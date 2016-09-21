@@ -21,9 +21,10 @@ var app = {
 
 
       // Parse the local storage
-      myStorage = localStorage;
-      var data = JSON.parse(myStorage.getItem("data"));
+      var data = JSON.parse(localStorage.getItem("data"));
 
+
+      // Initialisiere Cache
       var initCache = function() {
           // see console output for debug info
           ImgCache.options.debug = true;
@@ -47,7 +48,7 @@ var app = {
       initCache();
 
 
-      // Filter the data
+      // Suche Station anhand der ID in der JSON Datei
       window.station = data.stations.filter(function(station) {
         return station.id == id;
       });

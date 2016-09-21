@@ -21,6 +21,9 @@
         },
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },
     "dependent_plugins": {
