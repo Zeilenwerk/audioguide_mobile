@@ -28,6 +28,7 @@ p {
   font-size: 1.8em;
 }
 
+
 /****** Titel Guide ******/
 .titel {
   background-color: black;
@@ -74,6 +75,7 @@ p {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  visibility: visible;
 }
 
 .update p {
@@ -81,20 +83,51 @@ p {
 }
 
 .update-box {
-  background-color: rgba(47, 113, 47, 0.95);
+  background-color: rgba(47, 113, 47, 0.99);
   color: #fff;
   position: absolute;
+  font-size: 0.8em;
   top: 0px;
-  width: 100%;
-  height: 50px;
+  width: 95%;
   visibility: hidden;
   z-index: 99;
-  padding-top: 10px;
   text-align: center;
+  left: 2.5%;
 }
 
 .update-box p {
   opacity: 0.9;
+  float: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 75%;
+  margin-left: 36px;
+}
+
+.close-icon {
+  font-size: 3.4em !important;
+  padding: 14px;
+}
+
+
+/****** Button ******/
+.button {
+  cursor: pointer;
+  width: 70%;
+  border: 2px solid rgb(145, 207, 218);
+  text-align: center;
+  background-color: rgba(67, 150, 224, 0.06);
+  padding: 10px 0px 10px 0px;
+  font-size: 1.8em;
+  margin-top: 15px;
+  float: left;
+  margin-left: 7%;
+  visibility: hidden;
+}
+
+.button:hover {
+  background-color: rgb(145, 207, 218);
+  color: white;
 }
 
 
@@ -170,10 +203,6 @@ li.list-box {
 .item-text p {
   opacity: 0.65;
 }
-
-
-/****** Item Audio ******/
-
 
 
 /****** Footer ******/

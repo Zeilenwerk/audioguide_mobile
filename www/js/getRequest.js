@@ -15,10 +15,3 @@ function get(url, callbackSuccess, callbackError) {
   };
   req.send(null);
 }
-
-// Fehlermeldung
-function transferFailed() {
-  console.log('Fehler beim Laden der Daten');
-  var p = document.querySelector('p');
-  p.innerHTML = 'Der Download neuer Inhalte ist leider fehlgeschlagen.<br> Ist der Gerät mit dem Internet verbunden?';
-}

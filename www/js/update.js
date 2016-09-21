@@ -9,9 +9,6 @@ var app = {
     },
 
     onDeviceReady: function() {
-
-
-
       // Initialisiere lokalen cache
       var initCache = function() {
           // see console output for debug info
@@ -53,7 +50,7 @@ var app = {
             }
           };
         }
-        setTimeout(goIndex, 4000);
+        setTimeout(goIndex, 6000);
       }
 
 
@@ -78,6 +75,18 @@ var app = {
         console.log('Neue Daten geladen');
         var p = document.querySelector('p');
         p.innerHTML = "Neue Inhalte werden geladen.<br>Bitte etwas Geduld";
+      }
+
+
+      // Fehlermeldung
+      function transferFailed() {
+        console.log('Fehler beim Laden der Daten');
+        var p = document.querySelector('p');
+        var button = document.querySelector('.button');
+        var loading_gif = document.querySelector('.loading-gif');
+        p.innerHTML = 'Der Download neuer Inhalte ist leider fehlgeschlagen, tja.<br> Ist der Gerät mit dem Internet verbunden?';
+        loading_gif.style.visibility = 'hidden';
+        button.style.visibility = 'visible';
       }
     },
 };

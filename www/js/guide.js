@@ -41,7 +41,7 @@ var app = {
           console.log('Device is offline');
           onOffline();
         } else {
-          get(url, checkUpdate, transferFailed);
+          get(url, checkUpdate, function(){});
           onOffline();
         }
       }
@@ -52,8 +52,11 @@ var app = {
         var cacheData = JSON.parse(localStorage.getItem("data"));
         if (newData.updated_at !== cacheData.updated_at) {
           var updateBox = document.querySelector('.update-box');
+          var p = document.querySelector('p');
+          var icon = document.querySelector('.fa.fa-times');
           updateBox.style.visibility = 'visible';
-          updateBox.addEventListener('click', goUpdate);
+          p.addEventListener('click', goUpdate);
+          icon.addEventListener('click', hideIcon);
         }
       }
 
@@ -129,6 +132,14 @@ var app = {
           console.log('load cached files');
           ImgCache.useCachedFile($(this));
       });
+    }
+
+
+    // Verstecke close icon
+    function hideIcon(e) {
+      e.stopPropagation();
+      var updateBox = document.querySelector('.update-box');
+      updateBox.style.visibility = 'hidden';
     }
 
   },
