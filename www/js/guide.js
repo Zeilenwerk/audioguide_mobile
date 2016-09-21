@@ -1,3 +1,4 @@
+var url = 'http://192.168.1.62:3000/api/guides/7'; // Url für JSON Daten von RailsServer
 var app = {
     initialize: function() {
         this.bindEvents();
@@ -8,7 +9,8 @@ var app = {
     },
 
     onDeviceReady: function() {
-      var url = 'http://192.168.1.62:3000/api/guides/7'; // Url für JSON Daten von RailsServer
+      // Wenn Netzwerk verbunden, prüfe Update
+      document.addEventListener('online', checkNetwork, false);
 
 
       // Initialisiere lokalen cache
@@ -22,21 +24,26 @@ var app = {
       initCache();
 
 
-      // Beim ersten Start werden die Daten geladen oder der Cache wird gelöscht
+      // Beim ersten Start werden die Daten geladen
       if (ImgCache.getCurrentSize() === 0) {
+        console.log('Erster Start');
         window.location.replace('update.html');
-        firstStart();
       }
 
 
+      checkNetwork();
+
+
       // Überprüfe Netzwerkstatus
-      var networkState = navigator.connection.type;
-      if (networkState === Connection.NONE) {
-        console.log('Device is offline');
-        onOffline();
-      } else {
-        get(url, checkUpdate, transferFailed);
-        onOffline();
+      function checkNetwork() {
+        var networkState = navigator.connection.type;
+        if (networkState === Connection.NONE) {
+          console.log('Device is offline');
+          onOffline();
+        } else {
+          get(url, checkUpdate, transferFailed);
+          onOffline();
+        }
       }
 
 
@@ -107,10 +114,9 @@ var app = {
 
     // Wechsel zu Update Seite und anschliessend Update
     function goUpdate() {
-      window.location.replace('update.html');
-      get(url, saveDataToLocalStorage, transferFailed);
       var updateBox = document.querySelector('.update-box');
       updateBox.style.visibility = 'hidden';
+      window.location.replace('update.html');
     }
 
 

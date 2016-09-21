@@ -62,11 +62,27 @@ p {
 }
 
 
-/****** Header-Picture ******/
-.update-box {
-  background-color: green;
-  color: white;
+/****** Update ******/
+.update {
   text-align: center;
+  height: 250px;
+}
+
+.loading-gif {
+  width: 140px !important;
+  height: 140px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.update p {
+  padding-top: 20px;
+}
+
+.update-box {
+  background-color: rgba(47, 113, 47, 0.95);
+  color: #fff;
   position: absolute;
   top: 0px;
   width: 100%;
@@ -74,6 +90,11 @@ p {
   visibility: hidden;
   z-index: 99;
   padding-top: 10px;
+  text-align: center;
+}
+
+.update-box p {
+  opacity: 0.9;
 }
 
 
