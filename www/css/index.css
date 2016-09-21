@@ -75,10 +75,11 @@ p {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  visibility: visible;
+  display: none;
 }
 
 .update p {
+  font-size: 1.6em;
   padding-top: 20px;
 }
 
@@ -112,7 +113,6 @@ p {
 
 /****** Button ******/
 .button {
-  cursor: pointer;
   width: 70%;
   border: 2px solid rgb(145, 207, 218);
   text-align: center;
@@ -120,9 +120,9 @@ p {
   padding: 10px 0px 10px 0px;
   font-size: 1.8em;
   margin-top: 15px;
+  margin-left: 14%;
+  display: none;
   float: left;
-  margin-left: 7%;
-  visibility: hidden;
 }
 
 .button:hover {

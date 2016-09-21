@@ -19,13 +19,33 @@ var app = {
 
       initCache();
 
+      checkNetwork();
+
+
+      // Überprüfe Netzwerkstatus
+      function checkNetwork() {
+        var networkState = navigator.connection.type;
+        if (networkState === Connection.NONE) {
+          transferFailed();
+        } else {
+          checking();
+        }
+      }
+
 
       // Überprüfe ob erster Start und sonst starte Update
-      if (ImgCache.getCurrentSize() === 0) {
-        firstStart();
-      } else {
-        updateText();
-        get(url, saveDataToLocalStorage, transferFailed);
+      function checking() {
+        this.style.display = 'none';
+        if (ImgCache.getCurrentSize() === 0) {
+          firstStart();
+        } else {
+          var reverse_button = document.querySelector('.reverse-button');
+          var back_button = document.querySelector('.back-button');
+          reverse_button.style.display = 'none';
+          back_button.style.display = 'none';
+          updateText();
+          get(url, saveDataToLocalStorage, transferFailed);
+        }
       }
 
 
@@ -74,7 +94,9 @@ var app = {
       function updateText() {
         console.log('Neue Daten geladen');
         var p = document.querySelector('p');
+        var loading_gif = document.querySelector('.loading-gif');
         p.innerHTML = "Neue Inhalte werden geladen.<br>Bitte etwas Geduld";
+        loading_gif.style.display = 'block';
       }
 
 
@@ -82,11 +104,13 @@ var app = {
       function transferFailed() {
         console.log('Fehler beim Laden der Daten');
         var p = document.querySelector('p');
-        var button = document.querySelector('.button');
-        var loading_gif = document.querySelector('.loading-gif');
+        var reverse_button = document.querySelector('.reverse-button');
+        var back_button = document.querySelector('.back-button');
         p.innerHTML = 'Der Download neuer Inhalte ist leider fehlgeschlagen, tja.<br> Ist der Gerät mit dem Internet verbunden?';
-        loading_gif.style.visibility = 'hidden';
-        button.style.visibility = 'visible';
+        reverse_button.style.display = 'block';
+        back_button.style.display = 'block';
+        reverse_button.addEventListener('click', checkNetwork);
+        back_button.addEventListener('click', goIndex);
       }
     },
 };
