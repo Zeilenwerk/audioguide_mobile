@@ -36,6 +36,7 @@ var app = {
 
       // Überprüfe Netzwerkstatus
       function checkNetwork() {
+        console.log('checkNetwork function');
         var networkState = navigator.connection.type;
         if (networkState === Connection.NONE) {
           console.log('Device is offline');
@@ -49,6 +50,7 @@ var app = {
 
       // Prüft auf neue Updates und zeigt UpdateBox an
       function checkUpdate(newData) {
+        console.log('chechUpdate function');
         var cacheData = JSON.parse(localStorage.getItem("data"));
         if (newData.updated_at !== cacheData.updated_at) {
           var updateBox = document.querySelector('.update-box');

@@ -73,7 +73,50 @@ var app = {
           }
         });
 
-        // Stations files
+        var total = 0;
+        var cacheChecked = 0;
+        var todo = 0;
+
+        for (var a = 0; a < data.stations.length; a++) {
+          for (var i = 0; i < data.stations[a].all_items.length; i++) {
+            if (data.stations[a].all_items[i].kind !== 'text') {
+              total += 1;
+            }
+          }
+        }
+
+        // total: 7, cC: 0, todo: 0
+
+        // Anzahl Files die gecached werden müssten
+        for (var a = 0; a < data.stations.length; a++) {
+          for (var i = 0; i < data.stations[a].all_items.length; i++) {
+            if (data.stations[a].all_items[i].kind !== 'text') {
+              var url = 'http://192.168.1.62:3000' + data.stations[a].all_items[i].file.url;
+                ImgCache.isCached(url, function(path, success) {
+                  cacheChecked += 1;
+                  if (success) {
+                    // Wenn schon cached, nichts tun
+                  } else {
+                    todo += 1;
+                  }
+                  if(cacheChecked == total) {
+                    cacheFiles(data, todo);
+                  }
+              });
+            }
+          };
+        }
+      }
+
+      function cacheFiles(data, todo) {
+        // todo: 1
+        var complete = 0;
+
+        if (todo == 0) {
+          goIndex();
+        }
+
+        // Cache die Files und zeige Fortschritt an
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
             if (data.stations[a].all_items[i].kind !== 'text') {
@@ -82,15 +125,19 @@ var app = {
                   if (success) {
                     // Wenn schon cached, nichts tun
                   } else {
-                    // Noch nicht cached.
-                    console.log("Caching " + url);
-                    ImgCache.cacheFile(url);
+                    progress(todo, complete);
+                    ImgCache.cacheFile(url, function() {
+                      complete +=1;
+                      progress(todo, complete);
+                      if(complete == todo) {
+                        setTimeout(goIndex, 1000);
+                      }
+                    });
                   }
               });
             }
           };
         }
-        setTimeout(goIndex, 5000);
       }
 
 
@@ -115,9 +162,18 @@ var app = {
       function updateText() {
         console.log('updateText function');
         var p = document.querySelector('p');
-        var loading_gif = document.querySelector('.loading-gif');
         p.innerHTML = "Neue Inhalte werden geladen.<br>Bitte etwas Geduld";
-        loading_gif.style.display = 'block';
+      }
+
+
+      // Fortschritt
+      function progress(total, complete) {
+        console.log('progress function');
+        var p = document.querySelector('.progress-text');
+        p.innerHTML = complete + ' von ' + total + ' Dateien geladen';
+        var bar = document.querySelector('.progress-bar');
+        var span = document.querySelector('span');
+        span.style.width = complete / total * 100 + '%';
       }
 
 
