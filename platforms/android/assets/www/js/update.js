@@ -11,7 +11,6 @@ var app = {
     onDeviceReady: function() {
       // Initialisiere lokalen cache
       var initCache = function() {
-          // see console output for debug info
           ImgCache.options.debug = true;
           ImgCache.options.usePersistentCache = true;
           ImgCache.init();
@@ -24,6 +23,7 @@ var app = {
 
       // Überprüfe Netzwerkstatus
       function checkNetwork() {
+        console.log('checkNetwork function');
         var networkState = navigator.connection.type;
         if (networkState === Connection.NONE) {
           transferFailed();
@@ -35,7 +35,7 @@ var app = {
 
       // Überprüfe ob erster Start und sonst starte Update
       function checking() {
-        this.style.display = 'none';
+        console.log('checking function');
         if (ImgCache.getCurrentSize() === 0) {
           firstStart();
         } else {
@@ -51,6 +51,7 @@ var app = {
 
       // Hole Daten beim ersten Start
       function firstStart() {
+        console.log('firstStart function');
         firstStartText();
         get(url, saveDataToLocalStorage, transferFailed);
       }
@@ -58,24 +59,44 @@ var app = {
 
       // Speichere Daten in lokalen Speicher
       function saveDataToLocalStorage(data) {
+        console.log('saveDataToLocalStorage function');
         localStorage.setItem("data", JSON.stringify(data));
-        // Speichere alle Files in den Cache
-        ImgCache.cacheFile(data.picture.url);
+
+        // Speichere alle Files in den Cache falls noch nicht vorhanden
+        // Guide Picture
+        ImgCache.isCached(data.picture.url, function(path, success) {
+          if (success) {
+            // Wenn schon cached, nichts tun
+          } else {
+            // Noch nicht cached
+            ImgCache.cacheFile(data.picture.url);
+          }
+        });
+
+        // Stations files
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
             if (data.stations[a].all_items[i].kind !== 'text') {
               var url = 'http://192.168.1.62:3000' + data.stations[a].all_items[i].file.url;
-              console.log("Caching " + url);
-              ImgCache.cacheFile(url);
+                ImgCache.isCached(url, function(path, success) {
+                  if (success) {
+                    // Wenn schon cached, nichts tun
+                  } else {
+                    // Noch nicht cached.
+                    console.log("Caching " + url);
+                    ImgCache.cacheFile(url);
+                  }
+              });
             }
           };
         }
-        setTimeout(goIndex, 6000);
+        setTimeout(goIndex, 5000);
       }
 
 
       // Gehe zu index.html
       function goIndex() {
+        console.log('goIndex function');
         var p = document.querySelector('p');
         p.innerHTML = '';
         window.location.replace('index.html');
@@ -84,7 +105,7 @@ var app = {
 
       // Erstmaliger Download
       function firstStartText() {
-        console.log('Daten werden geladen');
+        console.log('firstStartText function');
         var p = document.querySelector('p');
         p.innerHTML = "Inhalt wird geladen...";
       }
@@ -92,7 +113,7 @@ var app = {
 
       // Updatemeldung
       function updateText() {
-        console.log('Neue Daten geladen');
+        console.log('updateText function');
         var p = document.querySelector('p');
         var loading_gif = document.querySelector('.loading-gif');
         p.innerHTML = "Neue Inhalte werden geladen.<br>Bitte etwas Geduld";
@@ -102,7 +123,7 @@ var app = {
 
       // Fehlermeldung
       function transferFailed() {
-        console.log('Fehler beim Laden der Daten');
+        console.log('transferFailed function');
         var p = document.querySelector('p');
         var reverse_button = document.querySelector('.reverse-button');
         var back_button = document.querySelector('.back-button');
