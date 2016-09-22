@@ -111,16 +111,13 @@ var app = {
         getThumbnail();
       };
 
+
       function setPoster() {
            var video = this;
            var canvas = document.createElement("canvas");
            canvas.width = video.videoWidth;
            canvas.height = video.videoHeight;
            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-
-           //var img = document.createElement("img");
-           //img.src = canvas.toDataURL();
-           //$('#thumbnail').append(img);
 
            video.currentTime = 0;
            video.setAttribute('poster', canvas.toDataURL());
@@ -131,10 +128,11 @@ var app = {
            video.load();
       }
 
+
       function setTime() {
         this.currentTime = 15;
-
       }
+
 
       function getThumbnail() {
             var videos = document.querySelectorAll('video');
