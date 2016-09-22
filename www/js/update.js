@@ -129,9 +129,13 @@ var app = {
         var back_button = document.querySelector('.back-button');
         p.innerHTML = 'Der Download neuer Inhalte ist leider fehlgeschlagen, tja.<br> Ist der Gerät mit dem Internet verbunden?';
         reverse_button.style.display = 'block';
-        back_button.style.display = 'block';
         reverse_button.addEventListener('click', checkNetwork);
-        back_button.addEventListener('click', goIndex);
+        if (ImgCache.getCurrentSize === 0) {
+          back_button.style.display = 'none';
+        } else {
+          back_button.style.display = 'block';
+          back_button.addEventListener('click', goIndex);
+        }
       }
     },
 };

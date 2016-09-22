@@ -108,7 +108,40 @@ var app = {
         }
 
         items.appendChild(div);
+        getThumbnail();
       };
+
+
+      function setPoster() {
+           var video = this;
+           var canvas = document.createElement("canvas");
+           canvas.width = video.videoWidth;
+           canvas.height = video.videoHeight;
+           canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+           video.currentTime = 0;
+           video.setAttribute('poster', canvas.toDataURL());
+
+           video.removeEventListener('loadedmetadata', setTime);
+           video.removeEventListener('loadeddata', setPoster);
+
+           video.load();
+      }
+
+
+      function setTime() {
+        this.currentTime = 15;
+      }
+
+
+      function getThumbnail() {
+            var videos = document.querySelectorAll('video');
+
+            for (var i = 0; i < videos.length; i++) {
+              videos[i].addEventListener('loadedmetadata', setTime, false);
+              videos[i].addEventListener('loadeddata', setPoster, false);
+            }
+      }
 
     },
 
