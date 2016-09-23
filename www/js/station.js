@@ -77,14 +77,14 @@ var app = {
           var div = document.createElement('div');
           div.className += 'item-image item';
           var img = document.createElement('img');
-          img.setAttribute('src', 'http://192.168.1.62:3000' + station[0].all_items[i].file.url);
+          img.setAttribute('src', API_HOST + station[0].all_items[i].file.url);
           div.appendChild(img);
 
         } else if (station[0].all_items[i].kind === 'audio') {
           var div = document.createElement('div');
           div.className += 'item-audio item';
           var audio = document.createElement('audio');
-          audio.setAttribute('src', 'http://192.168.1.62:3000' + station[0].all_items[i].file.url);
+          audio.setAttribute('src', API_HOST + station[0].all_items[i].file.url);
           audio.setAttribute('controls', '');
           div.appendChild(audio);
 
@@ -99,7 +99,7 @@ var app = {
           var div = document.createElement('div');
           div.className += 'item-video item';
           var video = document.createElement('video');
-          video.setAttribute('src', 'http://192.168.1.62:3000' + station[0].all_items[i].file.url);
+          video.setAttribute('src', API_HOST + station[0].all_items[i].file.url);
           video.setAttribute('controls', '');
           div.appendChild(video);
 
