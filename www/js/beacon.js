@@ -24,7 +24,9 @@ function startRangingBeacons(data) {
 
 
   for (var i = 0; i < data.stations.length; i++) {
-    startRangingRegion({ uuid: data.stations[i].uuid, identifier: data.stations[i].titel });
+    if (data.stations[i].uuid != "") {
+      startRangingRegion({ uuid: data.stations[i].uuid, identifier: data.stations[i].titel });
+    }
   }
 
   delegate.didRangeBeaconsInRegion = function onDidRangeBeaconsInRegion(result) {
