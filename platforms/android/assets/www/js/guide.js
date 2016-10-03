@@ -54,7 +54,7 @@ var app = {
         if (newData.updated_at !== cacheData.updated_at) {
           var updateBox = document.querySelector('.update-box');
           var p = document.querySelector('p');
-          var icon = document.querySelector('.fa.fa-times');
+          var icon = document.querySelector('.close-icon');
           updateBox.style.visibility = 'visible';
           p.addEventListener('click', goUpdate);
           icon.addEventListener('click', hideIcon);
@@ -67,7 +67,7 @@ var app = {
         console.log('displayData');
 
         var dat = data;
-        
+
         startRangingBeacons(data);
 
         var div_error = document.querySelector('.error');

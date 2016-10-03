@@ -87,27 +87,28 @@ p {
   background-color: rgba(47, 113, 47, 0.99);
   color: #fff;
   position: absolute;
-  font-size: 0.8em;
+  font-size: 0.9em;
   top: 0px;
-  width: 95%;
+  width: 100%;
   visibility: hidden;
   z-index: 99;
-  text-align: center;
-  left: 2.5%;
+  height: 51px;
 }
 
 .update-box p {
   opacity: 0.9;
   float: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 75%;
+  padding-top: 16px;
   margin-left: 36px;
 }
 
 .close-icon {
   font-size: 3.4em !important;
-  padding: 14px;
+  padding-top: 10px;
+  float: right;
+  position: absolute;
+  right: 0px;
+
 }
 
 
