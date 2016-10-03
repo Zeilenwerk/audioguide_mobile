@@ -66,6 +66,10 @@ var app = {
       function displayData(data) {
         console.log('displayData');
 
+        var dat = data;
+        
+        startRangingBeacons(data);
+
         var div_error = document.querySelector('.error');
         var div_header_pic = document.querySelector('.header-pic');
         var div_titel = document.querySelector('.titel');

@@ -1,4 +1,3 @@
-var url = 'http://192.168.1.62:3000/api/guides/7'; // Url für JSON Daten von RailsServer
 var app = {
     initialize: function() {
         this.bindEvents();
@@ -42,7 +41,7 @@ var app = {
           console.log('Device is offline');
           onOffline();
         } else {
-          get(url, checkUpdate, function(){});
+          get(URL, checkUpdate, function(){});
           onOffline();
         }
       }
@@ -67,6 +66,10 @@ var app = {
       function displayData(data) {
         console.log('displayData');
 
+        var dat = data;
+        
+        startRangingBeacons(data);
+
         var div_error = document.querySelector('.error');
         var div_header_pic = document.querySelector('.header-pic');
         var div_titel = document.querySelector('.titel');
@@ -78,7 +81,7 @@ var app = {
         document.querySelector('.stations > ul').innerHTML = '';
 
         var header_pic_img = document.createElement('img');
-        header_pic_img.setAttribute('src', 'http://192.168.1.62:3000' + data.picture.url);
+        header_pic_img.setAttribute('src', API_HOST + data.picture.url);
         header_pic_img.setAttribute('data-desc', 'local-desc');
         header_pic_img.setAttribute('data-is-cached', 'local_cached');
         div_header_pic.appendChild(header_pic_img);

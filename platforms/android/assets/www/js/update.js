@@ -1,4 +1,3 @@
-var url = 'http://192.168.1.62:3000/api/guides/7'; // Url für JSON Daten von RailsServer
 var app = {
     initialize: function() {
         this.bindEvents();
@@ -44,7 +43,7 @@ var app = {
           reverse_button.style.display = 'none';
           back_button.style.display = 'none';
           updateText();
-          get(url, saveDataToLocalStorage, transferFailed);
+          get(URL, saveDataToLocalStorage, transferFailed);
         }
       }
 
@@ -53,7 +52,7 @@ var app = {
       function firstStart() {
         console.log('firstStart function');
         firstStartText();
-        get(url, saveDataToLocalStorage, transferFailed);
+        get(URL, saveDataToLocalStorage, transferFailed);
       }
 
 
@@ -91,7 +90,7 @@ var app = {
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
             if (data.stations[a].all_items[i].kind !== 'text') {
-              var url = 'http://192.168.1.62:3000' + data.stations[a].all_items[i].file.url;
+              var url = API_HOST + data.stations[a].all_items[i].file.url;
                 ImgCache.isCached(url, function(path, success) {
                   cacheChecked += 1;
                   if (success) {
@@ -120,7 +119,7 @@ var app = {
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
             if (data.stations[a].all_items[i].kind !== 'text') {
-              var url = 'http://192.168.1.62:3000' + data.stations[a].all_items[i].file.url;
+              var url = API_HOST + data.stations[a].all_items[i].file.url;
                 ImgCache.isCached(url, function(path, success) {
                   if (success) {
                     // Wenn schon cached, nichts tun

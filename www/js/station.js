@@ -24,6 +24,9 @@ var app = {
       var data = JSON.parse(localStorage.getItem("data"));
 
 
+      startRangingBeacons(data);
+
+
       // Initialisiere Cache
       var initCache = function() {
           // see console output for debug info

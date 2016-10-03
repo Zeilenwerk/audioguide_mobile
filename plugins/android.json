@@ -24,6 +24,9 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "com.unarin.cordova.beacon": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },
     "dependent_plugins": {
