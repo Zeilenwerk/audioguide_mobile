@@ -93,22 +93,20 @@ p {
   visibility: hidden;
   z-index: 99;
   height: 51px;
+  border-bottom: 1px solid #ccc;
 }
 
 .update-box p {
   opacity: 0.9;
   float: left;
   padding-top: 16px;
-  margin-left: 36px;
+  margin-left: 22%;
 }
 
 .close-icon {
   font-size: 3.4em !important;
-  padding-top: 10px;
   float: right;
-  position: absolute;
-  right: 0px;
-
+  padding: 10px 14px 6px 10px;
 }
 
 
