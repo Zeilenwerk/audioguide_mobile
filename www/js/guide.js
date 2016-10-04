@@ -29,9 +29,7 @@ var app = {
         window.location.replace('update.html');
       }
 
-
       checkNetwork();
-
 
       // Überprüfe Netzwerkstatus
       function checkNetwork() {

@@ -80,8 +80,8 @@ var app = {
 
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
-            if (data.stations[a].all_items[i].kind !== 'text') {
-              total += 1;
+            if (data.stations[a].all_items[i].kind != 'text') {
+              total++;
             }
           }
         }
@@ -92,17 +92,17 @@ var app = {
         // Anzahl Files die gecached werden müssten
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
-            if (data.stations[a].all_items[i].kind !== 'text') {
+            if (data.stations[a].all_items[i].kind != 'text') {
               var url = API_HOST + data.stations[a].all_items[i].file.url;
                 ImgCache.isCached(url, function(path, success) {
-                  cacheChecked += 1;
+                  cacheChecked++;
                   if (success) {
                     // Wenn schon cached, nichts tun
                   } else {
-                    todo += 1;
-                  }
-                  if(cacheChecked == total) {
-                    cacheFiles(data, todo);
+                    todo++;
+                    if (cacheChecked == total) {
+                      cacheFiles(data, todo);
+                    }
                   }
               });
             }
@@ -122,7 +122,7 @@ var app = {
         // Cache die Files und zeige Fortschritt an
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
-            if (data.stations[a].all_items[i].kind !== 'text') {
+            if (data.stations[a].all_items[i].kind != 'text') {
               var url = API_HOST + data.stations[a].all_items[i].file.url;
                 ImgCache.isCached(url, function(path, success) {
                   if (success) {
@@ -131,7 +131,7 @@ var app = {
                     progress(todo, complete);
 
                     ImgCache.cacheFile(url, function() {
-                      complete +=1;
+                      complete++;
                       progress(todo, complete);
                       if(todo == complete) {
                         setTimeout(goIndex, 1500);
