@@ -49,7 +49,7 @@ var app = {
 
       // Prüft auf neue Updates und zeigt UpdateBox an
       function checkUpdate(newData) {
-        console.log('chechUpdate function');
+        console.log('checkUpdate function');
         var cacheData = JSON.parse(localStorage.getItem("data"));
         if (newData.updated_at !== cacheData.updated_at) {
           var updateBox = document.querySelector('.update-box');

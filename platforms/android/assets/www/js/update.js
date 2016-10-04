@@ -64,6 +64,8 @@ var app = {
         // Speichere alle Files in den Cache falls noch nicht vorhanden
         // Guide Picture
         ImgCache.isCached(data.picture.url, function(path, success) {
+          console.log('Check Guide Picture');
+
           if (success) {
             // Wenn schon cached, nichts tun
           } else {
@@ -84,7 +86,8 @@ var app = {
           }
         }
 
-        // total: 7, cC: 0, todo: 0
+
+        console.log('Total: ' + total + " Files");
 
         // Anzahl Files die gecached werden müssten
         for (var a = 0; a < data.stations.length; a++) {
@@ -112,6 +115,7 @@ var app = {
         var complete = 0;
 
         if (todo == 0) {
+          console.log('Es müssen keine Files gecached werden')
           goIndex();
         }
 
@@ -125,11 +129,12 @@ var app = {
                     // Wenn schon cached, nichts tun
                   } else {
                     progress(todo, complete);
+
                     ImgCache.cacheFile(url, function() {
                       complete +=1;
                       progress(todo, complete);
-                      if(complete == todo) {
-                        setTimeout(goIndex, 1000);
+                      if(todo == complete) {
+                        setTimeout(goIndex, 1500);
                       }
                     });
                   }

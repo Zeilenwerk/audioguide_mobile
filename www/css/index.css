@@ -86,7 +86,7 @@ p {
 .update-box {
   background-color: rgba(47, 113, 47, 0.99);
   color: #fff;
-  position: absolute;
+  position: fixed;
   font-size: 0.9em;
   top: 0px;
   width: 100%;
