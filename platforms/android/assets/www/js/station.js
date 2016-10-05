@@ -11,23 +11,38 @@ var app = {
       // Wenn Netzwerk verbunden, prüfe Update
       document.addEventListener('online', checkNetwork, false);
 
-
       // QuerySelectors
       var div_error = document.querySelector('.error');
       var div_name = document.querySelector('.station-show-titel.list-box');
       var items = document.querySelector('.items');
 
-      // Get station id from url param
-      var re = /[\?&]station_id=([0-9]+)/g;
-      var str = window.location.search;
-      var id = re.exec(str)[1];
-
       // Parse the local storage
       var data = JSON.parse(localStorage.getItem("data"));
 
+      // Initialisiere Cache
+      var initCache = function() {
+          // see console output for debug info
+          ImgCache.options.debug = true;
+          ImgCache.options.usePersistentCache = true;
+          ImgCache.init(function() {
+            $('img, audio, video').each(function() {
+              console.log('load cached files');
+              var element = $(this);
+              ImgCache.getCachedFileURL(element.attr('src'), function(source, cdvUrl){
+                resolveLocalFileSystemURL(cdvUrl, function(entry) {
+                  var nativePath = entry.toURL();
+                  element.attr('src', nativePath);
+                })
+              }, function(){
+                console.log('cache fail')
+              });
+            });
+          });
+      };
+
+      initCache();
 
       checkNetwork();
-
 
       // Überprüfe Netzwerkstatus
       function checkNetwork() {
@@ -67,28 +82,10 @@ var app = {
       startRangingBeacons(data);
 
 
-      // Initialisiere Cache
-      var initCache = function() {
-          // see console output for debug info
-          ImgCache.options.debug = true;
-          ImgCache.options.usePersistentCache = true;
-          ImgCache.init(function() {
-            $('img,audio,video').each(function() {
-              console.log('load cached files');
-              var element = $(this);
-              ImgCache.getCachedFileURL(element.attr('src'), function(source, cdvUrl){
-                resolveLocalFileSystemURL(cdvUrl, function(entry) {
-                  var nativePath = entry.toURL();
-                  element.attr('src', nativePath);
-                })
-              }, function(){
-                console.log('cache fail')
-              });
-            });
-          });
-      };
-
-      initCache();
+      // Get station id from url param
+      var re = /[\?&]station_id=([0-9]+)/g;
+      var str = window.location.search;
+      var id = re.exec(str)[1];
 
 
       // Suche Station anhand der ID in der JSON Datei
@@ -151,6 +148,12 @@ var app = {
         }
 
         items.appendChild(div);
+
+        $('img,audio,video').each(function() {
+            console.log('load cached files');
+            ImgCache.useCachedFile($(this));
+        });
+
         getThumbnail();
       };
 

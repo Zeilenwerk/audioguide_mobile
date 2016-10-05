@@ -58,6 +58,12 @@ var app = {
 
       // Speichere Daten in lokalen Speicher
       function saveDataToLocalStorage(data) {
+        var reverse_button = document.querySelector('.reverse-button');
+        var back_button = document.querySelector('.back-button');
+
+        reverse_button.style.display = 'none';
+        back_button.style.display = 'none';
+
         console.log('saveDataToLocalStorage function');
         localStorage.setItem("data", JSON.stringify(data));
 
@@ -70,7 +76,8 @@ var app = {
             // Wenn schon cached, nichts tun
           } else {
             // Noch nicht cached
-            ImgCache.cacheFile(data.picture.url);
+            console.log('Cache guide picture');
+            ImgCache.cacheFile(API_HOST + data.picture.url);
           }
         });
 
@@ -95,18 +102,19 @@ var app = {
             if (data.stations[a].all_items[i].kind != 'text') {
               var url = API_HOST + data.stations[a].all_items[i].file.url;
                 ImgCache.isCached(url, function(path, success) {
+                  console.log('isCached aufruf')
                   cacheChecked++;
                   if (success) {
                     // Wenn schon cached, nichts tun
                   } else {
                     todo++;
-                    if (cacheChecked == total) {
+                    if (cacheChecked === total) {
                       cacheFiles(data, todo);
                     }
                   }
               });
             }
-          };
+          }
         }
       }
 
@@ -114,7 +122,7 @@ var app = {
         // todo: 1
         var complete = 0;
 
-        if (todo == 0) {
+        if (todo === 0) {
           console.log('Es müssen keine Files gecached werden')
           goIndex();
         }
@@ -122,27 +130,24 @@ var app = {
         // Cache die Files und zeige Fortschritt an
         for (var a = 0; a < data.stations.length; a++) {
           for (var i = 0; i < data.stations[a].all_items.length; i++) {
+
             if (data.stations[a].all_items[i].kind != 'text') {
               var url = API_HOST + data.stations[a].all_items[i].file.url;
-                ImgCache.isCached(url, function(path, success) {
-                  if (success) {
-                    // Wenn schon cached, nichts tun
-                  } else {
+
+                    console.log('Cache File');
                     progress(todo, complete);
 
                     ImgCache.cacheFile(url, function() {
                       complete++;
                       progress(todo, complete);
-                      if(todo == complete) {
+                      if(todo === complete) {
                         setTimeout(goIndex, 1500);
                       }
                     });
                   }
-              });
             }
-          };
+          }
         }
-      }
 
 
       // Gehe zu index.html
@@ -174,8 +179,10 @@ var app = {
       function progress(total, complete) {
         console.log('progress function');
         var p = document.querySelector('.progress-text');
+        p.style.display = 'block';
         p.innerHTML = complete + ' von ' + total + ' Dateien geladen';
         var bar = document.querySelector('.progress-bar');
+        bar.style.display = 'block';
         var span = document.querySelector('span');
         span.style.width = complete / total * 100 + '%';
       }
@@ -190,7 +197,7 @@ var app = {
         p.innerHTML = 'Der Download neuer Inhalte ist leider fehlgeschlagen, tja.<br> Ist der Gerät mit dem Internet verbunden?';
         reverse_button.style.display = 'block';
         reverse_button.addEventListener('click', checkNetwork);
-        if (ImgCache.getCurrentSize === 0) {
+        if (ImgCache.getCurrentSize() === 0) {
           back_button.style.display = 'none';
         } else {
           back_button.style.display = 'block';

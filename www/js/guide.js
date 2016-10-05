@@ -8,10 +8,6 @@ var app = {
     },
 
     onDeviceReady: function() {
-      // Wenn Netzwerk verbunden, prüfe Update
-      document.addEventListener('online', checkNetwork, false);
-
-
       // Initialisiere lokalen cache
       var initCache = function() {
           // see console output for debug info
@@ -29,7 +25,11 @@ var app = {
         window.location.replace('update.html');
       }
 
-      checkNetwork();
+      // Wenn Netzwerk verbunden, prüfe Update
+      document.addEventListener('online', checkNetwork, false);
+
+      setTimeout(checkNetwork, 1000);
+
 
       // Überprüfe Netzwerkstatus
       function checkNetwork() {
