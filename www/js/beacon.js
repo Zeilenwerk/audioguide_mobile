@@ -54,8 +54,8 @@ function startRangingBeacons(data) {
       // Wenn nächste Station nicht dieselbe wie schon vorhanden ist
       if(beaconCounter > 5 && (!match || (match && match[1] != station.id))) {
 
-        // Wenn Distanz kleiner als 2 Meter ist
-        if ((secondBeacon && (secondBeacon.accuracy - beacon.accuracy) > 1) || !secondBeacon) {
+        // Wenn Distanz kleiner als 0.5 Meter ist
+        if ((secondBeacon && (secondBeacon.accuracy - beacon.accuracy) > 0.1) || !secondBeacon) {
           window.location.replace('show.html?station_id=' + station.id)
         }
       }
