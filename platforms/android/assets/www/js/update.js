@@ -116,6 +116,13 @@ var app = {
             }
           }
         }
+
+        if (todo === 0) {
+          console.log('Es müssen keine Files gecached werden')
+          progress(1,1);
+          setTimeout(goIndex, 1500);
+        }
+
       }
 
       function cacheFiles(data, todo) {
