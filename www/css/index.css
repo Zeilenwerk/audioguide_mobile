@@ -1,37 +1,58 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *
+ *= require font-awesome
+ *= require_self
+ */
 /****** Body, Wrapper, Typography ******/
 * {
   margin: 0px;
-  padding: 0px;
-}
+  padding: 0px; }
 
 body {
   background-color: #F9F8F4;
   font-size: 62.5%;
-}
-
-.wrapper {
   font-family: 'Roboto', sans-serif;
-  position: relative;
-}
-
-.content {
-  border-bottom: 2px solid #ccc;
-  box-shadow: 0px 16px 32px #EBE7D6;
-}
-
-.update-content {
-  height: 220px;
-}
+  position: relative; }
 
 a {
   text-decoration: none;
-  color: #666;
-}
+  color: #999; }
 
 p {
   font-size: 1.8em;
-}
+  opacity: 0.9; }
 
+/****** Item ******/
+.item {
+  margin-bottom: 20px; }
+
+.item-audio, .item-text {
+  padding: 0 20px;
+  overflow: visible; }
+
+.item audio, .item img, .item video {
+  width: 100%; }
+
+.fa {
+  font-size: 2.0em;
+  cursor: pointer; }
+
+.fa-right {
+  float: right; }
+
+.fa-left {
+  float: left; }
 
 /****** Titel Guide ******/
 .titel {
@@ -39,202 +60,130 @@ p {
   width: 100%;
   position: absolute;
   top: 0px;
-  left: 0px;
-  background: -moz-linear-gradient(top,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
-}
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
+  /* IE6-9 */ }
 
 .titel h1 {
   padding: 25px 0px 50px 25px;
-  color: white;
-}
+  color: white; }
 
 .station-show-titel {
-  width: 100%;
-}
+  width: 100%; }
 
 .station-show-titel p {
   display: inline;
-  margin-left: 15px;
-}
-
+  margin-left: 15px; }
 
 /****** Header-Picture ******/
 .header-pic img {
-  width: 100% !important;
-}
-
-
-/****** Update ******/
-.update {
-  text-align: center;
-  height: 155px;
-}
-
-.loading-gif {
-  width: 140px !important;
-  height: 140px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  display: none;
-}
-
-.update p {
-  font-size: 1.6em;
-  padding-top: 20px;
-}
-
-.update-box {
-  background-color: rgba(47, 113, 47, 0.99);
-  color: #fff;
-  position: fixed;
-  font-size: 0.9em;
-  top: 0px;
-  width: 100%;
-  visibility: hidden;
-  z-index: 99;
-  height: 51px;
-  border-bottom: 1px solid #000;
-}
-
-.update-box p {
-  opacity: 0.9;
-  float: left;
-  padding-top: 16px;
-  margin-left: 22%;
-}
-
-.close-icon {
-  font-size: 3.4em !important;
-  float: right;
-  padding: 10px 14px 6px 10px;
-}
-
-
-/****** Progress Bar ******/
-span {
-  height: 100%;
-  display: block;
-  width: 0%;
-  background-color: rgb(145, 207, 218);
-}
-
-.progress-bar {
-  width: 70%;
-  margin-top: 15px;
-  border: 2px solid rgb(145, 207, 218);
-  background-color: rgba(67, 150, 224, 0.06);
-  margin-left: 14%;
-  height: 20px;
-  display: none;
-}
-
-.progress-text {
-  display: none;
-}
-
-
-/****** Button ******/
-.button {
-  width: 70%;
-  border: 2px solid rgb(145, 207, 218);
-  text-align: center;
-  background-color: rgba(67, 150, 224, 0.06);
-  padding: 10px 0px 10px 0px;
-  font-size: 1.8em;
-  margin-top: 15px;
-  margin-left: 14%;
-  display: none;
-  float: left;
-}
-
-.button:hover {
-  background-color: rgb(145, 207, 218);
-  color: white;
-}
-
+  width: 100% !important; }
 
 /****** List-Box ******/
-.stations ul {
-  margin-top: -5px;
-  list-style: none;
-}
+.stations ul, .public-stations ul {
+  list-style: none; }
 
 .list-box {
-  background-color: white;
-}
+  background-color: white; }
+
+.list-box.active {
+  background-color: #CCC; }
+
+.list-box.active p, .list-box.active i {
+  color: white; }
 
 div.list-box {
-  border-bottom: 2px solid #ccc;
-}
+  border-bottom: 2px solid #ccc; }
 
 li.list-box {
-  border-top: 1px solid #ccc;
-}
+  border-top: 1px solid #ccc; }
 
 .list-box a {
   display: block;
-  padding: 15px;
-}
+  padding: 15px; }
+
+.list-box p {
+  color: #777777; }
 
 .list-box .fa, .stations-number {
   line-height: 22px;
   color: #ccc;
-  font-size: 1.6em;
-}
-
-.fa-right {
-  float: right;
-}
-
-.fa-left {
-  float: left;
-}
+  font-size: 1.6em; }
 
 .stations-number {
   display: inline;
-  margin-left: 20px;
-}
+  margin-left: 20px; }
 
 .stations-title {
   display: inline;
-  margin-left: 15px;
-}
+  margin-left: 15px; }
 
-
-/****** Item ******/
-.item {
-  margin-bottom: 20px;
-}
-
-.item-audio, .item-text {
-  padding: 0 20px;
-}
-
-.item audio, .item img, .item video {
-  width: 100%;
-}
-
-
-/****** Item Image ******/
+/****** item image ******/
 .item-image img {
-  border-bottom: 2px solid #ccc;
-}
+  border-bottom: 2px solid #ccc; }
 
-
-/****** Item Text ******/
+/****** item text ******/
 .item-text p {
-  opacity: 0.65;
-}
+  opacity: 0.65; }
 
+/****** 800 and above ******/
+@media (min-width: 800px) {
+  .public-stations.bottom {
+    display: none !important; }
 
-/****** Footer ******/
+  .station-show-titel.left {
+    display: block !important; }
+
+  .station-show-titel.right {
+    display: none; }
+
+  .menu-left {
+    display: block !important;
+    float: left;
+    width: 30%;
+    background-color: #EEE; }
+
+  .wrapper {
+    float: left;
+    width: 70%; } }
+/****** 1200 and above ******/
+@media screen and (min-width: 1200px) {
+  .wrapper, .titel {
+    width: 840px;
+    margin-left: auto;
+    margin-right: auto; }
+
+  .main {
+    width: 1200px; } }
+.main {
+  margin: 0px auto; }
+
+.public-stations {
+  margin-top: -3px; }
+
+.public-stations.bottom {
+  display: block; }
+
+.menu-left {
+  display: none;
+  width: 30%; }
+
+.text-box {
+  width: 100%;
+  background-color: #fff;
+  text-align: center; }
+
+.text-box p {
+  padding: 15px;
+  opacity: 0.6; }
+
 .footer {
-  text-align: center;
-}
+  text-align: center; }
 
 .footer p, .footer a {
   margin-top: 20px;
@@ -242,15 +191,6 @@ li.list-box {
   color: #777;
   opacity: 0.8;
   font-weight: 600;
-  font-size: 1.2em !important;
-}
+  font-size: 1.2em !important; }
 
-
-/****** Media Queries ******/
-@media screen and (min-width: 400px) {
-  .wrapper {
-    width: 398px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
+/*# sourceMappingURL=index.css.map */

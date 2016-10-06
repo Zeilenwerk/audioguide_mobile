@@ -1,0 +1,45 @@
+/****** Update ******/
+.update {
+  text-align: center;
+  height: 155px;
+}
+
+.loading-gif {
+  width: 140px !important;
+  height: 140px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+}
+
+.update p {
+  font-size: 1.6em;
+  padding-top: 20px;
+}
+
+.update-box {
+  background-color: rgba(47, 113, 47, 0.99);
+  color: #fff;
+  position: fixed;
+  font-size: 0.9em;
+  top: 0px;
+  width: 100%;
+  visibility: hidden;
+  z-index: 99;
+  height: 51px;
+  border-bottom: 1px solid #000;
+}
+
+.update-box p {
+  opacity: 0.9;
+  float: left;
+  padding-top: 16px;
+  margin-left: 22%;
+}
+
+.close-icon {
+  font-size: 3.4em !important;
+  float: right;
+  padding: 10px 14px 6px 10px;
+}

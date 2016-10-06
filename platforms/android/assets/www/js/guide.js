@@ -67,57 +67,11 @@ var app = {
       function displayData(data) {
         console.log('displayData');
 
-        var dat = data;
+        var source = $('.main').html();
+        var template = Handlebars.compile(source);
+        $('.main').html(template({ guide: data, host: API_HOST }));
 
         startRangingBeacons(data);
-
-        var div_error = document.querySelector('.error');
-        var div_header_pic = document.querySelector('.header-pic');
-        var div_titel = document.querySelector('.titel');
-        var ul = document.querySelector('ul');
-        var div_content = document.querySelector('.content');
-
-        document.querySelector('.header-pic').innerHTML = '';
-        document.querySelector('.titel').innerHTML = '';
-        document.querySelector('.stations > ul').innerHTML = '';
-
-        var header_pic_img = document.createElement('img');
-        header_pic_img.setAttribute('src', API_HOST + data.picture.url);
-        header_pic_img.setAttribute('data-desc', 'local-desc');
-        header_pic_img.setAttribute('data-is-cached', 'local_cached');
-        div_header_pic.appendChild(header_pic_img);
-
-        var titel = document.createElement('h1');
-        titel.innerHTML = data.name;
-        div_titel.appendChild(titel);
-
-        for (var i = 0; i < data.stations.length; i++) {
-          var li = document.createElement('li');
-          li.className += 'list-box';
-
-          var a = document.createElement('a');
-          a.setAttribute('href', 'show.html?station_id=' + data.stations[i].id);
-
-          var p_number = document.createElement('p');
-          p_number.innerHTML = data.stations[i].number;
-          p_number.className += 'stations-number';
-
-          var p_titel = document.createElement('p');
-          p_titel.innerHTML = data.stations[i].titel;
-          p_titel.className += 'stations-title';
-
-          var icon = document.createElement('i');
-          icon.className += 'fa fa-chevron-right fa-right';
-          icon.setAttribute('aria-hidden', 'true');
-
-          a.appendChild(p_number);
-          a.appendChild(p_titel);
-          a.appendChild(icon);
-
-          li.appendChild(a);
-
-          ul.appendChild(li);
-        }
     }
 
 

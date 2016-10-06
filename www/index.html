@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src *; script-src *; object-src *; style-src *; img-src *; media-src *; frame-src *; font-src *; connect-src *">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <title>AudioGuide</title>
+      <meta charset="utf-8">
+      <meta http-equiv="Content-Security-Policy" content="default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; object-src *; style-src *; img-src *; media-src *; child-src *; font-src *; connect-src *">
+      <meta name="format-detection" content="telephone=no">
+      <meta name="msapplication-tap-highlight" content="no">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+      <link rel="stylesheet" type="text/css" href="css/index.css">
+      <link rel="stylesheet" type="text/css" href="css/update-box.css">
+      <link rel="stylesheet" href="css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <title>AudioGuide</title>
     </head>
     <body>
       <div class="update-box">
@@ -16,31 +18,59 @@
         <i class="fa fa-times close-icon" aria-hidden="true"></i>
       </div>
 
-      <div class="wrapper">
-
-        <div class="content">
-
-
-          <div class="header-pic">
-
+      <div class="main">
+        <div class="menu-left">
+          <div class="station-show-titel list-box left active">
+            <a href="index.html">
+              <p>{{guide.name}}</p>
+            </a>
           </div>
 
-          <div class="titel">
-
-          </div>
-
-          <div class="stations">
+          <div class="public-stations left">
             <ul>
+              {{#each guide.stations}}
+                <li class="list-box">
+                  <a href="show.html?station_id={{this.id}}">
+                    <p class="stations-number">{{this.number}}</p>
+                    <p class="stations-title">{{this.titel}}</p>
+                    <i class="fa fa-chevron-right fa-right" aria-hidden="true"></i>
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
 
+        <div class="wrapper">
+          <div class="content">
+            <div class="header-pic">
+              <img src="{{ host }}{{ guide.picture.url }}" alt="header-pic">
+            </div>
+
+            <div class="titel">
+              <h1>{{guide.name}}</h1>
+            </div>
+          </div>
+
+          <div class="public-stations bottom">
+            <ul>
+              {{#each guide.stations}}
+                <li class="list-box">
+                  <a href="show.html?station_id={{this.id}}">
+                    <p class="stations-number">{{this.number}}</p>
+                    <p class="stations-title">{{this.titel}}</p>
+                    <i class="fa fa-chevron-right fa-right" aria-hidden="true"></i>
+                  </a>
+                </li>
+              {{/each}}
             </ul>
           </div>
 
-        </div>
+          <div class="footer">
+            <p>&lt;&gt; with ♥ by <a href="https://zeilenwerk.ch">Zeilenwerk</a></p>
+          </div>
 
-        <div class="footer">
-          <p>&lt;&gt; with ♥ by <a href="https://zeilenwerk.ch">Zeilenwerk</a></p>
         </div>
-
       </div>
 
       <script type="text/javascript" src="cordova.js"></script>
@@ -50,5 +80,9 @@
       <script type="text/javascript" src="js/guide.js"></script>
       <script type="text/javascript" src="js/getRequest.js"></script>
       <script type="text/javascript" src="js/beacon.js"></script>
+      <script type="text/javascript" src="js/handlebars-latest.js"></script>
+
+
+
     </body>
 </html>
