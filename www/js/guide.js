@@ -11,6 +11,21 @@ var app = {
       // Wenn Netzwerk verbunden, prüfe Update
       document.addEventListener('online', checkNetwork, false);
 
+
+      var url = 'https://guide.zeilenwerk.ch/public/guides/3';
+      var file = getHTML(url, function onComplete(newContent) {
+        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dirEntry) {
+          console.log('file system open: ' + dirEntry.name);
+          var isAppend = true;
+          createFile(dirEntry, newContent, isAppend);
+        }, function onErrorLoadFs() {
+          console.log('fs load error');
+        });
+      });
+
+
+
+
       // Initialisiere lokalen cache
       var initCache = function() {
           // see console output for debug info
@@ -66,8 +81,10 @@ var app = {
       function displayData(data) {
         console.log('displayData');
         var url = 'https://guide.zeilenwerk.ch/public/guides/3';
-        
-        getHTML(url);
+
+        getHTML(url, function(newContent) {
+          document.querySelector('.main').innerHTML = newContent.innerHTML;
+        });
 
         startRangingBeacons(data);
     }

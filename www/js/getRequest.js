@@ -16,11 +16,11 @@ function get(url, callbackSuccess, callbackError) {
   req.send(null);
 }
 
-function getHTML(url) {
+function getHTML(url, callback) {
   var req = new XMLHttpRequest();
   req.addEventListener('load', function() {
     var parser = new DOMParser();
-    var newContent = parser.parseFromString(this.responseText, 'text/html').querySelector('.main');
+    newContent = parser.parseFromString(this.responseText, 'text/html').querySelector('.main');
     var links = newContent.querySelectorAll('a');
 
     for (var i = 0; i < links.length; i++) {
@@ -33,7 +33,7 @@ function getHTML(url) {
       }
     }
 
-    document.querySelector('.main').innerHTML = newContent.innerHTML;
+    callback(newContent);
   });
   req.open('GET', url);
   req.send();

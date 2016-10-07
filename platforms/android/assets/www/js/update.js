@@ -19,7 +19,6 @@ var app = {
 
       checkNetwork();
 
-
       // Überprüfe Netzwerkstatus
       function checkNetwork() {
         console.log('checkNetwork function');
@@ -30,7 +29,6 @@ var app = {
           checking();
         }
       }
-
 
       // Überprüfe ob erster Start und sonst starte Update
       function checking() {
@@ -92,9 +90,6 @@ var app = {
             }
           }
         }
-
-
-        console.log('Total: ' + total + " Files");
 
         // Anzahl Files die gecached werden müssten
         for (var a = 0; a < data.stations.length; a++) {
