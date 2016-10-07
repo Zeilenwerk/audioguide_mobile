@@ -11,7 +11,6 @@ var app = {
       // Wenn Netzwerk verbunden, prüfe Update
       document.addEventListener('online', checkNetwork, false);
 
-
       // Initialisiere lokalen cache
       var initCache = function() {
           // see console output for debug info
@@ -66,10 +65,9 @@ var app = {
       // Zeige Daten im HTML an, aus online oder lokalen Cache
       function displayData(data) {
         console.log('displayData');
-
-        var source = $('.main').html();
-        var template = Handlebars.compile(source);
-        $('.main').html(template({ guide: data, host: API_HOST }));
+        var url = 'https://guide.zeilenwerk.ch/public/guides/3';
+        
+        getHTML(url);
 
         startRangingBeacons(data);
     }

@@ -21,10 +21,8 @@ var app = {
         return station.id == id;
       });
 
-      var source = $('.main').html();
-      var template = Handlebars.compile(source);
-      console.log(API_HOST);
-      $('.main').html(template({ host: API_HOST, guide: data, station: station[0] }));
+      var url = 'https://guide.zeilenwerk.ch/public/guides/3/stations/' + id;
+      getHTML(url);
 
       // Initialisiere Cache
       var initCache = function() {
@@ -47,9 +45,6 @@ var app = {
           });
       };
 
-      setTimeout(initCache, 100);
-
-      displayData(data);
 
       function displayData(data) {
         // Ermittle Beacons in der Nähe
