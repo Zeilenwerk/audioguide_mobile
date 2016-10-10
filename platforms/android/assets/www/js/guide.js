@@ -8,115 +8,120 @@ var app = {
     },
 
     onDeviceReady: function() {
-      // Wenn Netzwerk verbunden, prüfe Update
-      document.addEventListener('online', checkNetwork, false);
 
+      ImgCache.init(function () {
+        // Wenn Netzwerk verbunden, prüfe Update
+        document.addEventListener('online', checkNetwork, false);
 
-      var url = 'https://guide.zeilenwerk.ch/public/guides/3';
-      var file = getHTML(url, function onComplete(newContent) {
-        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dirEntry) {
-          console.log('file system open: ' + dirEntry.name);
-          var isAppend = true;
-          createFile(dirEntry, newContent, isAppend);
-        }, function onErrorLoadFs() {
-          console.log('fs load error');
-        });
-      });
-
-
-
-
-      // Initialisiere lokalen cache
-      var initCache = function() {
-          // see console output for debug info
-          ImgCache.options.debug = true;
-          ImgCache.options.usePersistentCache = true;
-          ImgCache.init();
-      };
-
-      initCache();
-
-      setTimeout(firstStart, 1000);
-
-      function firstStart() {
-        // Beim ersten Start werden die Daten geladen
         if (ImgCache.getCurrentSize() === 0) {
-          console.log('Erster Start');
+          console.log('first start');
           window.location.replace('update.html');
         }
-      }
 
-      checkNetwork();
+        checkNetwork();
 
-      // Überprüfe Netzwerkstatus
-      function checkNetwork() {
-        console.log('checkNetwork function');
-        var networkState = navigator.connection.type;
-        if (networkState === Connection.NONE) {
-          console.log('Device is offline');
-          onOffline();
-        } else {
-          get(URL, checkUpdate, function(){});
-          onOffline();
+        // Überprüfe Netzwerkstatus
+        function checkNetwork() {
+          console.log('checkNetwork function');
+          var networkState = navigator.connection.type;
+          if (networkState === Connection.NONE) {
+            console.log('Device is offline');
+            displayData();
+          } else {
+            get(URL, checkUpdate, function(){});
+          }
         }
-      }
 
 
-      // Prüft auf neue Updates und zeigt UpdateBox an
-      function checkUpdate(newData) {
-        console.log('checkUpdate function');
-        var cacheData = JSON.parse(localStorage.getItem("data"));
-        if (newData.updated_at !== cacheData.updated_at) {
+        // Prüft auf neue Updates und zeigt UpdateBox an
+        function checkUpdate(newData) {
+          console.log('checkUpdate function');
+          var cacheData = JSON.parse(localStorage.getItem("data"));
+          if (newData.updated_at !== cacheData.updated_at) {
+            var updateBox = document.querySelector('.update-box');
+            var p = document.querySelector('p');
+            var icon = document.querySelector('.close-icon');
+            updateBox.style.visibility = 'visible';
+            p.addEventListener('click', goUpdate);
+            icon.addEventListener('click', hideIcon);
+          } else {
+            displayData();
+          }
+        }
+
+
+        // Zeige Daten im HTML an, aus online oder lokalen Cache
+        function displayData() {
+          console.log('displayData function');
+          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+              console.log('file system open: ' + fs.name);
+              fs.root.getFile('index.html', { create: true, exclusive: false }, function (fileEntry) {
+
+                console.log("fileEntry is file?" + fileEntry.isFile.toString());
+                var data = JSON.parse(localStorage.getItem('data'));
+                readFile(fileEntry, data);
+
+              }, onErrorCreateFile);
+
+          }, onErrorLoadFs);
+        }
+
+
+        function readFile(fileEntry, data) {
+
+            fileEntry.file(function (file) {
+                var reader = new FileReader();
+
+                reader.onloadend = function() {
+                    document.querySelector('.main').innerHTML = this.result;
+
+                    $('img,audio,video').each(function() {
+                        console.log('load cached files');
+                        ImgCache.useCachedFile($(this));
+                    });
+
+                    startRangingBeacons(data);
+                };
+
+                reader.readAsText(file);
+
+            }, onErrorReadFile);
+        }
+
+
+        // Wechsel zu Update Seite und anschliessend Update
+        function goUpdate() {
           var updateBox = document.querySelector('.update-box');
-          var p = document.querySelector('p');
-          var icon = document.querySelector('.close-icon');
-          updateBox.style.visibility = 'visible';
-          p.addEventListener('click', goUpdate);
-          icon.addEventListener('click', hideIcon);
+          updateBox.style.visibility = 'hidden';
+          window.location.replace('update.html');
         }
-      }
 
 
-      // Zeige Daten im HTML an, aus online oder lokalen Cache
-      function displayData(data) {
-        console.log('displayData');
-        var url = 'https://guide.zeilenwerk.ch/public/guides/3';
+        // Verstecke close icon
+        function hideIcon(e) {
+          e.stopPropagation();
+          var updateBox = document.querySelector('.update-box');
+          updateBox.style.visibility = 'hidden';
+        }
 
-        getHTML(url, function(newContent) {
-          document.querySelector('.main').innerHTML = newContent.innerHTML;
-        });
-
-        startRangingBeacons(data);
-    }
-
-
-    // Wechsel zu Update Seite und anschliessend Update
-    function goUpdate() {
-      var updateBox = document.querySelector('.update-box');
-      updateBox.style.visibility = 'hidden';
-      window.location.replace('update.html');
-    }
+        function onErrorCreateFile() {
+          console.log('Error beim erstellen des Files');
+        }
 
 
-    // Wenn offline, verwende cache
-    function onOffline() {
-      var data = JSON.parse(localStorage.getItem('data'));
-      displayData(data);
-
-      $('img,audio,video').each(function() {
-          console.log('load cached files');
-          ImgCache.useCachedFile($(this));
-      });
-    }
+        function onErrorLoadFs() {
+          console.log('Error beim laden des File System');
+        }
 
 
-    // Verstecke close icon
-    function hideIcon(e) {
-      e.stopPropagation();
-      var updateBox = document.querySelector('.update-box');
-      updateBox.style.visibility = 'hidden';
-    }
+        function onErrorReadFile() {
+          console.log('Error beim laden des File');
+        }
 
+      }, function () {
+        alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
+    });
   },
 };
 

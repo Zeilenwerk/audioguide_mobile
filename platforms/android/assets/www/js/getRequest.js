@@ -1,6 +1,6 @@
 function get(url, callbackSuccess, callbackError) {
   var req = new XMLHttpRequest();
-  req.open('GET', URL, true);
+  req.open('GET', url, true);
   req.onload = function(e) {
     if(req.readyState === 4) {
       if(req.status === 200 || req.status === 204) {
@@ -16,11 +16,12 @@ function get(url, callbackSuccess, callbackError) {
   req.send(null);
 }
 
-function getHTML(url, callback) {
+
+function getHTML(url, callback, station_id) {
   var req = new XMLHttpRequest();
   req.addEventListener('load', function() {
     var parser = new DOMParser();
-    newContent = parser.parseFromString(this.responseText, 'text/html').querySelector('.main');
+    var newContent = parser.parseFromString(this.responseText, 'text/html').querySelector('.main');
     var links = newContent.querySelectorAll('a');
 
     for (var i = 0; i < links.length; i++) {
@@ -33,7 +34,7 @@ function getHTML(url, callback) {
       }
     }
 
-    callback(newContent);
+    callback(newContent, station_id);
   });
   req.open('GET', url);
   req.send();
