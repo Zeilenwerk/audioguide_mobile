@@ -11,13 +11,13 @@ function get(url, callbackSuccess, callbackError) {
     }
   };
   req.onerror = function() {
-    callbackError(req.responseText)
+    callbackError(req.responseText);
   };
   req.send(null);
 }
 
 
-function getHTML(url, callback, station_id) {
+function getHTML(url, callback, filename) {
   var req = new XMLHttpRequest();
   req.addEventListener('load', function() {
     var parser = new DOMParser();
@@ -34,7 +34,7 @@ function getHTML(url, callback, station_id) {
       }
     }
 
-    callback(newContent, station_id);
+    callback(newContent, filename);
   });
   req.open('GET', url);
   req.send();

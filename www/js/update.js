@@ -1,53 +1,58 @@
 var app = {
-    initialize: function() {
-        this.bindEvents();
-    },
+  initialize: function() {
+    this.bindEvents();
+  },
 
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
+  bindEvents: function() {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+  },
 
-    onDeviceReady: function() {
+  onDeviceReady: function() {
+    ImgCache.init(function () {
+      Network.checkNetwork(app.getApiResponse, app.transferFailed);
+    }, function () {
+      alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
+    });
+  },
 
-      ImgCache.init(function () {
+  getApiResponse: function() {
+    console.log('[UPDATE] getting api data');
+    get(URL, app.onApiResponseComplete, app.transferFailed);
+  },
 
-        checkNetwork();
+  transferFailed: function() {
+    console.log('[UPDATE] file transfer failed');
+  },
 
-        // Überprüfe Netzwerkstatus
-        function checkNetwork() {
-          console.log('checkNetwork function');
-          var networkState = navigator.connection.type;
-          if (networkState === Connection.NONE) {
-            transferFailed();
-          } else {
-            checking();
-          }
-        }
+  onApiResponseComplete: function(newData) {
+    if (newData.updated_at !== Cache.updatedAt()) {
+      console.log('[UPDATE] api != localstorage');
+      Cache.init(app.onCachingComplete, app.onCachingProgress);
+      Cache.storeApiData(newData);
+      Cache.storeGuide();
+      Cache.storeStations();
+    } else {
+      console.log('[UPDATE] api = localstorage');
+      window.location.replace('index.html');
+    }
+  },
 
-        // Überprüfe ob erster Start und sonst starte Update
-        function checking() {
-          console.log('checking function');
-          if (ImgCache.getCurrentSize() === 0) {
-            firstStart();
-          } else {
-            var reverse_button = document.querySelector('.reverse-button');
-            var back_button = document.querySelector('.back-button');
-            reverse_button.style.display = 'none';
-            back_button.style.display = 'none';
-            updateText();
-            get(URL, saveDataToLocalStorage, transferFailed);
-          }
-        }
+  onCachingComplete: function() {
+    window.location.replace('index.html');
+  },
 
+  onCachingProgress: function(percent) {
+    console.log("Progress: " + percent);
+    var bar = document.querySelector('.progress-bar');
+    bar.style.display = 'block';
+    var span = document.querySelector('span');
+    span.style.width = percent + '%';
+  }
+};
 
-        // Hole Daten beim ersten Start
-        function firstStart() {
-          console.log('firstStart function');
-          firstStartText();
-          get(URL, saveDataToLocalStorage, transferFailed);
-        }
+app.initialize();
 
-
+/*
         // Speichere Daten in lokalen Speicher
         function saveDataToLocalStorage(data) {
           console.log('saveDataToLocalStorage function');
@@ -156,57 +161,6 @@ var app = {
         }
 
 
-        function saveFile(htmlContent, station_id) {
-          // Save HTML Sourcecode
-          window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-            console.log('file system open: ' + fs.name);
-
-            var fileName = station_id + '.html';
-
-            if (station_id === 'index') {
-              fileName = 'index.html';
-            }
-
-            fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
-
-              console.log("fileEntry is file?" + fileEntry.isFile.toString());
-              writeFile(fileEntry, htmlContent);
-
-            }, onErrorCreateFile);
-
-          }, onErrorLoadFs);
-        }
-
-
-        // Write to file in system
-        function writeFile(fileEntry, dataObj) {
-          // Create a FileWriter object for our FileEntry (log.txt).
-          fileEntry.createWriter(function (fileWriter) {
-
-            fileWriter.onwriteend = function() {
-              console.log("Successful file write...");
-              goIndex();
-            };
-
-            fileWriter.onerror = function (e) {
-              console.log("Failed file write: " + e.toString());
-            };
-
-            fileWriter.write(dataObj.innerHTML);
-          });
-        }
-
-
-        function onErrorCreateFile() {
-          console.log('Error beim erstellen des Files');
-        }
-
-
-        function onErrorLoadFs() {
-          console.log('Error beim laden des File System');
-        }
-
-
         // Gehe zu index.html
         function goIndex() {
           console.log('goIndex function');
@@ -263,11 +217,4 @@ var app = {
             back_button.addEventListener('click', goIndex);
           }
         }
-
-      }, function () {
-        alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
-      });
-    },
-};
-
-app.initialize();
+*/
