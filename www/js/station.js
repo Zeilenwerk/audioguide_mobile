@@ -12,14 +12,7 @@ var app = {
 
       ImgCache.init(function () {
 
-        var data = JSON.parse(localStorage.getItem("data"));
-        var re = /[\?&]station_id=([0-9]+)/g;
-        var str = window.location.search;
-        var id = re.exec(str)[1];
-
-        window.station = data.stations.filter(function(station) {
-          return station.id == id;
-        });
+        var id = htmlparser.getID(window.location.search);
 
         app.displayData(id);
 
@@ -49,15 +42,11 @@ var app = {
 
 
     isActive: function() {
-      var re = /[\?&]station_id=([0-9]+)/g;
-      var str = window.location.search;
-      var id = re.exec(str)[1];
+      var id = htmlparser.getID(window.location.search);
 
       var links = document.querySelectorAll('.nav-links');
       for (var i = 0; i < links.length; i++) {
-        var url = links[i].getAttribute('href');
-        var re2 = /[\?&]station_id=([0-9]+)/g;
-        var link_id = re2.exec(url)[1];
+        var link_id = htmlparser.getID(links[i].getAttribute('href'));
         if (id === link_id) {
           links[i].parentNode.className += " active";
         }
