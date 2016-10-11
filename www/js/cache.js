@@ -109,6 +109,9 @@ function onErrorCreateFile() {
   console.log('Error beim erstellen des Files');
 }
 
+function onErrorReadFile() {
+  console.log('Error beim laden des File');
+}
 
 function onErrorLoadFs() {
   console.log('Error beim laden des File System');

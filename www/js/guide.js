@@ -69,18 +69,3 @@ function hideIcon(e) {
   var updateBox = document.querySelector('.update-box');
   updateBox.style.visibility = 'hidden';
 }
-
-
-function onErrorCreateFile() {
-  console.log('Error beim erstellen des Files');
-}
-
-
-function onErrorLoadFs() {
-  console.log('Error beim laden des File System');
-}
-
-
-function onErrorReadFile() {
-  console.log('Error beim laden des File');
-}

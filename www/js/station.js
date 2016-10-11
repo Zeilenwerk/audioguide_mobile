@@ -120,21 +120,6 @@ var app = {
               }
         }
 
-
-        function onErrorCreateFile() {
-          console.log('Error beim erstellen des Files');
-        }
-
-
-        function onErrorLoadFs() {
-          console.log('Error beim laden des File System');
-        }
-
-
-        function onErrorReadFile() {
-          console.log('Error beim laden des File');
-        }
-
       }, function () {
         alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
       });
