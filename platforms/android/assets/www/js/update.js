@@ -9,15 +9,10 @@ var app = {
 
   onDeviceReady: function() {
     ImgCache.init(function () {
-      Network.checkNetwork(app.getApiResponse, app.transferFailed);
+      Network.onUpdateAvailable(app.onUpdateAvailable, app.onNoUpdate);
     }, function () {
       alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
     });
-  },
-
-  getApiResponse: function() {
-    console.log('[UPDATE] getting api data');
-    get(URL, app.onApiResponseComplete, app.transferFailed);
   },
 
   transferFailed: function() {
@@ -28,17 +23,17 @@ var app = {
     button.style.display = 'block';
   },
 
-  onApiResponseComplete: function(newData) {
-    if (newData.updated_at !== Cache.updatedAt()) {
-      console.log('[UPDATE] api != localstorage');
-      Cache.init(app.onCachingComplete, app.onCachingProgress);
-      Cache.storeApiData(newData);
-      Cache.storeGuide();
-      Cache.storeStations();
-    } else {
-      console.log('[UPDATE] api = localstorage');
-      window.location.replace('index.html');
-    }
+  onUpdateAvailable: function(newData) {
+    console.log('[UPDATE] api != localstorage');
+    Cache.init(app.onCachingComplete, app.onCachingProgress);
+    Cache.storeApiData(newData);
+    Cache.storeGuide();
+    Cache.storeStations();
+  },
+
+  onNoUpdate: function() {
+    console.log('[UPDATE] api = localstorage');
+    window.location.replace('index.html');
   },
 
   onCachingComplete: function() {

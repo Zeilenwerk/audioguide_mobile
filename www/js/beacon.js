@@ -37,13 +37,13 @@ function startRangingBeacons(data) {
       beacons[beacon.uuid] = beacon;
     }
 
-    var beacon = getNearestBeacon(beacons);
+    var nearestBeacon = getNearestBeacon(beacons);
     var secondBeacon = getSecondBeacon(beacons);
 
-    if(beacon) {
-      console.log('didRangeBeaconsInRegion:', {uuid: beacon.uuid, distance: beacon.accuracy});
+    if(nearestBeacon) {
+      console.log('didRangeBeaconsInRegion:', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
       var station = data.stations.filter(function(station) {
-        return station.uuid.toLowerCase() === beacon.uuid.toLowerCase();
+        return station.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
       })[0];
 
       // Get station id from url param
@@ -52,16 +52,15 @@ function startRangingBeacons(data) {
       var match = re.exec(str);
 
       // Wenn nächste Station nicht dieselbe wie schon vorhanden ist
-      if(beaconCounter > 5 && (!match || (match && match[1] != station.id))) {
+      if(beaconCounter > 10 && (!match || (match && match[1] != station.id))) {
 
         // Wenn Distanz kleiner als 0.5 Meter ist
-        if ((secondBeacon && (secondBeacon.accuracy - beacon.accuracy) > 0.1) || !secondBeacon) {
+        if ((secondBeacon && (secondBeacon.accuracy - nearestBeacon.accuracy) > 0.5) || !secondBeacon) {
           window.location.replace('show.html?station_id=' + station.id);
         }
       }
     }
   };
-
 }
 
 

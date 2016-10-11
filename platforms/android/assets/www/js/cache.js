@@ -58,6 +58,19 @@ var Cache = {
     }, onErrorLoadFs);
   },
 
+  readFile: function(fileEntry, data, onFileLoaded) {
+    fileEntry.file(function (file) {
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+          onFileLoaded(this, data);
+        };
+
+        reader.readAsText(file);
+
+    }, onErrorReadFile);
+  },
+
   // Write to file in system
   writeFile: function(fileEntry, text, fileName) {
     fileEntry.createWriter(function (fileWriter) {
