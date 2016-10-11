@@ -10,33 +10,17 @@ var app = {
     onDeviceReady: function() {
 
       ImgCache.init(function () {
-        // Wenn Netzwerk verbunden, prüfe Update
-        document.addEventListener('online', checkNetwork, false);
 
         if (ImgCache.getCurrentSize() === 0) {
-          console.log('first start');
           window.location.replace('update.html');
         }
 
-        checkNetwork();
+        Network.checkNetwork(function() { get(URL, checkUpdate, function(){}); }, displayData);
 
-        // Überprüfe Netzwerkstatus
-        function checkNetwork() {
-          console.log('checkNetwork function');
-          var networkState = navigator.connection.type;
-          if (networkState === Connection.NONE) {
-            console.log('Device is offline');
-            displayData();
-          } else {
-            get(URL, checkUpdate, function(){});
-          }
-        }
-
-
-        // Prüft auf neue Updates und zeigt UpdateBox an
         function checkUpdate(newData) {
           console.log('checkUpdate function');
           var cacheData = JSON.parse(localStorage.getItem("data"));
+
           if (newData.updated_at !== cacheData.updated_at) {
             var updateBox = document.querySelector('.update-box');
             var p = document.querySelector('p');
@@ -44,9 +28,9 @@ var app = {
             updateBox.style.visibility = 'visible';
             p.addEventListener('click', goUpdate);
             icon.addEventListener('click', hideIcon);
-          } else {
-            displayData();
           }
+
+          displayData();
         }
 
 
@@ -90,7 +74,6 @@ var app = {
         }
 
 
-        // Wechsel zu Update Seite und anschliessend Update
         function goUpdate() {
           var updateBox = document.querySelector('.update-box');
           updateBox.style.visibility = 'hidden';
@@ -98,12 +81,12 @@ var app = {
         }
 
 
-        // Verstecke close icon
         function hideIcon(e) {
           e.stopPropagation();
           var updateBox = document.querySelector('.update-box');
           updateBox.style.visibility = 'hidden';
         }
+
 
         function onErrorCreateFile() {
           console.log('Error beim erstellen des Files');

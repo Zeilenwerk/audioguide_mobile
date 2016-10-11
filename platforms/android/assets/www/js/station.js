@@ -10,15 +10,12 @@ var app = {
     onDeviceReady: function() {
 
       ImgCache.init(function () {
-        // Parse the local storage
-        var data = JSON.parse(localStorage.getItem("data"));
 
-        // Schneide ID aus der URL
+        var data = JSON.parse(localStorage.getItem("data"));
         var re = /[\?&]station_id=([0-9]+)/g;
         var str = window.location.search;
         var id = re.exec(str)[1];
 
-        // Suche Stations Daten anhand der ID in der JSON Datei
         window.station = data.stations.filter(function(station) {
           return station.id == id;
         });

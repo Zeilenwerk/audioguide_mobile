@@ -4,15 +4,6 @@
   height: 155px;
 }
 
-.loading-gif {
-  width: 140px !important;
-  height: 140px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  display: none;
-}
-
 .update p {
   font-size: 1.6em;
   padding-top: 20px;
@@ -23,7 +14,7 @@
   color: #fff;
   position: fixed;
   font-size: 0.9em;
-  top: 0px;
+  bottom: 0px;
   width: 100%;
   visibility: hidden;
   z-index: 99;
@@ -33,13 +24,16 @@
 
 .update-box p {
   opacity: 0.9;
-  float: left;
   padding-top: 16px;
-  margin-left: 22%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
 }
 
 .close-icon {
   font-size: 3.4em !important;
-  float: right;
-  padding: 10px 14px 6px 10px;
+  padding: 10px;
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
 }

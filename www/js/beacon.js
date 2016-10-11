@@ -24,7 +24,7 @@ function startRangingBeacons(data) {
 
 
   for (var i = 0; i < data.stations.length; i++) {
-    if (data.stations[i].uuid != "") {
+    if (data.stations[i].uuid !== "") {
       startRangingRegion({ uuid: data.stations[i].uuid, identifier: data.stations[i].titel });
     }
   }
@@ -56,7 +56,7 @@ function startRangingBeacons(data) {
 
         // Wenn Distanz kleiner als 0.5 Meter ist
         if ((secondBeacon && (secondBeacon.accuracy - beacon.accuracy) > 0.1) || !secondBeacon) {
-          window.location.replace('show.html?station_id=' + station.id)
+          window.location.replace('show.html?station_id=' + station.id);
         }
       }
     }
