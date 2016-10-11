@@ -11,7 +11,7 @@ var Cache = {
   updatedAt: function() {
     var d = localStorage.getItem('data');
     if(d) {
-      return JSON.parse(d).created_at;
+      return JSON.parse(d).updated_at;
     } else {
       return '1970-01-01T00:00:00.000Z';
     }
@@ -58,17 +58,20 @@ var Cache = {
     }, onErrorLoadFs);
   },
 
-  readFile: function(fileEntry, data, onFileLoaded) {
-    fileEntry.file(function (file) {
-        var reader = new FileReader();
-
-        reader.onloadend = function() {
-          onFileLoaded(this, data);
-        };
-
-        reader.readAsText(file);
-
-    }, onErrorReadFile);
+  readFile: function(fileName, data, onFileLoaded) {
+    console.log('[CACHE] Reading html from ' + fileName);
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+        console.log('file system open: ' + fs.name);
+        fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
+          fileEntry.file(function (file) {
+              var reader = new FileReader();
+              reader.onloadend = function() {
+                onFileLoaded(this, data);
+              };
+              reader.readAsText(file);
+          }, onErrorReadFile);
+        }, onErrorCreateFile);
+    }, onErrorLoadFs);
   },
 
   // Write to file in system
@@ -109,6 +112,9 @@ function onErrorCreateFile() {
   console.log('Error beim erstellen des Files');
 }
 
+function onErrorReadFile() {
+  console.log('Error beim laden des File');
+}
 
 function onErrorLoadFs() {
   console.log('Error beim laden des File System');

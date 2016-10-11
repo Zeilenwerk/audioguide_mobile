@@ -29,18 +29,8 @@ var app = {
     // Zeige Daten im HTML an, aus online oder lokalen Cache
     displayData: function() {
       console.log('displayData function');
-      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-          console.log('file system open: ' + fs.name);
-          fs.root.getFile('index.html', { create: true, exclusive: false }, function (fileEntry) {
-
-            console.log("fileEntry is file?" + fileEntry.isFile.toString());
-            var data = JSON.parse(localStorage.getItem('data'));
-            Cache.readFile(fileEntry, data, app.onFileLoaded);
-
-          }, onErrorCreateFile);
-
-      }, onErrorLoadFs);
+      var data = JSON.parse(localStorage.getItem('data'));
+      Cache.readFile('index.html', data, app.onFileLoaded);
     },
 
     onFileLoaded: function(that, data) {

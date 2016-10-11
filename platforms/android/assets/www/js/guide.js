@@ -29,18 +29,8 @@ var app = {
     // Zeige Daten im HTML an, aus online oder lokalen Cache
     displayData: function() {
       console.log('displayData function');
-      window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-          console.log('file system open: ' + fs.name);
-          fs.root.getFile('index.html', { create: true, exclusive: false }, function (fileEntry) {
-
-            console.log("fileEntry is file?" + fileEntry.isFile.toString());
-            var data = JSON.parse(localStorage.getItem('data'));
-            Cache.readFile(fileEntry, data, app.onFileLoaded);
-
-          }, onErrorCreateFile);
-
-      }, onErrorLoadFs);
+      var data = JSON.parse(localStorage.getItem('data'));
+      Cache.readFile('index.html', data, app.onFileLoaded);
     },
 
     onFileLoaded: function(that, data) {
@@ -68,19 +58,4 @@ function hideIcon(e) {
   e.stopPropagation();
   var updateBox = document.querySelector('.update-box');
   updateBox.style.visibility = 'hidden';
-}
-
-
-function onErrorCreateFile() {
-  console.log('Error beim erstellen des Files');
-}
-
-
-function onErrorLoadFs() {
-  console.log('Error beim laden des File System');
-}
-
-
-function onErrorReadFile() {
-  console.log('Error beim laden des File');
 }
