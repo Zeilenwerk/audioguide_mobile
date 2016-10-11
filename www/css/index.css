@@ -152,14 +152,14 @@ li.list-box {
     float: left;
     width: 70%; } }
 /****** 1200 and above ******/
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1500px) {
   .wrapper, .titel {
-    width: 840px;
+    width: 1050px;
     margin-left: auto;
     margin-right: auto; }
 
   .main {
-    width: 1200px; } }
+    width: 1500px; } }
 .main {
   margin: 0px auto; }
 

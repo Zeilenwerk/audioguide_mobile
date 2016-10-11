@@ -27,6 +27,9 @@
         },
         "com.unarin.cordova.beacon": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },
     "dependent_plugins": {

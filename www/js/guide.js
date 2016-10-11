@@ -8,7 +8,8 @@ var app = {
     },
 
     onDeviceReady: function() {
-
+      StatusBar.hide();
+      
       ImgCache.init(function () {
 
         if (Cache.empty()) {
