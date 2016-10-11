@@ -30,7 +30,7 @@ var Cache = {
 
   storeGuide: function() {
     console.log('[CACHE] Storing guide');
-    getHTML(PUBLIC_URL, Cache.storeHtmlAndImages, 'index.html');
+    Network.getHTML(PUBLIC_URL, Cache.storeHtmlAndImages, 'index.html');
   },
 
   storeStations: function() {
@@ -39,7 +39,7 @@ var Cache = {
       var station = data.stations[i];
       var url = STATION_URL + station.id;
       console.log('[CACHE] Storing station ' + station.id);
-      getHTML(url, Cache.storeHtmlAndImages, station.id + '.html');
+      Network.getHTML(url, Cache.storeHtmlAndImages, station.id + '.html');
     }
   },
 

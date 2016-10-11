@@ -12,7 +12,7 @@ var app = {
 
       ImgCache.init(function () {
 
-        var id = htmlparser.getID(window.location.search);
+        var id = HtmlParser.getID(window.location.search);
 
         app.displayData(id);
 
@@ -42,11 +42,11 @@ var app = {
 
 
     isActive: function() {
-      var id = htmlparser.getID(window.location.search);
+      var id = HtmlParser.getID(window.location.search);
 
       var links = document.querySelectorAll('.nav-links');
       for (var i = 0; i < links.length; i++) {
-        var link_id = htmlparser.getID(links[i].getAttribute('href'));
+        var link_id = HtmlParser.getID(links[i].getAttribute('href'));
         if (id === link_id) {
           links[i].parentNode.className += " active";
         }
