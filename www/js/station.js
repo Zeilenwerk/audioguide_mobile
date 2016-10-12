@@ -40,24 +40,9 @@ var station = {
          video.load();
     },
 
-
-    isActive: function() {
-      var id = HtmlParser.getID(window.location.search);
-
-      var links = document.querySelectorAll('.nav-links');
-      for (var i = 0; i < links.length; i++) {
-        var link_id = HtmlParser.getID(links[i].getAttribute('href'));
-        if (id === link_id) {
-          links[i].parentNode.className += " active";
-        }
-      }
-    },
-
-
     setTime: function() {
       this.currentTime = 20;
     },
-
 
     getThumbnail: function() {
           var videos = document.querySelectorAll('video');
@@ -91,8 +76,7 @@ var station = {
         });
       });
 
-      // TODO station.isActive();                     // Akitves Element in der Navigation
-      station.getThumbnail();                 // Setze Thumbnail für Video
+      station.getThumbnail();         // Setze Thumbnail für Video
       startRangingBeacons(data);      // Ermittle Beacons in der Nähe
     }
 };

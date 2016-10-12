@@ -13,19 +13,18 @@ var guide = {
       ImgCache.init(function () {
 
         if (Cache.empty()) {
-          window.location.replace('update.html');
+          guide.goToUpdate();
         }
 
-        Network.onUpdateAvailable(function() {
-          window.location.replace('update.html');
-        }, function() {
-          guide.displayData();
-        });
+        Network.onUpdateAvailable(guide.goToUpdate, guide.displayData, guide.displayData);
       }, function () {
         alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
       });
     },
 
+    goToUpdate: function() {
+      window.location.replace('update.html');
+    },
 
     // Zeige Daten im HTML an, aus online oder lokalen Cache
     displayData: function() {
@@ -65,16 +64,3 @@ var guide = {
 };
 
 guide.initialize();
-
-function goUpdate() {
-  var updateBox = document.querySelector('.update-box');
-  updateBox.style.visibility = 'hidden';
-  window.location.replace('update.html');
-}
-
-
-function hideIcon(e) {
-  e.stopPropagation();
-  var updateBox = document.querySelector('.update-box');
-  updateBox.style.visibility = 'hidden';
-}

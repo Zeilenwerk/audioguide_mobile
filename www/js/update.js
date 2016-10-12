@@ -9,7 +9,7 @@ var update = {
 
   onDeviceReady: function() {
     ImgCache.init(function () {
-      Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate);
+      Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
     }, function () {
       alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
     });

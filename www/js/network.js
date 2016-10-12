@@ -11,7 +11,7 @@ var Network = {
     }
   },
 
-  onUpdateAvailable: function(updateAvailable, noUpdate) {
+  onUpdateAvailable: function(updateAvailable, noUpdate, noConnection) {
     var onOnline = function() {
       console.log('[UPDATE] getting api data');
       Network.get(URL, function(newData) {
@@ -24,7 +24,7 @@ var Network = {
     };
 
     var onOffline = function() {
-      noUpdate();
+      noConnection();
     };
 
     Network.checkNetwork(onOnline, onOffline);
