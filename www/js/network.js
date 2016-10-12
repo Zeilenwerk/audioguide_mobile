@@ -12,7 +12,7 @@ var Network = {
   },
 
   onUpdateAvailable: function(updateAvailable, noUpdate) {
-    onOnline = function() {
+    var onOnline = function() {
       console.log('[UPDATE] getting api data');
       Network.get(URL, function(newData) {
         if (newData.updated_at !== Cache.updatedAt()) {
@@ -53,17 +53,6 @@ var Network = {
     req.addEventListener('load', function() {
       var parser = new DOMParser();
       var newContent = parser.parseFromString(this.responseText, 'text/html').querySelector('.main');
-      var links = newContent.querySelectorAll('a');
-
-      for (var i = 0; i < links.length; i++) {
-        if (links[i].parentNode.className.indexOf('station-show-titel') > -1) {
-          links[i].setAttribute('href', 'index.html');
-        } else {
-          var url = links[i].getAttribute('href');
-          var id = url.split('/')[7];
-          links[i].setAttribute('href', 'show.html?station_id=' + id);
-        }
-      }
 
       callback(newContent, filename);
     });

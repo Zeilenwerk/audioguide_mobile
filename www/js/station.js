@@ -1,10 +1,10 @@
-var app = {
+var station = {
     initialize: function() {
         this.bindEvents();
     },
 
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
+        //document.addEventListener('deviceready', this.onDeviceReady, false);
     },
 
     onDeviceReady: function() {
@@ -14,7 +14,7 @@ var app = {
 
         var id = HtmlParser.getID(window.location.search);
 
-        app.displayData(id);
+        station.displayData(id);
 
       }, function () {
         alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
@@ -24,7 +24,7 @@ var app = {
     displayData: function(station_id)  {
       console.log('displayData function');
       var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile(station_id + '.html', data, app.onFileLoaded);
+      Cache.readFile(station_id + '.html', data, station.onFileLoaded);
     },
 
     setPoster: function() {
@@ -35,8 +35,8 @@ var app = {
          canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
          video.currentTime = 0;
          video.setAttribute('poster', canvas.toDataURL());
-         video.removeEventListener('loadedmetadata', app.setTime);
-         video.removeEventListener('loadeddata', app.setPoster);
+         video.removeEventListener('loadedmetadata', station.setTime);
+         video.removeEventListener('loadeddata', station.setPoster);
          video.load();
     },
 
@@ -63,13 +63,20 @@ var app = {
           var videos = document.querySelectorAll('video');
 
           for (var i = 0; i < videos.length; i++) {
-            videos[i].addEventListener('loadedmetadata', app.setTime, false);
-            videos[i].addEventListener('loadeddata', app.setPoster, false);
+            videos[i].addEventListener('loadedmetadata', station.setTime, false);
+            videos[i].addEventListener('loadeddata', station.setPoster, false);
           }
     },
 
     onFileLoaded: function(that, data) {
+      document.querySelector('.main').innerHTML = "";
       document.querySelector('.main').innerHTML = that.result;
+
+      var links = document.querySelectorAll('a');
+
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', guide.onStationClick);
+      }
 
       $('img, audio, video').each(function() {
         console.log('load cached files');
@@ -84,10 +91,10 @@ var app = {
         });
       });
 
-      app.isActive();                     // Akitves Element in der Navigation
-      app.getThumbnail();                 // Setze Thumbnail für Video
+      // TODO station.isActive();                     // Akitves Element in der Navigation
+      station.getThumbnail();                 // Setze Thumbnail für Video
       startRangingBeacons(data);      // Ermittle Beacons in der Nähe
     }
 };
 
-app.initialize();
+station.initialize();

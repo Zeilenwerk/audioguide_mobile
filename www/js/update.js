@@ -1,4 +1,4 @@
-var app = {
+var update = {
   initialize: function() {
     this.bindEvents();
   },
@@ -9,7 +9,7 @@ var app = {
 
   onDeviceReady: function() {
     ImgCache.init(function () {
-      Network.onUpdateAvailable(app.onUpdateAvailable, app.onNoUpdate);
+      Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate);
     }, function () {
       alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
     });
@@ -25,7 +25,7 @@ var app = {
 
   onUpdateAvailable: function(newData) {
     console.log('[UPDATE] api != localstorage');
-    Cache.init(app.onCachingComplete, app.onCachingProgress);
+    Cache.init(update.onCachingComplete, update.onCachingProgress);
     Cache.storeApiData(newData);
     Cache.storeGuide();
     Cache.storeStations();
@@ -49,4 +49,4 @@ var app = {
   }
 };
 
-app.initialize();
+update.initialize();

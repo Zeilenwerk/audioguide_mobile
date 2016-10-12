@@ -1,4 +1,4 @@
-var app = {
+var guide = {
     initialize: function() {
         this.bindEvents();
     },
@@ -9,7 +9,7 @@ var app = {
 
     onDeviceReady: function() {
       StatusBar.hide();
-      
+
       ImgCache.init(function () {
 
         if (Cache.empty()) {
@@ -19,7 +19,7 @@ var app = {
         Network.onUpdateAvailable(function() {
           window.location.replace('update.html');
         }, function() {
-          app.displayData();
+          guide.displayData();
         });
       }, function () {
         alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
@@ -31,11 +31,17 @@ var app = {
     displayData: function() {
       console.log('displayData function');
       var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile('index.html', data, app.onFileLoaded);
+      Cache.readFile('index.html', data, guide.onFileLoaded);
     },
 
     onFileLoaded: function(that, data) {
       document.querySelector('.main').innerHTML = that.result;
+
+      var links = document.querySelectorAll('a');
+
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', guide.onStationClick);
+      }
 
       $('img,audio,video').each(function() {
           console.log('load cached files');
@@ -43,10 +49,22 @@ var app = {
       });
 
       startRangingBeacons(data);
+    },
+
+    onStationClick: function(e) {
+      var id = this.getAttribute('data-id');
+      if(id !== null) {
+        e.preventDefault();
+        if (Number(id) === 0) {
+          guide.displayData();
+        } else {
+          station.displayData(id);
+        }
+      }
     }
 };
 
-app.initialize();
+guide.initialize();
 
 function goUpdate() {
   var updateBox = document.querySelector('.update-box');
