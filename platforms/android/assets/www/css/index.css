@@ -57,8 +57,8 @@ p {
 /****** Titel Guide ******/
 .titel {
   background-color: black;
-  width: 100%;
   position: absolute;
+  width: 100%;
   top: 0px;
   background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
   /* FF3.6-15 */
@@ -147,6 +147,9 @@ li.list-box {
     float: left;
     width: 30%;
     background-color: #EEE; }
+
+  .titel {
+    width: 70%; }
 
   .wrapper {
     float: left;
