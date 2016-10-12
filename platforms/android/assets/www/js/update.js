@@ -1,4 +1,4 @@
-var app = {
+var update = {
   initialize: function() {
     this.bindEvents();
   },
@@ -9,7 +9,7 @@ var app = {
 
   onDeviceReady: function() {
     ImgCache.init(function () {
-      Network.onUpdateAvailable(app.onUpdateAvailable, app.onNoUpdate);
+      Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
     }, function () {
       alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
     });
@@ -17,6 +17,8 @@ var app = {
 
   transferFailed: function() {
     console.log('[UPDATE] file transfer failed');
+    var bar = document.querySelector('.progress-bar');
+    bar.style.display = 'none';
     var p = document.querySelector('p');
     p.innerHTML = 'Aktualisierung fehlgeschlagen.<br>Bitte Internetverbindung überprüfen.';
     var button = document.querySelector('.reverse');
@@ -25,7 +27,7 @@ var app = {
 
   onUpdateAvailable: function(newData) {
     console.log('[UPDATE] api != localstorage');
-    Cache.init(app.onCachingComplete, app.onCachingProgress);
+    Cache.init(update.onCachingComplete, update.onCachingProgress);
     Cache.storeApiData(newData);
     Cache.storeGuide();
     Cache.storeStations();
@@ -49,4 +51,4 @@ var app = {
   }
 };
 
-app.initialize();
+update.initialize();

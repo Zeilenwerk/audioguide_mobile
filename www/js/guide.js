@@ -16,9 +16,23 @@ var guide = {
           guide.goToUpdate();
         }
 
-        Network.onUpdateAvailable(guide.goToUpdate, guide.displayData, guide.displayData);
+        guide.displayData();
+
+        Network.onUpdateAvailable(guide.displayUpdate, function(){}, function(){});
       }, function () {
         alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
+      });
+    },
+
+    displayUpdate: function() {
+      var box = document.querySelector('.update-box');
+      box.style.display = 'block';
+      box.addEventListener('click', guide.goToUpdate);
+      var icon = document.querySelector('.close-icon');
+      icon.addEventListener('click', function(e) {
+        var box = document.querySelector('.update-box');
+        box.style.display = 'none';
+        e.stopPropagation();
       });
     },
 
@@ -26,7 +40,6 @@ var guide = {
       window.location.replace('update.html');
     },
 
-    // Zeige Daten im HTML an, aus online oder lokalen Cache
     displayData: function() {
       console.log('displayData function');
       var data = JSON.parse(localStorage.getItem('data'));

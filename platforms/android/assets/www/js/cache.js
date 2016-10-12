@@ -50,12 +50,11 @@ var Cache = {
 
   storeHtml: function(newContent, fileName) {
     console.log('[CACHE] Storing HTML to ' + fileName);
-    // TODO Cache.cacheList.push(fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
         Cache.writeFile(fileEntry, newContent, fileName);
-      }, onErrorCreateFile);
-    }, onErrorLoadFs);
+      }, Cache.onErrorCreateFile);
+    }, Cache.onErrorLoadFs);
   },
 
   readFile: function(fileName, data, onFileLoaded) {
@@ -69,21 +68,16 @@ var Cache = {
                 onFileLoaded(this, data);
               };
               reader.readAsText(file);
-          }, onErrorReadFile);
-        }, onErrorCreateFile);
-    }, onErrorLoadFs);
+          }, Cache.onErrorReadFile);
+        }, Cache.onErrorCreateFile);
+    }, Cache.onErrorLoadFs);
   },
 
   // Write to file in system
   writeFile: function(fileEntry, text, fileName) {
     fileEntry.createWriter(function (fileWriter) {
-      fileWriter.onwriteend = function() {
-        // TODO drop(Cache.cacheList, fileName);
-      };
-
-      fileWriter.onerror = function (e) {
-        //console.log("Failed file write: " + e.toString());
-      };
+      fileWriter.onwriteend = function() {};
+      fileWriter.onerror = function (e) {};
       fileWriter.write(text);
     });
   },
@@ -100,36 +94,36 @@ var Cache = {
       Cache.cacheList.push(url);
       console.log('[CACHE] Storing image ' + url);
       ImgCache.cacheFile(url, function() {
-        drop(Cache.cacheList, url);
+        Cache.drop(Cache.cacheList, url);
       });
     } else {
-      drop(Cache.cacheList, url);
+      Cache.drop(Cache.cacheList, url);
     }
   },
+
+  onErrorCreateFile: function() {
+    console.log('Error beim erstellen des Files');
+  },
+
+  onErrorReadFile: function() {
+    console.log('Error beim laden des File');
+  },
+
+  onErrorLoadFs: function() {
+    console.log('Error beim laden des File System');
+  },
+
+  drop: function(array, element) {
+    if(array.length > Cache.totalImages) {
+      Cache.totalImages = array.length;
+    }
+    var index = array.indexOf(element);
+    if(index > -1) {
+      array.splice(index, 1);
+    }
+    Cache.onCachingProgress((1 - array.length / Cache.totalImages) * 100);
+    if(array.length === 0) {
+      Cache.onCachingComplete();
+    }
+  }
 };
-
-function onErrorCreateFile() {
-  console.log('Error beim erstellen des Files');
-}
-
-function onErrorReadFile() {
-  console.log('Error beim laden des File');
-}
-
-function onErrorLoadFs() {
-  console.log('Error beim laden des File System');
-}
-
-function drop(array, element) {
-  if(array.length > Cache.totalImages) {
-    Cache.totalImages = array.length;
-  }
-  var index = array.indexOf(element);
-  if(index > -1) {
-    array.splice(index, 1);
-  }
-  Cache.onCachingProgress((1 - array.length / Cache.totalImages) * 100);
-  if(array.length === 0) {
-    Cache.onCachingComplete();
-  }
-}

@@ -53,8 +53,8 @@ var Cache = {
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
         Cache.writeFile(fileEntry, newContent, fileName);
-      }, onErrorCreateFile);
-    }, onErrorLoadFs);
+      }, Cache.onErrorCreateFile);
+    }, Cache.onErrorLoadFs);
   },
 
   readFile: function(fileName, data, onFileLoaded) {
@@ -68,9 +68,9 @@ var Cache = {
                 onFileLoaded(this, data);
               };
               reader.readAsText(file);
-          }, onErrorReadFile);
-        }, onErrorCreateFile);
-    }, onErrorLoadFs);
+          }, Cache.onErrorReadFile);
+        }, Cache.onErrorCreateFile);
+    }, Cache.onErrorLoadFs);
   },
 
   // Write to file in system
@@ -94,10 +94,10 @@ var Cache = {
       Cache.cacheList.push(url);
       console.log('[CACHE] Storing image ' + url);
       ImgCache.cacheFile(url, function() {
-        drop(Cache.cacheList, url);
+        Cache.drop(Cache.cacheList, url);
       });
     } else {
-      drop(Cache.cacheList, url);
+      Cache.drop(Cache.cacheList, url);
     }
   },
 

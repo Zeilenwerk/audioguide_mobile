@@ -16,8 +16,7 @@
   font-size: 0.9em;
   bottom: 0px;
   width: 100%;
-  visibility: hidden;
-  z-index: 99;
+  display: none;
   height: 51px;
   border-bottom: 1px solid #000;
 }
@@ -36,4 +35,5 @@
   position: absolute;
   bottom: 0px;
   right: 10px;
+  z-index: 99;
 }

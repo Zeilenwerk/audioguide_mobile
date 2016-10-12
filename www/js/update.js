@@ -17,6 +17,8 @@ var update = {
 
   transferFailed: function() {
     console.log('[UPDATE] file transfer failed');
+    var bar = document.querySelector('.progress-bar');
+    bar.style.display = 'none';
     var p = document.querySelector('p');
     p.innerHTML = 'Aktualisierung fehlgeschlagen.<br>Bitte Internetverbindung überprüfen.';
     var button = document.querySelector('.reverse');

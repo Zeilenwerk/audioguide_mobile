@@ -6,7 +6,7 @@ span {
 }
 
 .progress-bar {
-  display: none;
+  display: block;
   width: 70%;
   margin-top: 15px;
   border: 2px solid rgb(145, 207, 218);
