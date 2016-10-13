@@ -73,7 +73,6 @@ var Cache = {
     }, Cache.onErrorLoadFs);
   },
 
-  // Write to file in system
   writeFile: function(fileEntry, text, fileName) {
     fileEntry.createWriter(function (fileWriter) {
       fileWriter.onwriteend = function() {};

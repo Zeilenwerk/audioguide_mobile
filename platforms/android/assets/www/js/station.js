@@ -1,25 +1,4 @@
 var station = {
-    initialize: function() {
-        this.bindEvents();
-    },
-
-    bindEvents: function() {
-        //document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-
-    onDeviceReady: function() {
-      StatusBar.hide();
-
-      ImgCache.init(function () {
-
-        var id = HtmlParser.getID(window.location.search);
-
-        station.displayData(id);
-
-      }, function () {
-        alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
-      });
-    },
 
     displayData: function(station_id)  {
       console.log('displayData function');
@@ -60,7 +39,7 @@ var station = {
       var links = document.querySelectorAll('a');
 
       for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('touchstart', guide.onStationClick);
+        links[i].addEventListener('touchend', guide.onStationClick);
       }
 
       $('img, audio, video').each(function() {
@@ -76,9 +55,6 @@ var station = {
         });
       });
 
-      station.getThumbnail();         // Setze Thumbnail für Video
-      startRangingBeacons(data);      // Ermittle Beacons in der Nähe
+      station.getThumbnail();
     }
 };
-
-station.initialize();

@@ -19,8 +19,9 @@ var guide = {
         guide.displayData();
 
         Network.onUpdateAvailable(guide.displayUpdate, function(){}, function(){});
+
       }, function () {
-        alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
+        alert('Please check your internet connection and reopen the app');
       });
     },
 
@@ -29,7 +30,7 @@ var guide = {
       box.style.display = 'block';
       box.addEventListener('touchstart', guide.goToUpdate);
       var icon = document.querySelector('.close-icon');
-      icon.addEventListener('touchstart', function(e) {
+      icon.addEventListener('touchend', function(e) {
         var box = document.querySelector('.update-box');
         box.style.display = 'none';
         e.stopPropagation();
@@ -52,7 +53,7 @@ var guide = {
       var links = document.querySelectorAll('a');
 
       for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('touchstart', guide.onStationClick);
+        links[i].addEventListener('touchend', guide.onStationClick);
       }
 
       $('img,audio,video').each(function() {
@@ -60,7 +61,7 @@ var guide = {
           ImgCache.useCachedFile($(this));
       });
 
-      startRangingBeacons(data);
+      Beacon.startRangingBeacons(data);
     },
 
     onStationClick: function(e) {

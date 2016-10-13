@@ -25,10 +25,10 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
-        "com.unarin.cordova.beacon": {
+        "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
-        "cordova-plugin-statusbar": {
+        "com.unarin.cordova.beacon": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },
