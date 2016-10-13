@@ -10,30 +10,36 @@
 }
 
 .update-box {
-  background-color: rgba(47, 113, 47, 0.99);
-  color: #fff;
   position: fixed;
-  font-size: 0.9em;
-  bottom: 0px;
-  width: 100%;
   display: none;
-  height: 51px;
-  border-bottom: 1px solid #000;
+  width: 100%;
+  bottom: 0px;
+
+  background-color: #fff;
+  border-top: 2px solid #ccc;
+  box-shadow: 0px -16px 32px #d9e0ed;
+
+  color: #5f749a;
+  font-size: 0.9em;
 }
 
 .update-box p {
   opacity: 0.9;
-  padding-top: 16px;
+  padding: 24px 0;
   margin-left: auto;
   margin-right: auto;
-  width: 200px;
+
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.05em;
 }
 
 .close-icon {
   font-size: 3.4em !important;
   padding: 10px;
   position: absolute;
-  bottom: 0px;
+  bottom: 50%;
+  margin-bottom: -25px;
   right: 10px;
   z-index: 99;
 }
