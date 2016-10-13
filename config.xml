@@ -12,7 +12,6 @@
     <access origin="*" />
     <access origin="cdvfile://*" />
     <allow-intent href="cdvfile://*" />
-    <preference name="iosPersistentFileLocation" value="Library" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -27,7 +26,8 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <engine name="android" spec="~6.0.0" />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
+    <preference name="iosPersistentFileLocation" value="Library" />
     <feature name="Device">
     <param name="ios-package" value="CDVDevice" />
     <param name="android-package" value="org.apache.cordova.device.Device" />
