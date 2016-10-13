@@ -34,9 +34,6 @@ p {
   opacity: 0.9; }
 
 /****** Item ******/
-.item {
-  margin-bottom: 20px; }
-
 .item-audio, .item-text {
   padding: 0 20px;
   overflow: visible; }
@@ -129,7 +126,8 @@ li.list-box {
 
 /****** item text ******/
 .item-text p {
-  opacity: 0.65; }
+  opacity: 0.65;
+  padding: 20px 0; }
 
 /****** 800 and above ******/
 @media (min-width: 800px) {

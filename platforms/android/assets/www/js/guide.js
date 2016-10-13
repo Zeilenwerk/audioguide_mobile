@@ -27,9 +27,9 @@ var guide = {
     displayUpdate: function() {
       var box = document.querySelector('.update-box');
       box.style.display = 'block';
-      box.addEventListener('click', guide.goToUpdate);
+      box.addEventListener('touchend', guide.goToUpdate);
       var icon = document.querySelector('.close-icon');
-      icon.addEventListener('click', function(e) {
+      icon.addEventListener('touchend', function(e) {
         var box = document.querySelector('.update-box');
         box.style.display = 'none';
         e.stopPropagation();
@@ -52,7 +52,7 @@ var guide = {
       var links = document.querySelectorAll('a');
 
       for (var i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', guide.onStationClick);
+        links[i].addEventListener('touchend', guide.onStationClick);
       }
 
       $('img,audio,video').each(function() {
