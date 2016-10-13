@@ -5,7 +5,7 @@ var Beacon = {
 
   startRangingBeacons: function(data) {
     // Frage Berechtigung ab
-    cordova.plugins.locationManager.requestAlwaysAuthorization();
+    //cordova.plugins.locationManager.requestAlwaysAuthorization();
 
     var delegate = new cordova.plugins.locationManager.Delegate();
     cordova.plugins.locationManager.setDelegate(delegate);
