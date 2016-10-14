@@ -33,13 +33,10 @@
     <feature name="File">
         <param name="ios-package" value="CDVFile" />
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     </feature>
     <feature name="FileTransfer">
         <param name="ios-package" value="CDVFileTransfer" />
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
     </feature>
-    <preference name="AndroidPersistentFileLocation" value="Internal" />
-    <preference name="AndroidExtraFilesystems" value="files,files-external,root" />
-    <preference name="iosPersistentFileLocation" value="Library" />
-    <preference name="iosExtraFilesystems" value="library,library-nosync,root" />
 </widget>

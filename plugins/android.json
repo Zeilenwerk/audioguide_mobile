@@ -13,9 +13,6 @@
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
@@ -29,6 +26,9 @@
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
         "com.unarin.cordova.beacon": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },
