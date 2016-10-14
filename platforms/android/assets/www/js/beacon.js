@@ -1,12 +1,12 @@
 var beacons = {};
 var beaconCounter = 0;
+var beaconNow = "00000000-0000-0000-0000-000000000000";
 
 var Beacon = {
 
   startRangingBeacons: function(data) {
 
     cordova.plugins.locationManager.requestAlwaysAuthorization();
-    cordova.plugins.file.requestAlwaysAuthorization();
 
     var delegate = new cordova.plugins.locationManager.Delegate();
     cordova.plugins.locationManager.setDelegate(delegate);
@@ -41,29 +41,26 @@ var Beacon = {
       var nearestBeacon = Beacon.getNearestBeacon(beacons);
       var secondBeacon = Beacon.getSecondBeacon(beacons);
 
-      if(nearestBeacon) {
-        console.log('didRangeBeaconsInRegion:', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
-        var stationData = data.stations.filter(function(stationData) {
-          return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
-        })[0];
+      console.log('didRangeBeaconsInRegion:', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
+      var stationData = data.stations.filter(function(stationData) {
+        return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
+      })[0];
 
-        // Get station id from url param
-        var re = /[\?&]station_id=([0-9]+)/g;
-        var str = window.location.search;
-        var match = re.exec(str);
-
-        // Wenn nächste Station nicht dieselbe wie schon vorhanden ist
-        if(beaconCounter > 10 && (!match || (match && match[1] != stationData.id))) {
-
-          // Wenn Distanz kleiner als 0.5 Meter ist
-          if ((secondBeacon && (secondBeacon.accuracy - nearestBeacon.accuracy) > 0.5) || !secondBeacon) {
-            station.displayData(stationData.id);
+      if (beaconCounter > 10 ) {
+        if ((secondBeacon.accuracy - nearestBeacon.accuracy) > 0.5) {
+          if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
+              station.displayData(stationData.id);
+              beaconNow = nearestBeacon.uuid.toLowerCase();
           }
-        }
+        }  
       }
     };
   },
 
+
+  sameBeacon: function(beacon1, beacon2) {
+    return beacon1.uuid.toLowerCase() === beacon2.uuid.toLowerCase();
+  },
 
   startRangingRegion: function(region) {
     console.log('start ranging region' + region.uuid);

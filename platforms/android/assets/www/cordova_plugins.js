@@ -58,56 +58,6 @@ module.exports = [
         ]
     },
     {
-        "id": "com.unarin.cordova.beacon.underscorejs",
-        "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "runs": true
-    },
-    {
-        "id": "com.unarin.cordova.beacon.Q",
-        "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "runs": true
-    },
-    {
-        "id": "com.unarin.cordova.beacon.LocationManager",
-        "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "merges": [
-            "cordova.plugins"
-        ]
-    },
-    {
-        "id": "com.unarin.cordova.beacon.Delegate",
-        "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "runs": true
-    },
-    {
-        "id": "com.unarin.cordova.beacon.Region",
-        "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "runs": true
-    },
-    {
-        "id": "com.unarin.cordova.beacon.Regions",
-        "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "runs": true
-    },
-    {
-        "id": "com.unarin.cordova.beacon.CircularRegion",
-        "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "runs": true
-    },
-    {
-        "id": "com.unarin.cordova.beacon.BeaconRegion",
-        "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
-        "pluginId": "com.unarin.cordova.beacon",
-        "runs": true
-    },
-    {
         "id": "cordova-plugin-file.DirectoryEntry",
         "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
         "pluginId": "cordova-plugin-file",
@@ -279,6 +229,56 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.underscorejs",
+        "file": "plugins/com.unarin.cordova.beacon/www/lib/underscore-min-1.6.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Q",
+        "file": "plugins/com.unarin.cordova.beacon/www/lib/q.min.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.LocationManager",
+        "file": "plugins/com.unarin.cordova.beacon/www/LocationManager.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "merges": [
+            "cordova.plugins"
+        ]
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Delegate",
+        "file": "plugins/com.unarin.cordova.beacon/www/Delegate.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Region",
+        "file": "plugins/com.unarin.cordova.beacon/www/model/Region.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.Regions",
+        "file": "plugins/com.unarin.cordova.beacon/www/Regions.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.CircularRegion",
+        "file": "plugins/com.unarin.cordova.beacon/www/model/CircularRegion.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
+    },
+    {
+        "id": "com.unarin.cordova.beacon.BeaconRegion",
+        "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
+        "pluginId": "com.unarin.cordova.beacon",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -291,8 +291,8 @@ module.exports.metadata =
     "cordova-plugin-file-transfer": "1.6.0",
     "cordova-plugin-splashscreen": "4.0.0",
     "cordova-plugin-statusbar": "2.2.0",
-    "com.unarin.cordova.beacon": "3.4.1",
-    "cordova-plugin-file": "4.3.0"
+    "cordova-plugin-file": "4.3.0",
+    "com.unarin.cordova.beacon": "3.4.1"
 };
 // BOTTOM OF METADATA
 });
