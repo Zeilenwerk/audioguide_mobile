@@ -279,6 +279,30 @@ module.exports = [
         "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
         "pluginId": "com.unarin.cordova.beacon",
         "runs": true
+    },
+    {
+        "id": "cordova-plugin-android-permissions.Permissions",
+        "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+        "pluginId": "cordova-plugin-android-permissions",
+        "clobbers": [
+            "cordova.plugins.permissions"
+        ]
+    },
+    {
+        "id": "cl.rmd.cordova.dialoggps.DialogGPS",
+        "file": "plugins/cl.rmd.cordova.dialoggps/www/DialogGPS.js",
+        "pluginId": "cl.rmd.cordova.dialoggps",
+        "clobbers": [
+            "cordova.dialogGPS"
+        ]
+    },
+    {
+        "id": "cordova-plugin-bluetooth-status.BluetoothStatus",
+        "file": "plugins/cordova-plugin-bluetooth-status/BluetoothStatus.js",
+        "pluginId": "cordova-plugin-bluetooth-status",
+        "clobbers": [
+            "cordova.plugins.BluetoothStatus"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -292,7 +316,10 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "4.0.0",
     "cordova-plugin-statusbar": "2.2.0",
     "cordova-plugin-file": "4.3.0",
-    "com.unarin.cordova.beacon": "3.4.1"
+    "com.unarin.cordova.beacon": "3.4.1",
+    "cordova-plugin-android-permissions": "0.10.0",
+    "cl.rmd.cordova.dialoggps": "0.0.2",
+    "cordova-plugin-bluetooth-status": "1.0.4"
 };
 // BOTTOM OF METADATA
 });

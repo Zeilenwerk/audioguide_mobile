@@ -8,6 +8,7 @@ var guide = {
     },
 
     onDeviceReady: function() {
+      cordova.plugins.BluetoothStatus.initPlugin();
       StatusBar.hide();
 
       ImgCache.init(function () {
@@ -28,7 +29,7 @@ var guide = {
     displayUpdate: function() {
       var box = document.querySelector('.update-box');
       box.style.display = 'block';
-      box.addEventListener('touchstart', guide.goToUpdate);
+      box.addEventListener('touchend', guide.goToUpdate);
       var icon = document.querySelector('.close-icon');
       icon.addEventListener('touchend', function(e) {
         var box = document.querySelector('.update-box');
@@ -61,7 +62,9 @@ var guide = {
           ImgCache.useCachedFile($(this));
       });
 
-      Beacon.startRangingBeacons(data);
+      if (guide.hasBeacons()) {
+          Beacon.startRangingBeacons();
+        }
     },
 
     onStationClick: function(e) {
@@ -73,6 +76,58 @@ var guide = {
         } else {
           station.displayData(id);
         }
+      }
+    },
+
+    askLocationPermission: function() {
+      cordova.dialogGPS("Dein GPS ist ausgeschaltet. Damit die App richtig funktionieren kann braucht es deine Position um Beacons um dich herum zu finden.",//message
+          "Dies geht mit Wifi, Mobilen Daten oder Offline",
+          function(buttonIndex){
+            switch(buttonIndex) {
+              case 0: break;
+              case 1: break;
+              case 2: break;
+            }},
+            "Einstellungen überprüfen",
+            ["Abbrechen","Später","Zu den Einstellungen"]);
+    },
+
+    hasBeacons: function() {
+      var beacons = false;
+
+      var data = JSON.parse(localStorage.getItem('data'));
+
+      for (i = 0; i < data.stations.length; i++) {
+        if (data.stations[i].uuid !== null) {
+          beacons = true;
+        }
+      }
+
+      if (beacons) {
+        if (guide.devicePlatform() === "Android" && guide.softwareVersion() >= "6.0") {
+          guide.checkBluetooth();
+          guide.askLocationPermission();  
+          return true;
+        } else {
+          guide.checkBluetooth();
+          return true;
+        } 
+      } else {
+        return false;
+      }
+    },
+
+    softwareVersion: function() {
+      return device.version;
+    },
+
+    devicePlatform: function() {
+      return device.platform;
+    },
+
+    checkBluetooth: function() {
+      if (!cordova.plugins.BluetoothStatus.BTenabled) {
+        alert('Bitte schalten Sie Bluetooth ein um Beacons zu empfangen.')
       }
     }
 };

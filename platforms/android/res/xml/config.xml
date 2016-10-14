@@ -29,6 +29,15 @@
     <feature name="LocationManager">
         <param name="android-package" value="com.unarin.cordova.beacon.LocationManager" />
     </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
+    </feature>
+    <feature name="DialogGPS">
+        <param name="android-package" value="cl.rmd.cordova.dialoggps.DialogGPS" />
+    </feature>
+    <feature name="BluetoothStatus">
+        <param name="android-package" value="com.twofivefivekb.android.bluetoothstatus.BluetoothStatus" />
+    </feature>
     <name>AudioGuideApp</name>
     <description>
       Audioguide von Zeilenwerk fuer deine Ausstellung

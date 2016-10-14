@@ -43,6 +43,18 @@
                         {
                             "xml": "<feature name=\"LocationManager\"><param name=\"android-package\" value=\"com.unarin.cordova.beacon.LocationManager\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"DialogGPS\"><param name=\"android-package\" value=\"cl.rmd.cordova.dialoggps.DialogGPS\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"BluetoothStatus\"><param name=\"android-package\" value=\"com.twofivefivekb.android.bluetoothstatus.BluetoothStatus\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -57,6 +69,18 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 2
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH_ADMIN\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-feature android:name=\"android.hardware.bluetooth_le\" android:required=\"false\" />",
+                            "count": 1
                         }
                     ],
                     "/manifest": [
@@ -74,6 +98,10 @@
                         },
                         {
                             "xml": "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />",
+                            "count": 2
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />",
                             "count": 1
                         }
                     ],
@@ -121,6 +149,15 @@
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
         "com.unarin.cordova.beacon": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cl.rmd.cordova.dialoggps": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-bluetooth-status": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },
@@ -405,6 +442,30 @@
             "file": "plugins/com.unarin.cordova.beacon/www/model/BeaconRegion.js",
             "pluginId": "com.unarin.cordova.beacon",
             "runs": true
+        },
+        {
+            "id": "cordova-plugin-android-permissions.Permissions",
+            "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+            "pluginId": "cordova-plugin-android-permissions",
+            "clobbers": [
+                "cordova.plugins.permissions"
+            ]
+        },
+        {
+            "id": "cl.rmd.cordova.dialoggps.DialogGPS",
+            "file": "plugins/cl.rmd.cordova.dialoggps/www/DialogGPS.js",
+            "pluginId": "cl.rmd.cordova.dialoggps",
+            "clobbers": [
+                "cordova.dialogGPS"
+            ]
+        },
+        {
+            "id": "cordova-plugin-bluetooth-status.BluetoothStatus",
+            "file": "plugins/cordova-plugin-bluetooth-status/BluetoothStatus.js",
+            "pluginId": "cordova-plugin-bluetooth-status",
+            "clobbers": [
+                "cordova.plugins.BluetoothStatus"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -416,6 +477,9 @@
         "cordova-plugin-splashscreen": "4.0.0",
         "cordova-plugin-statusbar": "2.2.0",
         "cordova-plugin-file": "4.3.0",
-        "com.unarin.cordova.beacon": "3.4.1"
+        "com.unarin.cordova.beacon": "3.4.1",
+        "cordova-plugin-android-permissions": "0.10.0",
+        "cl.rmd.cordova.dialoggps": "0.0.2",
+        "cordova-plugin-bluetooth-status": "1.0.4"
     }
 }

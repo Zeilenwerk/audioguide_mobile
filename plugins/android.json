@@ -13,6 +13,9 @@
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
@@ -22,13 +25,16 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
         "com.unarin.cordova.beacon": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cl.rmd.cordova.dialoggps": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-bluetooth-status": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },

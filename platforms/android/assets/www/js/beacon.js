@@ -4,7 +4,8 @@ var beaconNow = "00000000-0000-0000-0000-000000000000";
 
 var Beacon = {
 
-  startRangingBeacons: function(data) {
+  startRangingBeacons: function() {
+    var data = JSON.parse(localStorage.getItem('data'));
 
     cordova.plugins.locationManager.requestAlwaysAuthorization();
 
@@ -42,24 +43,23 @@ var Beacon = {
       var secondBeacon = Beacon.getSecondBeacon(beacons);
 
       console.log('didRangeBeaconsInRegion:', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
-      var stationData = data.stations.filter(function(stationData) {
-        return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
-      })[0];
 
-      if (beaconCounter > 10 ) {
-        if ((secondBeacon.accuracy - nearestBeacon.accuracy) > 0.5) {
-          if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-              station.displayData(stationData.id);
-              beaconNow = nearestBeacon.uuid.toLowerCase();
-          }
-        }  
+      if (nearestBeacon && secondBeacon) {
+        
+        var stationData = data.stations.filter(function(stationData) {
+          return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
+        })[0];
+
+        if (beaconCounter > 10 ) {
+          if ((secondBeacon.accuracy - nearestBeacon.accuracy) > 0.3) {
+            if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
+                station.displayData(stationData.id);
+                beaconNow = nearestBeacon.uuid.toLowerCase();
+            }
+          }  
+        }
       }
     };
-  },
-
-
-  sameBeacon: function(beacon1, beacon2) {
-    return beacon1.uuid.toLowerCase() === beacon2.uuid.toLowerCase();
   },
 
   startRangingRegion: function(region) {
