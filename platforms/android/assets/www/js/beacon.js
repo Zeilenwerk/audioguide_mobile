@@ -4,18 +4,17 @@ var beaconCounter = 0;
 var Beacon = {
 
   startRangingBeacons: function(data) {
-    // Frage Berechtigung ab
-    //cordova.plugins.locationManager.requestAlwaysAuthorization();
+
+    cordova.plugins.locationManager.requestAlwaysAuthorization();
+    cordova.plugins.file.requestAlwaysAuthorization();
 
     var delegate = new cordova.plugins.locationManager.Delegate();
     cordova.plugins.locationManager.setDelegate(delegate);
 
-    // Set delegate functions.
     delegate.didStartMonitoringForRegion = function onDidStartMonitoringForRegion(pluginResult) {
         console.log('didStartMonitoringForRegion:', pluginResult);
     };
 
-    // Move into and out of region
     delegate.didDetermineStateForRegion = function onDidDetermineStateForRegion(result) {
       var eventType = result.state;
       var regionId = result.region.identifier;
