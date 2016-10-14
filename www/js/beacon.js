@@ -57,11 +57,6 @@ var Beacon = {
     };
   },
 
-
-  sameBeacon: function(beacon1, beacon2) {
-    return beacon1.uuid.toLowerCase() === beacon2.uuid.toLowerCase();
-  },
-
   startRangingRegion: function(region) {
     console.log('start ranging region' + region.uuid);
     var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(
