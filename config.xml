@@ -7,6 +7,8 @@
     <author email="martin@zeilenwerk.ch" href="http://zeilenwerk.ch">
         Zeilenwerk.ch
     </author>
+    <icon src="www/img/icon.png" />
+    <splash src="www/img/splash.png" />
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />

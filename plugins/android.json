@@ -36,6 +36,9 @@
         },
         "cordova-plugin-bluetooth-status": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
         }
     },
     "dependent_plugins": {
