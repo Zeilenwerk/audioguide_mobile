@@ -98,7 +98,7 @@ var guide = {
       var data = JSON.parse(localStorage.getItem('data'));
 
       for (i = 0; i < data.stations.length; i++) {
-        if (data.stations[i].uuid !== null) {
+        if (data.stations[i].uuid !== "" && data.stations[i].uuid !== null) {
           beacons = true;
         }
       }
