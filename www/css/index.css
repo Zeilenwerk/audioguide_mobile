@@ -133,9 +133,6 @@ li.list-box {
   display: inline;
   margin-left: 15px; }
 
-.sortable {
-  margin-top: 54px; }
-
 /****** item image ******/
 .item-picture img {
   border-bottom: 2px solid #ccc; }
@@ -144,6 +141,12 @@ li.list-box {
 .item-text p {
   opacity: 0.65; }
 
+@media (max-width: 800px) {
+  .content {
+    margin-top: 52px; }
+
+  .header-pic {
+    margin-top: -52px; } }
 /****** 800 and above ******/
 @media (min-width: 800px) {
   .public-stations.bottom {
@@ -165,10 +168,7 @@ li.list-box {
 
   .wrapper {
     float: left;
-    width: 70%; }
-
-  .sortable {
-    margin-top: 0px; } }
+    width: 70%; } }
 /****** 1200 and above ******/
 @media screen and (min-width: 1200px) {
   .wrapper, .titel {
