@@ -34,6 +34,7 @@
     </feature>
     <feature name="File">
         <param name="ios-package" value="CDVFile" />
+        <preference name="iosPersistentFileLocation" value="Library" />
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
         <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     </feature>
