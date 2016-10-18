@@ -23,6 +23,9 @@ var update = {
     p.innerHTML = 'Aktualisierung fehlgeschlagen.<br>Bitte Internetverbindung überprüfen.';
     var button = document.querySelector('.reverse');
     button.style.display = 'block';
+    button.addEventListener('click', function() {
+      window.location.reload();
+    });
   },
 
   onUpdateAvailable: function(newData) {

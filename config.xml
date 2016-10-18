@@ -79,4 +79,8 @@
     <preference name="AndroidExtraFilesystems" value="files,files-external,root" />
     <preference name="iosPersistentFileLocation" value="Library" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,root" />
+
+    <platform name="ios">
+        <preference name="Orientation" value="all" />
+    </platform>
 </widget>

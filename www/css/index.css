@@ -77,6 +77,11 @@ p {
   display: inline;
   margin-left: 15px; }
 
+.station-show-titel.list-box.right {
+  position: fixed;
+  top: 0px;
+  z-index: 66; }
+
 /****** Header-Picture ******/
 .header-pic img {
   width: 100% !important; }
