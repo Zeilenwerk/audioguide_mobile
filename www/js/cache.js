@@ -76,7 +76,7 @@ var Cache = {
   writeFile: function(fileEntry, text, fileName) {
     fileEntry.createWriter(function (fileWriter) {
       fileWriter.onwriteend = function() {};
-      fileWriter.onerror = function (e) {};
+      fileWriter.onerror = function(e) {};
       fileWriter.write(text);
     });
   },
