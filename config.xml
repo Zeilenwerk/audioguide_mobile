@@ -32,9 +32,7 @@
     </feature>
     <feature name="File">
         <param name="ios-package" value="CDVFile" />
-        <preference name="iosPersistentFileLocation" value="Library" />
-        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
-        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />  
     </feature>
     <feature name="FileTransfer">
         <param name="ios-package" value="CDVFileTransfer" />
@@ -75,5 +73,10 @@
         <splash src="res/screens/ios/screen-iphone-portrait-568h-2x.png" width="640" height="1136"/>
         <splash src="res/screens/ios/screen-iphone-portrait-667h.png" width="750" height="1334"/>
         <splash src="res/screens/ios/screen-iphone-portrait-736h.png" width="1242" height="2208"/>
-</platform>
+    </platform>
+
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
+    <preference name="AndroidExtraFilesystems" value="files,files-external,root" />
+    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="iosExtraFilesystems" value="library,library-nosync,root" />
 </widget>
