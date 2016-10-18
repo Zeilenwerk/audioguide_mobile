@@ -1,5 +1,5 @@
 var Network = {
-  
+
   checkNetwork: function(online, offline) {
     console.log('checkNetwork function');
     var networkState = navigator.connection.type;
@@ -50,8 +50,9 @@ var Network = {
   getHTML: function(url, callback, filename) {
     var req = new XMLHttpRequest();
     req.addEventListener('load', function() {
-      var parser = new DOMParser();
-      var newContent = parser.parseFromString(this.responseText, 'text/html').querySelector('.main');
+      var el = document.createElement('html');
+      el.innerHTML = this.responseText;
+      var newContent = el.querySelector('.main');
 
       callback(newContent, filename);
     });
