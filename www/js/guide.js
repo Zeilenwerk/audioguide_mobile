@@ -8,7 +8,6 @@ var guide = {
     },
 
     onDeviceReady: function() {
-      cordova.plugins.BluetoothStatus.initPlugin();
       StatusBar.hide();
 
       ImgCache.init(function () {
@@ -98,7 +97,7 @@ var guide = {
       var data = JSON.parse(localStorage.getItem('data'));
 
       for (i = 0; i < data.stations.length; i++) {
-        if (data.stations[i].uuid !== "" && data.stations[i].uuid !== null) {
+        if (data.stations[i].uuid !== "" || data.stations[i].uuid !== null) {
           beacons = true;
         }
       }
@@ -126,6 +125,7 @@ var guide = {
     },
 
     checkBluetooth: function() {
+      cordova.plugins.BluetoothStatus.initPlugin();
       if (!cordova.plugins.BluetoothStatus.BTenabled) {
         alert('Bitte schalten Sie Bluetooth ein um Beacons zu empfangen.')
       }
