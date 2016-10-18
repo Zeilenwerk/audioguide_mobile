@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ch.zeilenwerk.audioguide" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SmartGuide</name>
+<widget id="ch.zeilenwerk.smartguide" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>EasyGuide</name>
     <description>
-      SmartGuide from Zeilenwerk GmbH
+      EasyGuide from Zeilenwerk GmbH
     </description>
     <author email="martin@zeilenwerk.ch" href="http://zeilenwerk.ch">
         Zeilenwerk.ch
