@@ -52,7 +52,7 @@ var Cache = {
     console.log('[CACHE] Storing HTML to ' + fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
-        Cache.writeFile(fileEntry, newContent, fileName);
+        Cache.writeFile(fileEntry, newContent, fileName); 
       }, Cache.onErrorCreateFile);
     }, Cache.onErrorLoadFs);
   },

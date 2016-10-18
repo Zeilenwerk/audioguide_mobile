@@ -43,7 +43,7 @@ var guide = {
     },
 
     displayData: function() {
-      console.log('displayData function');
+      console.log('displayData');
       var data = JSON.parse(localStorage.getItem('data'));
       Cache.readFile('index.html', data, guide.onFileLoaded);
     },
@@ -106,7 +106,7 @@ var guide = {
       if (beacons) {
         if (guide.devicePlatform() === "Android" && guide.softwareVersion() >= "6.0") {
           guide.checkBluetooth();
-          guide.askLocationPermission();  
+          guide.askLocationPermission(); 
           return true;
         } else {
           guide.checkBluetooth();
