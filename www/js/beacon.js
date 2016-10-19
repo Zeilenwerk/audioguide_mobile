@@ -26,7 +26,7 @@ var Beacon = {
 
 
     for (var i = 0; i < data.stations.length; i++) {
-      if (data.stations[i].uuid !== "") {
+      if (data.stations[i].uuid !== "" && data.stations[i].uuid !== null) {
         Beacon.startRangingRegion({ uuid: data.stations[i].uuid, identifier: data.stations[i].titel });
       }
     }
@@ -42,21 +42,23 @@ var Beacon = {
       var nearestBeacon = Beacon.getNearestBeacon(beacons);
       var secondBeacon = Beacon.getSecondBeacon(beacons);
 
-      console.log('didRangeBeaconsInRegion:', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
+      console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
 
-      if (nearestBeacon && secondBeacon) {
-        
+      if (nearestBeacon) {
+
         var stationData = data.stations.filter(function(stationData) {
+          return stationData.uuid !== null && stationData.uuid !== '';
+        }).filter(function(stationData) {
           return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
         })[0];
 
         if (beaconCounter > 10 ) {
-          if ((secondBeacon.accuracy - nearestBeacon.accuracy) > 0.3) {
+          if (!secondBeacon || ((secondBeacon.accuracy - nearestBeacon.accuracy) > 0.3)) {
             if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
                 station.displayData(stationData.id);
                 beaconNow = nearestBeacon.uuid.toLowerCase();
             }
-          }  
+          }
         }
       }
     };
@@ -121,6 +123,5 @@ var Beacon = {
 
   getBeaconId: function(beacon) {
     return beacon.uuid + ':' + beacon.major + ':' + beacon.minor;
-  },
-
+  }
 };

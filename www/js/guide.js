@@ -129,7 +129,23 @@ var guide = {
     checkBluetooth: function() {
       cordova.plugins.BluetoothStatus.initPlugin();
       if (!cordova.plugins.BluetoothStatus.BTenabled) {
-        navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit EasyGuide iBeacons in Ihrer Nähe finden kann', function() {}, 'Hinweis',  'OK');
+        if(new Date() - guide.getLastAlert() > 1000 * 60 * 10) {
+          guide.setLastAlert();
+          navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit EasyGuide iBeacons in Ihrer Nähe finden kann', function() {}, 'Hinweis',  'OK');
+        }
+      }
+    },
+
+    setLastAlert: function() {
+      localStorage.setItem('bluetoothLastAlert', new Date().toISOString());
+    },
+
+    getLastAlert: function() {
+      var last = localStorage.getItem('bluetoothLastAlert');
+      if(last) {
+        return Date.parse(last);
+      } else {
+        return (new Date()) - (1000 * 60 * 60 * 24);
       }
     },
 
