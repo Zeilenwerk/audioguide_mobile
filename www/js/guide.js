@@ -154,7 +154,7 @@ var guide = {
     hideScrollbar: function() {
       if (document.querySelector('.menu-left')) {
         var width = document.querySelector('.menu-left').clientWidth;
-        gitdocument.querySelector(".wrapper").style.marginLeft = (width - 100) + 'px';
+        document.querySelector(".wrapper").style.marginLeft = (width - 100) + 'px';
       }
     }
 };
