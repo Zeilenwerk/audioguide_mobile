@@ -8,6 +8,8 @@ var guide = {
     },
 
     onDeviceReady: function() {
+      window.addEventListener("orientationchange", hideScrollbar, true);
+
       StatusBar.hide();
 
       ImgCache.init(function () {
