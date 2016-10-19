@@ -156,6 +156,8 @@ var guide = {
         var width = document.querySelector('.menu-left').clientWidth;
         if(width > 0) {
           document.querySelector(".wrapper").style.marginLeft = (width - 100) + 'px';
+        } else {
+          document.querySelector(".wrapper").style.marginLeft = 0 + 'px';
         }
       }
     }
