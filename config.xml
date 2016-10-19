@@ -44,10 +44,15 @@
         <icon density="hdpi" src="res/icons/android/icon-72-hdpi.png" />
         <icon density="xhdpi" src="res/icons/android/icon-96-xhdpi.png" />
         <splash density="port-hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
+        <splash density="port-hdpi" src="res/screens/android/screen-hdpi-landscape.png" />
         <splash density="port-ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
+        <splash density="port-ldpi" src="res/screens/android/screen-ldpi-landscape.png" />
         <splash density="port-mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
+        <splash density="port-mdpi" src="res/screens/android/screen-mdpi-landscape.png" />
         <splash density="port-xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
+        <splash density="port-xhdpi" src="res/screens/android/screen-xhdpi-landscape.png" />
     </platform>
+
     <platform name="ios">
         <icon height="180" src="res/icons/ios/icon-60-3x.png" width="180" />
         <icon height="60" src="res/icons/ios/icon-60.png" width="60" />
@@ -65,12 +70,19 @@
         <icon height="50" src="res/icons/ios/icon-50.png" width="50" />
         <icon height="100" src="res/icons/ios/icon-50-2x.png" width="100" />
         <splash height="480" src="res/screens/ios/screen-iphone-portrait.png" width="320" />
+        <splash height="320" src="res/screens/ios/screen-iphone-landscape.png" width="480" />
         <splash height="960" src="res/screens/ios/screen-iphone-portrait-2x.png" width="640" />
+        <splash height="640" src="res/screens/ios/screen-iphone-landscape-2x.png" width="960" />
         <splash height="1024" src="res/screens/ios/screen-ipad-portrait.png" width="768" />
+        <splash height="768" src="res/screens/ios/screen-ipad-landscape.png" width="1024" />
         <splash height="2048" src="res/screens/ios/screen-ipad-portrait-2x.png" width="1536" />
+        <splash height="1536" src="res/screens/ios/screen-ipad-landscape-2x.png" width="2048" />
         <splash height="1136" src="res/screens/ios/screen-iphone-portrait-568h-2x.png" width="640" />
+        <splash height="640" src="res/screens/ios/screen-iphone-landscape-568h-2x.png" width="1136" />
         <splash height="1334" src="res/screens/ios/screen-iphone-portrait-667h.png" width="750" />
+        <splash height="750" src="res/screens/ios/screen-iphone-landscape-667h.png" width="1334" />
         <splash height="2208" src="res/screens/ios/screen-iphone-portrait-736h.png" width="1242" />
+        <splash height="1242" src="res/screens/ios/screen-iphone-landscape-736h.png" width="2208" />
     </platform>
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,root" />
