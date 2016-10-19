@@ -42,6 +42,9 @@
         },
         "cordova-plugin-settings-hook": {
             "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         }
     },
     "dependent_plugins": {

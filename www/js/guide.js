@@ -127,7 +127,7 @@ var guide = {
     checkBluetooth: function() {
       cordova.plugins.BluetoothStatus.initPlugin();
       if (!cordova.plugins.BluetoothStatus.BTenabled) {
-        alert('Bitte schalten Sie Bluetooth ein um Beacons zu empfangen.')
+        navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit Easy Guide iBeacons in Ihrer Nähe finden kann', 'Hinweis',  'OK');
       }
     }
 };
