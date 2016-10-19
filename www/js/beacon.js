@@ -42,7 +42,7 @@ var Beacon = {
       var nearestBeacon = Beacon.getNearestBeacon(beacons);
       var secondBeacon = Beacon.getSecondBeacon(beacons);
 
-      console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
+      //  console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
 
       if (nearestBeacon) {
 

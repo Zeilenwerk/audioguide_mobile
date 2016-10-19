@@ -167,7 +167,7 @@ li.list-box {
     width: 30%; }
 
   .titel {
-    width: 70%; }
+    width: 100%; }
 
   .wrapper {
     float: left; } }
@@ -176,6 +176,9 @@ li.list-box {
   .wrapper, .titel {
     margin-left: auto;
     margin-right: auto; }
+
+  .titel {
+    width: 100%; }
 
   .main {
     width: 1200px; } }
