@@ -11,7 +11,7 @@ var update = {
     ImgCache.init(function () {
       Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
     }, function () {
-      alert('Lokale Daten konnten nicht geladen werden. Guide bitte mit funktionierender Internetverbindung neu öffnen.');
+      navigator.notification.alert('Bitte öffnen Sie EasyGuide mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'OK');
     });
   },
 

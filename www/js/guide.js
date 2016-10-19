@@ -21,7 +21,7 @@ var guide = {
         Network.onUpdateAvailable(guide.displayUpdate, function(){}, function(){});
 
       }, function () {
-        alert('Please check your internet connection and reopen the app');
+        navigator.notification.alert('Bitte öffnen Sie EasyGuide mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'OK');
       });
     },
 
@@ -127,7 +127,7 @@ var guide = {
     checkBluetooth: function() {
       cordova.plugins.BluetoothStatus.initPlugin();
       if (!cordova.plugins.BluetoothStatus.BTenabled) {
-        navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit EasyGuide iBeacons in Ihrer Nähe finden kann', 'Hinweis',  'OK');
+        navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit EasyGuide iBeacons in Ihrer Nähe finden kann', function() {}, 'Hinweis',  'OK');
       }
     }
 };
