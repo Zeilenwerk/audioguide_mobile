@@ -39,6 +39,9 @@
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        },
+        "cordova-plugin-settings-hook": {
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         }
     },
     "dependent_plugins": {
