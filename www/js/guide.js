@@ -8,7 +8,7 @@ var guide = {
     },
 
     onDeviceReady: function() {
-      window.addEventListener("orientationchange", hideScrollbar, true);
+      window.addEventListener("resize", guide.hideScrollbar, true);
 
       StatusBar.hide();
 
@@ -154,7 +154,7 @@ var guide = {
     hideScrollbar: function() {
       if (document.querySelector('.menu-left')) {
         var width = document.querySelector('.menu-left').clientWidth;
-        document.querySelector(".wrapper").style.marginLeft = (width - 100) + 'px';
+        gitdocument.querySelector(".wrapper").style.marginLeft = (width - 100) + 'px';
       }
     }
 };

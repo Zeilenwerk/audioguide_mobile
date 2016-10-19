@@ -146,10 +146,7 @@ li.list-box {
     margin-top: 52px; }
 
   .header-pic {
-    margin-top: -52px; }
-
-  .wrapper {
-    margin-left: 0px !important; } }
+    margin-top: -52px; } }
 /****** 800 and above ******/
 @media (min-width: 800px) {
   .public-stations.bottom {
