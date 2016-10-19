@@ -202,7 +202,7 @@ li.list-box {
 .menu-left {
   display: none;
   position: fixed;
-  width: 25%;
+  width: 30%;
   overflow: hidden;
   max-height: 100%;
   margin-right: -100px;
