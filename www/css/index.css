@@ -170,12 +170,10 @@ li.list-box {
     width: 70%; }
 
   .wrapper {
-    float: left;
-    width: 70%; } }
+    float: left; } }
 /****** 1200 and above ******/
 @media screen and (min-width: 1200px) {
   .wrapper, .titel {
-    width: 840px;
     margin-left: auto;
     margin-right: auto; }
 
@@ -201,7 +199,7 @@ li.list-box {
 .menu-left {
   display: none;
   position: fixed;
-  width: 400px;
+  width: 25%;
   overflow: hidden;
   max-height: 100%;
   margin-right: -100px;
@@ -212,7 +210,6 @@ li.list-box {
 
 .wrapper {
   position: relative;
-  margin-left: 400px;
   background-color: #FFF;
   box-shadow: 8px 16px 32px #d9e0ed; }
 

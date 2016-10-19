@@ -56,6 +56,8 @@ var guide = {
         links[i].addEventListener('click', guide.onStationClick);
       }
 
+      guide.hideScrollbar();
+
       $('img,audio,video').each(function() {
           console.log('load cached files');
           ImgCache.useCachedFile($(this));
@@ -128,6 +130,13 @@ var guide = {
       cordova.plugins.BluetoothStatus.initPlugin();
       if (!cordova.plugins.BluetoothStatus.BTenabled) {
         navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit EasyGuide iBeacons in Ihrer Nähe finden kann', function() {}, 'Hinweis',  'OK');
+      }
+    },
+
+    hideScrollbar: function() {
+      if (document.querySelector('.menu-left')) {
+        var width = document.querySelector('.menu-left').clientWidth;
+        document.querySelector(".wrapper").style.marginLeft = (width - 100) + 'px';
       }
     }
 };

@@ -55,6 +55,8 @@ var station = {
         });
       });
 
+      guide.hideScrollbar();
+
       station.getThumbnail();
     }
 };
