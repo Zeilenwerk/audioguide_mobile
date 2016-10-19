@@ -105,12 +105,12 @@ var guide = {
       if (beacons) {
         if (guide.devicePlatform() === "Android" && guide.softwareVersion() >= "6.0") {
           guide.checkBluetooth();
-          guide.askLocationPermission(); 
+          guide.askLocationPermission();
           return true;
         } else {
           guide.checkBluetooth();
           return true;
-        } 
+        }
       } else {
         return false;
       }
@@ -127,7 +127,7 @@ var guide = {
     checkBluetooth: function() {
       cordova.plugins.BluetoothStatus.initPlugin();
       if (!cordova.plugins.BluetoothStatus.BTenabled) {
-        navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit Easy Guide iBeacons in Ihrer Nähe finden kann', 'Hinweis',  'OK');
+        navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit EasyGuide iBeacons in Ihrer Nähe finden kann', 'Hinweis',  'OK');
       }
     }
 };
