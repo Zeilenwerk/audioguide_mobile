@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ch.zeilenwerk.smartguide" version="1.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>EasyGuide</name>
+<widget id="ch.zeilenwerk.ihb" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Impact Hub Bern</name>
     <description>
-      EasyGuide from Zeilenwerk GmbH
+      Impact Hub Guide
     </description>
     <author email="martin@zeilenwerk.ch" href="http://zeilenwerk.ch">
         Zeilenwerk.ch
@@ -44,13 +44,13 @@
         <icon density="hdpi" src="res/icons/android/icon-72-hdpi.png" />
         <icon density="xhdpi" src="res/icons/android/icon-96-xhdpi.png" />
         <splash density="port-hdpi" src="res/screens/android/screen-hdpi-portrait.png" />
-        <splash density="port-hdpi" src="res/screens/android/screen-hdpi-landscape.png" />
+        <splash density="land-hdpi" src="res/screens/android/screen-hdpi-landscape.png" />
         <splash density="port-ldpi" src="res/screens/android/screen-ldpi-portrait.png" />
-        <splash density="port-ldpi" src="res/screens/android/screen-ldpi-landscape.png" />
+        <splash density="land-ldpi" src="res/screens/android/screen-ldpi-landscape.png" />
         <splash density="port-mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
-        <splash density="port-mdpi" src="res/screens/android/screen-mdpi-landscape.png" />
+        <splash density="land-mdpi" src="res/screens/android/screen-mdpi-landscape.png" />
         <splash density="port-xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
-        <splash density="port-xhdpi" src="res/screens/android/screen-xhdpi-landscape.png" />
+        <splash density="land-xhdpi" src="res/screens/android/screen-xhdpi-landscape.png" />
     </platform>
 
     <platform name="ios">
