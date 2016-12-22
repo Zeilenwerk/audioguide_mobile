@@ -37,7 +37,7 @@ p {
 .item {
   margin-bottom: 0; }
 
-.item-audio, .item-text {
+.item-audio, .item-text, .item-link {
   padding: 15px 20px;
   overflow: visible; }
 
@@ -47,6 +47,13 @@ p {
 
 .item-picture.item-pos-0, .item-video.item-pos-0 {
   margin-top: 0px; }
+
+.item-link a {
+  font-size: 1.8em;
+  color: #4985ba; }
+
+.item-link a > i {
+  font-size: 1em; }
 
 .fa {
   font-size: 2.0em;

@@ -42,7 +42,7 @@ var update = {
   },
 
   onCachingComplete: function() {
-    window.location.replace('index.html');
+    setTimeout(function() { window.location.replace('index.html'); }, 2000);
   },
 
   onCachingProgress: function(percent) {

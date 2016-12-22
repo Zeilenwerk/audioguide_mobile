@@ -20,7 +20,7 @@ var station = {
     },
 
     setTime: function() {
-      this.currentTime = 20;
+      this.currentTime = 5;
     },
 
     getThumbnail: function() {
