@@ -28,31 +28,26 @@ var Cache = {
     localStorage.setItem("data", JSON.stringify(data));
   },
 
-  storeGuide: function() {
-    console.log('[CACHE] Storing guide');
-    Network.getHTML(PUBLIC_URL, Cache.storeHtmlAndImages, 'index.html');
-  },
-
-  storeStations: function() {
+  storeSites: function() {
     var data = Cache.getApiData();
-    for (var i = 0; i < data.stations.length; i++) {
-      var station = data.stations[i];
-      var url = STATION_URL + station.id;
-      console.log('[CACHE] Storing station ' + station.id);
-      Network.getHTML(url, Cache.storeHtmlAndImages, station.id + '.html');
+    for (var i = 0; i < data.length; i++) {
+      var site = data[i];
+      var url = data[i].url;
+      console.log('[CACHE] Storing site ' + url.split('/')[4].split('?')[0]);
+      Network.getHTML(url, Cache.storeHtmlAndImages, url.split('/')[4].split('?')[0] + '.html');
     }
   },
 
   storeHtmlAndImages: function(html, filename) {
     Cache.storeHtml(html.innerHTML, filename);
-    Cache.storeImages(html);
+    Cache.storeImages(html.innerHTML);
   },
 
   storeHtml: function(newContent, fileName) {
     console.log('[CACHE] Storing HTML to ' + fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
-        Cache.writeFile(fileEntry, newContent, fileName); 
+        Cache.writeFile(fileEntry, newContent, fileName);
       }, Cache.onErrorCreateFile);
     }, Cache.onErrorLoadFs);
   },
@@ -83,6 +78,7 @@ var Cache = {
 
   storeImages: function(html) {
     var urls = HtmlParser.getImages(html);
+    console.log(urls);
     for(var i = 0; i < urls.length; i++) {
       ImgCache.isCached(urls[i], Cache.cacheCheckComplete);
     }

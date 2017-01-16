@@ -32,8 +32,7 @@ var update = {
     console.log('[UPDATE] api != localstorage');
     Cache.init(update.onCachingComplete, update.onCachingProgress);
     Cache.storeApiData(newData);
-    Cache.storeGuide();
-    Cache.storeStations();
+    Cache.storeSites();
   },
 
   onNoUpdate: function() {

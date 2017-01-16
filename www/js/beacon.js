@@ -24,9 +24,9 @@ var Beacon = {
     };
 
 
-    for (var i = 0; i < data.stations.length; i++) {
-      if (data.stations[i].uuid !== "" && data.stations[i].uuid !== null) {
-        Beacon.startRangingRegion({ uuid: data.stations[i].uuid, identifier: data.stations[i].titel });
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].uuid !== "" && data[i].uuid !== null) {
+        Beacon.startRangingRegion({ uuid: data[i].uuid, identifier: data[i].titel });
       }
     }
 
@@ -43,16 +43,15 @@ var Beacon = {
       //console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
 
       if (nearestBeacon) {
-
-        var stationData = data.stations.filter(function(stationData) {
-          return stationData.uuid !== null && stationData.uuid !== '';
-        }).filter(function(stationData) {
-          return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
+        var siteData = data.filter(function(siteData) {
+          return siteData.uuid !== null && siteData.uuid !== '';
+        }).filter(function(siteData) {
+          return siteData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
         })[0];
 
         if ((!secondBeacon && !nearestBeacon) || Beacon.pitaDistance(secondBeacon.accuracy, nearestBeacon.accuracy)) {
           if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-              station.displayData(stationData.id);
+              site.displayData(siteData.url);
               beaconNow = nearestBeacon.uuid.toLowerCase();
           }
         }

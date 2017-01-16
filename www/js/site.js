@@ -1,9 +1,9 @@
-var station = {
+var site = {
 
-    displayData: function(station_id)  {
+    displayData: function(url)  {
       console.log('displayData function');
       var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile(station_id + '.html', data, station.onFileLoaded);
+      Cache.readFile(url.split('/')[2].split('?')[0] + '.html', data, site.onFileLoaded);
     },
 
     setPoster: function() {
@@ -14,8 +14,8 @@ var station = {
          canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
          video.currentTime = 0;
          video.setAttribute('poster', canvas.toDataURL());
-         video.removeEventListener('loadedmetadata', station.setTime);
-         video.removeEventListener('loadeddata', station.setPoster);
+         video.removeEventListener('loadedmetadata', site.setTime);
+         video.removeEventListener('loadeddata', site.setPoster);
          video.load();
     },
 
@@ -27,8 +27,8 @@ var station = {
           var videos = document.querySelectorAll('video');
 
           for (var i = 0; i < videos.length; i++) {
-            videos[i].addEventListener('loadedmetadata', station.setTime, false);
-            videos[i].addEventListener('loadeddata', station.setPoster, false);
+            videos[i].addEventListener('loadedmetadata', site.setTime, false);
+            videos[i].addEventListener('loadeddata', site.setPoster, false);
           }
     },
 
@@ -56,7 +56,8 @@ var station = {
       });
 
       guide.hideScrollbar();
+      guide.setHamburger();
 
-      station.getThumbnail();
+      site.getThumbnail();
     }
 };

@@ -15,6 +15,7 @@ var guide = {
       ImgCache.init(function () {
 
         if (Cache.empty()) {
+          console.log('Cache is empty');
           guide.goToUpdate();
         }
 
@@ -23,7 +24,7 @@ var guide = {
         Network.onUpdateAvailable(guide.displayUpdate, function(){}, function(){});
 
       }, function () {
-        navigator.notification.alert('Bitte öffnen Sie EasyGuide mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'OK');
+        navigator.notification.alert('Bitte öffnen Sie die App mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'OK');
       });
     },
 
@@ -46,7 +47,7 @@ var guide = {
     displayData: function() {
       console.log('displayData');
       var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile('index.html', data, guide.onFileLoaded);
+      Cache.readFile(data[0].url.split('/')[4].split('?')[0] + ".html", data, guide.onFileLoaded);
     },
 
     onFileLoaded: function(that, data) {
@@ -59,6 +60,7 @@ var guide = {
       }
 
       guide.hideScrollbar();
+      guide.setHamburger();
 
       $('img,audio,video').each(function() {
           console.log('load cached files');
@@ -71,14 +73,10 @@ var guide = {
     },
 
     onStationClick: function(e) {
-      var id = this.getAttribute('data-id');
-      if(id !== null) {
+      var url = this.getAttribute('href');
+      if(url !== null) {
         e.preventDefault();
-        if (Number(id) === 0) {
-          guide.displayData();
-        } else {
-          station.displayData(id);
-        }
+        site.displayData(url);
       }
     },
 
@@ -100,8 +98,8 @@ var guide = {
 
       var data = JSON.parse(localStorage.getItem('data'));
 
-      for (i = 0; i < data.stations.length; i++) {
-        if (data.stations[i].uuid !== "" && data.stations[i].uuid !== null) {
+      for (i = 0; i < data.length; i++) {
+        if (data[i].uuid !== "" && data[i].uuid !== null) {
           beacons = true;
         }
       }
@@ -160,6 +158,19 @@ var guide = {
           document.querySelector(".wrapper").style.marginLeft = 0 + 'px';
         }
       }
+    },
+
+    setHamburger: function() {
+      $('.app-hamburger').click(function(){
+        $('.menu').toggleClass('open');
+        $('.content-overlay').toggleClass('visible');
+      });
+      close_menu = function(){
+        $('.menu').removeClass('open');
+        $('.content-overlay').removeClass('visible');
+      };
+      $(window).resize(close_menu);
+      $('.content-overlay').click(close_menu);
     }
 };
 

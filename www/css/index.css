@@ -1,253 +1,315 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
+ * Reset
  *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *
- *= require font-awesome
- *= require_self
  */
-/****** Body, Wrapper, Typography ******/
 * {
-  margin: 0px;
-  padding: 0px; }
+  margin: 0;
+  padding: 0; }
 
 body {
-  background-color: #f6f7f8;
+  padding-bottom: 100px;
   font-size: 62.5%;
-  font-family: 'Roboto', sans-serif;
-  position: relative; }
+  font-family: 'Roboto', sans-serif; }
 
-a {
-  text-decoration: none;
-  color: #999; }
+/*
+ * Variables
+ *
+ */
+body {
+  background-color: #f6f7f8; }
 
-p {
-  font-size: 1.8em;
-  opacity: 0.9; }
+/*
+ * Layout
+ *
+ */
+.centered, .sw-elements-wrapper-combined {
+  margin: 0 12px;
+  /*@media screen and (min-width: $full-width-breakpoint){
+    width: $full-width;
+    margin: 0 auto;
+  }*/ }
 
-/****** Item ******/
-.item {
-  margin-bottom: 0; }
-
-.item-audio, .item-text, .item-link {
-  padding: 15px 20px;
-  overflow: visible; }
-
-.item audio, .item img, .item video {
-  display: block;
-  width: 100%; }
-
-.item-picture.item-pos-0, .item-video.item-pos-0 {
-  margin-top: 0px; }
-
-.item-link a {
-  font-size: 1.8em;
-  color: #4985ba; }
-
-.item-link a > i {
-  font-size: 1em; }
-
-.fa {
-  font-size: 2.0em;
-  cursor: pointer; }
-
-.fa-right {
-  float: right; }
-
-.fa-left {
-  float: left; }
-
-/****** Titel Guide ******/
-.titel {
-  background-color: black;
+.app-wrapper .menu,
+.app-wrapper .content-overlay,
+.app-wrapper .content {
   position: absolute;
-  width: 100%;
-  top: 0px;
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
-  /* IE6-9 */ }
-
-.titel h1 {
-  padding: 25px 0px 50px 25px;
-  color: white; }
-
-.station-show-titel {
-  width: 100%; }
-
-.station-show-titel p {
-  display: inline;
-  margin-left: 15px; }
-
-.station-show-titel.list-box.right {
-  position: fixed;
-  top: 0px;
-  z-index: 66; }
-
-/****** Header-Picture ******/
-.header-pic img {
-  width: 100% !important; }
-
-/****** List-Box ******/
-.stations ul, .public-stations ul {
-  list-style: none; }
-
-.list-box {
-  background-color: white; }
-
-.list-box.active {
-  background-color: #555;
-  box-shadow: inset 0px 4px 8px #000; }
-
-.list-box.active p, .list-box.active i {
-  color: white; }
-
-div.list-box {
-  border-bottom: 2px solid #d9e0ed; }
-
-li.list-box {
-  border-top: 1px solid #d9e0ed; }
-
-.list-box a {
-  display: block;
-  padding: 15px; }
-
-.list-box p {
-  color: #777777; }
-
-.list-box .fa, .stations-number {
-  line-height: 22px;
-  color: #ccc;
-  font-size: 1.6em; }
-
-.stations-number {
-  display: inline;
-  margin-left: 20px; }
-
-.stations-title {
-  display: inline;
-  margin-left: 15px; }
-
-/****** item image ******/
-.item-picture img {
-  border-bottom: 2px solid #ccc; }
-
-/****** item text ******/
-.item-text p {
-  opacity: 0.65; }
-
-@media (max-width: 800px) {
-  .content {
-    margin-top: 52px; }
-
-  .header-pic {
-    margin-top: -52px; } }
-/****** 800 and above ******/
-@media (min-width: 800px) {
-  .public-stations.bottom {
-    display: none !important; }
-
-  .station-show-titel.left {
-    display: block !important; }
-
-  .station-show-titel.right {
-    display: none; }
-
-  .menu-left {
-    display: block !important;
-    float: left;
-    width: 30%; }
-
-  .titel {
-    width: 100%; }
-
-  .wrapper {
-    float: left; } }
-/****** 1200 and above ******/
-@media screen and (min-width: 1200px) {
-  .wrapper, .titel {
-    margin-left: auto;
-    margin-right: auto; }
-
-  .titel {
-    width: 100%; }
-
-  .main {
-    width: 1200px; } }
-.main {
-  height: 100%;
-  margin: 0px auto;
-  /*background-color: #FFF;
-  box-shadow: 0px 16px 32px #d9e0ed;*/ }
-
-.main:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.public-stations {
-  margin-top: -3px; }
-
-.public-stations.bottom {
-  display: block; }
-
-.menu-left {
-  display: none;
-  position: fixed;
-  width: 30%;
-  overflow: hidden;
-  max-height: 100%;
-  margin-right: -100px;
-  padding-right: 100px;
   top: 0;
   bottom: 0;
-  overflow: auto; }
+  overflow: scroll; }
 
-.wrapper {
-  position: relative;
-  background-color: #FFF;
-  box-shadow: 8px 16px 32px #d9e0ed; }
-
-.wrapper:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.text-box {
+.app-wrapper .menu {
+  display: block;
   width: 100%;
-  background-color: #fff;
-  text-align: center; }
+  margin-left: -100%;
+  z-index: 200;
+  left: 0;
+  background-color: #f6f7f8;
+  transition: margin-left 0.5s; }
 
-.text-box p {
-  padding: 15px;
-  opacity: 0.6; }
+.app-wrapper .menu.open {
+  margin-left: 0%; }
 
-.footer {
-  text-align: center; }
+.app-wrapper .content-overlay {
+  visibility: hidden;
+  opacity: 0.1;
+  z-index: 150;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: opacity 0.5s, visibility 0.5s; }
+  .app-wrapper .content-overlay.visible {
+    visibility: visible;
+    opacity: 1; }
 
-.footer p, .footer a {
-  margin-top: 20px;
-  margin-bottom: 50px;
-  color: #d9e0ed;
-  opacity: 0.8;
-  font-weight: 600;
-  font-size: 1.2em !important; }
+.app-wrapper .content {
+  width: 100%;
+  z-index: 100;
+  right: 0;
+  background-color: #FFF;
+  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.4); }
+  .app-wrapper .content .app-hamburger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 12px 18px;
+    background-color: #f6f7f8;
+    font-size: 1.8em; }
 
-.footer a {
-  padding-bottom: 2px;
-  border-bottom: 2px solid #eef1f7;
-  font-size: 1em !important; }
+@media screen and (min-width: 300px) {
+  .app-wrapper .menu {
+    width: 300px;
+    margin-left: -300px; }
+
+  .app-wrapper .menu.open {
+    margin-left: 0px; } }
+@media screen and (min-width: 824px) {
+  .app-wrapper .menu {
+    width: 35%;
+    background-color: transparent; }
+
+  .app-wrapper .menu {
+    margin-left: 0%; }
+
+  .app-wrapper .content {
+    width: 65%; }
+    .app-wrapper .content .app-hamburger {
+      display: none; } }
+/*
+ * Header
+ *
+ */
+.app-wrapper .menu h1 {
+  margin: 36px 12px 24px 12px;
+  padding: 12px;
+  font-size: 1.8em;
+  font-weight: 500; }
+.app-wrapper .menu .navbar {
+  margin: 0 12px;
+  border-bottom: 1px solid #CCC;
+  list-style-type: none; }
+  .app-wrapper .menu .navbar li a {
+    display: block;
+    padding: 12px;
+    border-top: 1px solid #CCC;
+    font-size: 1.8em;
+    font-weight: 300;
+    text-decoration: none; }
+  .app-wrapper .menu .navbar li a, .app-wrapper .menu .navbar li a:visited {
+    color: #888; }
+  .app-wrapper .menu .navbar li a:hover {
+    color: #222; }
+  .app-wrapper .menu .navbar li.current a {
+    font-weight: 500; }
+  .app-wrapper .menu .navbar li.current a, .app-wrapper .menu .navbar li.current a:visited {
+    color: #222; }
+
+/*.header-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: visible;
+  transition: top 0.4s ease-in-out;
+
+  background-color: #FFF;
+
+  &.invisible {
+    top: -100px;
+    overflow: hidden;
+  }
+}
+
+.header {
+  @include clearfix();
+  @extend .centered;
+  padding: 4px 0;
+
+  a, a:visited {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .header-title {
+    float: left;
+    margin-right: $unit;
+
+    h1 {
+      padding: 2px 0;
+
+      @include font-size();
+      font-weight: $bold;
+    }
+  }
+
+  .header-menu-hamburger {
+    display: none;
+    float: right;
+
+    @include font-size();
+    font-weight: $normal;
+  }
+
+  .header-menu-inner {
+    ul {
+      list-style-type: none;
+
+      li {
+        @include font-size();
+        font-weight: $normal;
+
+        a {
+          display: block;
+          padding: 2px 5px;
+        }
+      }
+      li.current a, li:hover a {
+        background-color: #EEE;
+      }
+    }
+  }
+@media screen and (max-width: 400px){
+  .header-menu-hamburger {
+    display: block;
+  }
+
+  .locale-switcher {
+    margin-top: $unit;
+  }
+  .header-menu-inner {
+    display: none;
+    position: absolute;
+    right: 0;//$unit;
+    top: (2 * $unit);
+    padding: $unit;
+
+    background-color: #FFF;
+  }
+}
+@media screen and (min-width: 400px){
+.navbar {
+  float: left;
+}
+.locale-switcher {
+  float: right;
+}
+.header-menu-inner {
+  ul {
+    li {
+      float: left;
+    }
+    li + li {
+      margin-left: ($unit / 2);
+    }
+  }
+}
+}}*/
+/*
+ * Content Modules
+ *
+ */
+.sw--title-wrapper h3, .sw--title-wrapper h4, .sw--title-wrapper h5 {
+  margin-top: 1.2em;
+  margin-bottom: 0.6em; }
+.sw--title-wrapper h3 {
+  font-size: 4.05em;
+  font-weight: 300; }
+.sw--title-wrapper h4 {
+  font-size: 2.7em;
+  font-weight: 300; }
+.sw--title-wrapper h5 {
+  font-size: 1.8em;
+  font-weight: 500; }
+
+.sw--paragraph-wrapper p, .sw--paragraph-wrapper ul, .sw--paragraph-wrapper ol {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em; }
+.sw--paragraph-wrapper p {
+  font-size: 1.8em;
+  font-weight: 300; }
+  .sw--paragraph-wrapper p strong {
+    font-weight: 500; }
+.sw--paragraph-wrapper ul, .sw--paragraph-wrapper ol {
+  padding-left: 1em;
+  font-size: 1.8em;
+  font-weight: 300; }
+
+.sw--background_image-wrapper .sw--background_image {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center; }
+
+.sw--gallery {
+  position: relative;
+  margin-bottom: 0.6em; }
+  .sw--gallery img {
+    max-width: 100%;
+    width: auto\9;
+    height: auto;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic; }
+  .sw--gallery .slidesjs-navigation {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    height: 0px;
+    padding: 28.125% 20px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 20px;
+    color: #FFF; }
+  .sw--gallery .slidesjs-navigation:hover {
+    opacity: 1; }
+  .sw--gallery .slidesjs-previous {
+    left: 0;
+    padding-right: 48px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.5+0,0.2+40,0+100 */
+    background: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 40%, transparent 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 40%, transparent 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 40%, transparent 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#80000000', endColorstr='#00000000',GradientType=1 );
+    /* IE6-9 */ }
+  .sw--gallery .slidesjs-next {
+    right: 0;
+    padding-left: 48px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.2+60,0.5+100 */
+    background: -moz-linear-gradient(left, transparent 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.5) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, transparent 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.5) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.5) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#80000000',GradientType=1 );
+    /* IE6-9 */ }
+  
+  .sw-elements-wrapper img {
+    width: 100%;
+  }
 
 /*# sourceMappingURL=index.css.map */

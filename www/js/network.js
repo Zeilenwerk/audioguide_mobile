@@ -52,8 +52,7 @@ var Network = {
     req.addEventListener('load', function() {
       var el = document.createElement('html');
       el.innerHTML = this.responseText;
-      var newContent = el.querySelector('.main');
-
+      var newContent = el.querySelector('#main-wrapper');
       callback(newContent, filename);
     });
     req.open('GET', url);
