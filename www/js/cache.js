@@ -1,4 +1,7 @@
 var Cache = {
+  cacheList: [],
+  totalImages: 0,
+
   init: function(onCachingComplete, onCachingProgress) {
     this.onCachingComplete = onCachingComplete;
     this.onCachingProgress = onCachingProgress;
@@ -9,31 +12,34 @@ var Cache = {
   },
 
   updatedAt: function() {
-    var d = localStorage.getItem('data');
-    if(d) {
-      return JSON.parse(d).updated_at;
+    var data = localStorage.getItem('data');
+    if(data) {
+      return JSON.parse(data).updated_at;
     } else {
       return '1970-01-01T00:00:00.000Z';
     }
   },
 
-  cacheList: [],
-  totalImages: 1,
-
   getApiData: function() {
-    return JSON.parse(localStorage.getItem('data'));
+    console.log('[CACHE] get cache data');
+    var data = localStorage.getItem('data');
+    if (data) {
+     return JSON.parse(data); 
+    }
   },
 
   storeApiData: function(data) {
+    console.log('[CACHE] store api data');
     localStorage.setItem("data", JSON.stringify(data));
   },
 
   storeSites: function() {
+    console.log('[CACHE] store sites');
     var data = Cache.getApiData();
-    for (var i = 0; i < data.length; i++) {
-      var site = data[i];
-      var url = data[i].url;
-      console.log('[CACHE] Storing site ' + url.split('/')[4].split('?')[0]);
+    for (var i = 0; i < data.posts.length; i++) {
+      var site = data.posts[i];
+      var url = data.posts[i].url;
+      console.log('[CACHE] Storing site ' + url.split('/')[4].split('?')[0] + '.html');
       Network.getHTML(url, Cache.storeHtmlAndImages, url.split('/')[4].split('?')[0] + '.html');
     }
   },

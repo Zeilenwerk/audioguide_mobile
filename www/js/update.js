@@ -11,7 +11,7 @@ var update = {
     ImgCache.init(function () {
       Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
     }, function () {
-      navigator.notification.alert('Bitte öffnen Sie EasyGuide mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'OK');
+      navigator.notification.alert('Bitte öffnen Sie EasyGuide mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'Mach ich');
     });
   },
 
@@ -36,12 +36,13 @@ var update = {
   },
 
   onNoUpdate: function() {
-    console.log('[UPDATE] api = localstorage');
+    console.log('[UPDATE] no update need, redirect to start site');
     window.location.replace('index.html');
   },
 
   onCachingComplete: function() {
-    setTimeout(function() { window.location.replace('index.html'); }, 2000);
+    console.log('[UPDATE] update complete, redirect to start site');
+    window.location.replace('index.html'); 
   },
 
   onCachingProgress: function(percent) {

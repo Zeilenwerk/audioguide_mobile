@@ -46,8 +46,8 @@ var guide = {
 
     displayData: function() {
       console.log('displayData');
-      var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile(data[0].url.split('/')[4].split('?')[0] + ".html", data, guide.onFileLoaded);
+      var data = Cache.getApiData();
+      Cache.readFile(data.landing_page.split('/')[4].split('?')[0] + ".html", data, guide.onFileLoaded);
     },
 
     onFileLoaded: function(that, data) {
@@ -60,16 +60,33 @@ var guide = {
       }
 
       guide.hideScrollbar();
-      guide.setHamburger();
-
-      $('img,audio,video').each(function() {
-          console.log('load cached files');
-          ImgCache.useCachedFile($(this));
-      });
-
+      guide.setHamburger();     // if design has an hamburger else disable
+      guide.loadCachedFiles();
+      
       if (guide.hasBeacons()) {
           Beacon.startRangingBeacons();
         }
+    },
+
+    loadCachedFiles: function() {
+      console.log('load cached files');
+
+      $('img, audio, video').each(function() {
+        console.log('load cached files');
+        var element = $(this);
+        ImgCache.getCachedFileURL(element.attr('src'), function(source, cdvUrl){
+          resolveLocalFileSystemURL(cdvUrl, function(entry) {
+            var nativePath = entry.toURL();
+            element.attr('src', nativePath);
+          });
+        }, function(){
+          console.log('cache fail');
+        });
+      });
+
+      $(document).find('.sw--background_image').each(function() {
+        ImgCache.useCachedBackground($(this));
+      });
     },
 
     onStationClick: function(e) {
@@ -95,11 +112,10 @@ var guide = {
 
     hasBeacons: function() {
       var beacons = false;
-
-      var data = JSON.parse(localStorage.getItem('data'));
+      var data = Cache.getApiData();
 
       for (i = 0; i < data.length; i++) {
-        if (data[i].uuid !== "" && data[i].uuid !== null) {
+        if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
           beacons = true;
         }
       }

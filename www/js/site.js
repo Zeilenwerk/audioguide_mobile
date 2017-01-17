@@ -42,22 +42,9 @@ var site = {
         links[i].addEventListener('click', guide.onStationClick);
       }
 
-      $('img, audio, video').each(function() {
-        console.log('load cached files');
-        var element = $(this);
-        ImgCache.getCachedFileURL(element.attr('src'), function(source, cdvUrl){
-          resolveLocalFileSystemURL(cdvUrl, function(entry) {
-            var nativePath = entry.toURL();
-            element.attr('src', nativePath);
-          });
-        }, function(){
-          console.log('cache fail');
-        });
-      });
-
       guide.hideScrollbar();
       guide.setHamburger();
-
+      guide.loadCachedFiles();
       site.getThumbnail();
     }
 };

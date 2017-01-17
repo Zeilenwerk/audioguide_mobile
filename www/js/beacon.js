@@ -25,8 +25,8 @@ var Beacon = {
 
 
     for (var i = 0; i < data.length; i++) {
-      if (data[i].uuid !== "" && data[i].uuid !== null) {
-        Beacon.startRangingRegion({ uuid: data[i].uuid, identifier: data[i].titel });
+      if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
+        Beacon.startRangingRegion({ uuid: data.posts[i].uuid, identifier: data.posts[i].url });
       }
     }
 
