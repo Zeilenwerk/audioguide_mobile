@@ -16,6 +16,7 @@ var Network = {
       Network.get(URL, function(newData) {
         console.log(newData.updated_at);
         if (newData.updated_at !== Cache.updatedAt()) {
+          console.log('[NETWORK] update is available');
           updateAvailable(newData);
         } else {
           noUpdate();

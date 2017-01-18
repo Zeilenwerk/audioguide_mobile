@@ -1,26 +1,14 @@
-/****** Update ******/
-.update {
-  text-align: center;
-  height: 155px;
-}
-
-.update p {
-  font-size: 1.6em;
-  padding-top: 20px;
-}
-
+/****** Update Box ******/
 .update-box {
   position: fixed;
   display: none;
   width: 100%;
   bottom: 0px;
-  z-index: 99;
-
+  z-index: 201;
   background-color: #fff;
   border-top: 2px solid #ccc;
   box-shadow: 0px -16px 32px #d9e0ed;
-
-  color: #5f749a;
+  color: #222;
   font-size: 0.9em;
 }
 
@@ -29,9 +17,9 @@
   padding: 24px 0;
   margin-left: auto;
   margin-right: auto;
-
   text-align: center;
   font-weight: bold;
+  font-size: 1.6em;
   letter-spacing: 0.05em;
 }
 
@@ -40,7 +28,7 @@
   padding: 10px;
   position: absolute;
   bottom: 50%;
-  margin-bottom: -25px;
+  margin-bottom: -27px;
   right: 10px;
   z-index: 99;
 }
