@@ -1,5 +1,13 @@
 body {
   font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  color: #666;
+  text-align: center;
+}
+
+a {
+  color: #666;
+  outline: 0;
 }
 
 span {
@@ -11,12 +19,11 @@ span {
 
 .progress-bar {
   display: block;
-  width: 70%;
-  margin-top: 15px;
+  width: 80%;
   border: 2px solid rgb(145, 207, 218);
   background-color: rgba(67, 150, 224, 0.06);
-  margin-left: 14%;
-  height: 20px;
+  height: 22px;
+  margin: 20px auto 20px auto;
 }
 
 .update-content {
@@ -32,14 +39,16 @@ span {
   text-align: center;
   background-color: rgba(67, 150, 224, 0.06);
   padding: 12px 0px 12px 0px;
-  font-size: 1.8em;
-  margin-top: 15px;
   margin-left: auto;
   margin-right: auto;
-  color: #888;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.reverse {
+  margin-top: 20px;
 }
 
 .wrapper-update {
   width: 100%;
-
 }

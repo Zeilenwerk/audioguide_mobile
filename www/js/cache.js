@@ -24,7 +24,7 @@ var Cache = {
     console.log('[CACHE] get cache data');
     var data = localStorage.getItem('data');
     if (data) {
-     return JSON.parse(data); 
+     return JSON.parse(data);
     }
   },
 
@@ -34,11 +34,12 @@ var Cache = {
   },
 
   storeSites: function() {
-    console.log('[CACHE] store sites');
+    console.log('[CACHE] store html sites');
     var data = Cache.getApiData();
     for (var i = 0; i < data.posts.length; i++) {
       var site = data.posts[i];
       var url = data.posts[i].url;
+      Cache.cacheList.push(url.split('/')[4].split('?')[0] + '.html');
       console.log('[CACHE] Storing site ' + url.split('/')[4].split('?')[0] + '.html');
       Network.getHTML(url, Cache.storeHtmlAndImages, url.split('/')[4].split('?')[0] + '.html');
     }
@@ -61,7 +62,6 @@ var Cache = {
   readFile: function(fileName, data, onFileLoaded) {
     console.log('[CACHE] Reading html from ' + fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-        console.log('file system open: ' + fs.name);
         fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
           fileEntry.file(function (file) {
               var reader = new FileReader();
@@ -76,7 +76,9 @@ var Cache = {
 
   writeFile: function(fileEntry, text, fileName) {
     fileEntry.createWriter(function (fileWriter) {
-      fileWriter.onwriteend = function() {};
+      fileWriter.onwriteend = function() {
+        Cache.drop(Cache.cacheList, fileName);
+      };
       fileWriter.onerror = function(e) {};
       fileWriter.write(text);
     });
@@ -84,7 +86,7 @@ var Cache = {
 
   storeImages: function(html) {
     var urls = HtmlParser.getImages(html);
-    console.log(urls);
+
     for(var i = 0; i < urls.length; i++) {
       ImgCache.isCached(urls[i], Cache.cacheCheckComplete);
     }
