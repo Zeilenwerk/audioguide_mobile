@@ -51,7 +51,7 @@ var guide = {
     },
 
     onFileLoaded: function(that, data) {
-      document.querySelector('.main').innerHTML = that.result;
+      $('.main').html(that.result);
 
       var links = document.querySelectorAll('a');
 
@@ -60,7 +60,6 @@ var guide = {
       }
 
       guide.hideScrollbar();
-      guide.setHamburger();     // if design has an hamburger else disable
       guide.loadCachedFiles();
       
       if (guide.hasBeacons()) {
@@ -174,19 +173,6 @@ var guide = {
           document.querySelector(".wrapper").style.marginLeft = 0 + 'px';
         }
       }
-    },
-
-    setHamburger: function() {
-      $('.app-hamburger').click(function(){
-        $('.menu').toggleClass('open');
-        $('.content-overlay').toggleClass('visible');
-      });
-      close_menu = function(){
-        $('.menu').removeClass('open');
-        $('.content-overlay').removeClass('visible');
-      };
-      $(window).resize(close_menu);
-      $('.content-overlay').click(close_menu);
     }
 };
 

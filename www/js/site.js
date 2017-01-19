@@ -33,8 +33,7 @@ var site = {
     },
 
     onFileLoaded: function(that, data) {
-      document.querySelector('.main').innerHTML = "";
-      document.querySelector('.main').innerHTML = that.result;
+      $('.main').html(that.result);
 
       var links = document.querySelectorAll('a');
 
@@ -43,7 +42,6 @@ var site = {
       }
 
       guide.hideScrollbar();
-      guide.setHamburger();
       guide.loadCachedFiles();
       site.getThumbnail();
     }
