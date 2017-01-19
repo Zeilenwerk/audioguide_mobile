@@ -36,6 +36,11 @@ var Cache = {
   storeSites: function() {
     console.log('[CACHE] store html sites');
     var data = Cache.getApiData();
+
+    // store css
+    Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
+
+    // store sites and media
     for (var i = 0; i < data.posts.length; i++) {
       var site = data.posts[i];
       var url = data.posts[i].url;
@@ -48,6 +53,14 @@ var Cache = {
   storeHtmlAndImages: function(html, filename) {
     Cache.storeHtml(html.innerHTML, filename);
     Cache.storeImages(html.innerHTML);
+  },
+
+  storeCss: function(newContent, fileName) {
+    window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+      fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
+        Cache.writeFile(fileEntry, newContent, fileName);
+      }, Cache.onErrorCreateFile);
+    }, Cache.onErrorLoadFs);
   },
 
   storeHtml: function(newContent, fileName) {
@@ -66,6 +79,7 @@ var Cache = {
           fileEntry.file(function (file) {
               var reader = new FileReader();
               reader.onloadend = function() {
+                console.log(this);
                 onFileLoaded(this, data);
               };
               reader.readAsText(file);

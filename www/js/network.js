@@ -59,5 +59,15 @@ var Network = {
     });
     req.open('GET', url);
     req.send();
+  },
+
+  getCss: function(url, callback, filename) {
+    var req = new XMLHttpRequest();
+    req.addEventListener('load', function() {
+      console.log(this.responseText);
+      callback(this.responseText, filename);
+    });
+    req.open('GET', url);
+    req.send();
   }
 };
