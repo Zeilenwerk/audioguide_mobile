@@ -1,6 +1,6 @@
 body {
   font-family: 'Roboto', sans-serif;
-  font-size: 1em;
+  font-size: 18px;
   color: #666;
   text-align: center;
 }
@@ -12,17 +12,18 @@ a {
 
 span {
   height: 100%;
+  width: 32%;
   display: block;
   width: 0%;
-  background-color: rgb(145, 207, 218);
+  background-color: #2dafec;
 }
 
 .progress-bar {
   display: block;
   width: 80%;
-  border: 2px solid rgb(145, 207, 218);
-  background-color: rgba(67, 150, 224, 0.06);
-  height: 22px;
+  border: 2px solid #2dafec;
+  background-color: #f6f7f8;
+  height: 32px;
   margin: 20px auto 20px auto;
 }
 
