@@ -29,15 +29,7 @@ var guide = {
     },
 
     displayUpdate: function() {
-      var box = document.querySelector('.update-box');
-      box.style.display = 'block';
-      box.addEventListener('click', guide.goToUpdate);
-      var icon = document.querySelector('.close-icon');
-      icon.addEventListener('click', function(e) {
-        var box = document.querySelector('.update-box');
-        box.style.display = 'none';
-        e.stopPropagation();
-      });
+      notify('Neue Inhalte sind verfügbar', 'Herunterladen', guide.goToUpdate);
     },
 
     goToUpdate: function() {
