@@ -100,7 +100,7 @@
     <platform name="ios">
         <preference name="Orientation" value="all" />
         <config-file parent="NSBluetoothPeripheralUsageDescription" platform="ios" target="*-Info.plist">
-            <string>EasyGuide would like to use bluetooth to find iBeacon near you</string>
+            <string>The App would like to use bluetooth to find iBeacon near you</string>
         </config-file>
     </platform>
     <plugin name="cordova-plugin-dialogs" spec="~1.3.0" />

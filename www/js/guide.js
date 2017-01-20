@@ -55,8 +55,8 @@ var guide = {
       guide.loadCachedFiles();
       
       if (guide.hasBeacons()) {
-          Beacon.startRangingBeacons();
-        }
+        Beacon.startRangingBeacons();
+      }
     },
 
     loadCachedFiles: function() {
@@ -89,7 +89,7 @@ var guide = {
     },
 
     askLocationPermission: function() {
-      cordova.dialogGPS("Dein GPS ist ausgeschaltet. Damit die App richtig funktionieren kann braucht es deine Position um Beacons um dich herum zu finden.",//message
+      cordova.dialogGPS("Das GPS auf deinem Smartphone ist ausgeschaltet. Damit die App richtig funktionieren kann braucht es deine Position um Beacons um dich herum zu finden.",//message
           "Dies geht mit Wifi, Mobilen Daten oder Offline",
           function(buttonIndex){
             switch(buttonIndex) {
@@ -105,7 +105,7 @@ var guide = {
       var beacons = false;
       var data = Cache.getApiData();
 
-      for (i = 0; i < data.length; i++) {
+      for (i = 0; i < data.posts.length; i++) {
         if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
           beacons = true;
         }
@@ -138,7 +138,7 @@ var guide = {
       if (!cordova.plugins.BluetoothStatus.BTenabled) {
         if(new Date() - guide.getLastAlert() > 1000 * 60 * 10) {
           guide.setLastAlert();
-          navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit EasyGuide iBeacons in Ihrer Nähe finden kann', function() {}, 'Hinweis',  'OK');
+          navigator.notification.alert('Bitte schalten Sie Bluetooth ein damit die App Beacons in Ihrer Nähe finden kann', function() {}, 'Hinweis',  'OK');
         }
       }
     },

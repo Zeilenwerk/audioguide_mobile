@@ -44,5 +44,9 @@ var site = {
       guide.hideScrollbar();
       guide.loadCachedFiles();
       site.getThumbnail();
+
+      if (guide.hasBeacons()) {
+        Beacon.startRangingBeacons();
+      }
     }
 };

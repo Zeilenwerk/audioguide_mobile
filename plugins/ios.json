@@ -8,48 +8,48 @@
     },
     "installed_plugins": {
         "cl.rmd.cordova.dialoggps": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "com.unarin.cordova.beacon": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-android-permissions": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-bluetooth-status": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-file": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-settings-hook": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "ch.zeilenwerk.ihb"
+            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
         }
     }
 }

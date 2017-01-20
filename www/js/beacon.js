@@ -4,7 +4,7 @@ var beaconNow = "00000000-0000-0000-0000-000000000000";
 var Beacon = {
 
   startRangingBeacons: function() {
-    var data = JSON.parse(localStorage.getItem('data'));
+    var data = Cache.getApiData();
 
     cordova.plugins.locationManager.requestAlwaysAuthorization();
 
@@ -24,15 +24,18 @@ var Beacon = {
     };
 
 
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.posts.length; i++) {
       if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
-        Beacon.startRangingRegion({ uuid: data.posts[i].uuid, identifier: data.posts[i].url });
+        console.log('TRUE');
+        Beacon.startRangingRegion({ uuid: data.posts[i].uuid,
+                                    identifier: data.posts[i].url.split('/')[4].split('?')[0] });
       }
     }
 
     delegate.didRangeBeaconsInRegion = function onDidRangeBeaconsInRegion(result) {
 
       for(var i in result.beacons) {
+        console.log('TRUE');
         var beacon = result.beacons[i];
         beacons[beacon.uuid] = beacon;
       }
@@ -40,19 +43,31 @@ var Beacon = {
       var nearestBeacon = Beacon.getNearestBeacon(beacons);
       var secondBeacon = Beacon.getSecondBeacon(beacons);
 
-      //console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
-
       if (nearestBeacon) {
-        var siteData = data.filter(function(siteData) {
-          return siteData.uuid !== null && siteData.uuid !== '';
-        }).filter(function(siteData) {
-          return siteData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
+        console.log('TRUE');
+        console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
+
+        var stationData = data.posts.filter(function(stationData) {
+          return stationData.uuid !== null && stationData.uuid !== '';
+        }).filter(function(stationData) {
+          return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
         })[0];
 
-        if ((!secondBeacon && !nearestBeacon) || Beacon.pitaDistance(secondBeacon.accuracy, nearestBeacon.accuracy)) {
+        if (!secondBeacon && nearestBeacon) {
+          console.log('TRUE');
           if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-              site.displayData(siteData.url);
-              beaconNow = nearestBeacon.uuid.toLowerCase();
+            console.log('TRUE');
+            station.displayData(stationData.url);
+            beaconNow = nearestBeacon.uuid.toLowerCase();
+          }
+        }
+
+        if ((!secondBeacon && !nearestBeacon) || Beacon.pitaDistance(secondBeacon.accuracy, nearestBeacon.accuracy)) {
+          console.log('TRUE');
+          if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
+            console.log('TRUE');
+            station.displayData(stationData.url);
+            beaconNow = nearestBeacon.uuid.toLowerCase();
           }
         }
       }
@@ -80,8 +95,10 @@ var Beacon = {
     var secondBeacon = null;
 
     for (var i in beacons) {
+      console.log('TRUE');
       var beacon = beacons[i];
       if (!nearestBeacon) {
+        console.log('TRUE');
         nearestBeacon = beacon;
       } else {
         if (Beacon.getBeaconId(beacon) == Beacon.getBeaconId(nearestBeacon) || Beacon.isNearerThan(beacon, nearestBeacon)) {
