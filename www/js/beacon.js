@@ -26,7 +26,6 @@ var Beacon = {
 
     for (var i = 0; i < data.posts.length; i++) {
       if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
-        console.log('TRUE');
         Beacon.startRangingRegion({ uuid: data.posts[i].uuid,
                                     identifier: data.posts[i].url.split('/')[4].split('?')[0] });
       }
@@ -35,7 +34,6 @@ var Beacon = {
     delegate.didRangeBeaconsInRegion = function onDidRangeBeaconsInRegion(result) {
 
       for(var i in result.beacons) {
-        console.log('TRUE');
         var beacon = result.beacons[i];
         beacons[beacon.uuid] = beacon;
       }
@@ -44,7 +42,6 @@ var Beacon = {
       var secondBeacon = Beacon.getSecondBeacon(beacons);
 
       if (nearestBeacon) {
-        console.log('TRUE');
         console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
 
         var stationData = data.posts.filter(function(stationData) {
@@ -54,18 +51,14 @@ var Beacon = {
         })[0];
 
         if (!secondBeacon && nearestBeacon) {
-          console.log('TRUE');
           if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-            console.log('TRUE');
             station.displayData(stationData.url);
             beaconNow = nearestBeacon.uuid.toLowerCase();
           }
         }
 
         if ((!secondBeacon && !nearestBeacon) || Beacon.pitaDistance(secondBeacon.accuracy, nearestBeacon.accuracy)) {
-          console.log('TRUE');
           if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-            console.log('TRUE');
             station.displayData(stationData.url);
             beaconNow = nearestBeacon.uuid.toLowerCase();
           }
