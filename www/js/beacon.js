@@ -52,14 +52,16 @@ var Beacon = {
 
         if (!secondBeacon && nearestBeacon) {
           if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-            station.displayData(stationData.url);
+            console.log('[BEACON] display data from ' + stationData.url);
+            site.displayData(stationData.url.split('/')[4].split('?')[0] + '.html');
             beaconNow = nearestBeacon.uuid.toLowerCase();
           }
         }
 
-        if ((!secondBeacon && !nearestBeacon) || Beacon.pitaDistance(secondBeacon.accuracy, nearestBeacon.accuracy)) {
+        if ((!secondBeacon || !nearestBeacon) || Beacon.pitaDistance(secondBeacon.accuracy, nearestBeacon.accuracy)) {
           if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-            station.displayData(stationData.url);
+            console.log('[BEACON] display data from ' + stationData.url);
+            site.displayData(stationData.url.split('/')[4].split('?')[0] + '.html');
             beaconNow = nearestBeacon.uuid.toLowerCase();
           }
         }
@@ -88,10 +90,8 @@ var Beacon = {
     var secondBeacon = null;
 
     for (var i in beacons) {
-      console.log('TRUE');
       var beacon = beacons[i];
       if (!nearestBeacon) {
-        console.log('TRUE');
         nearestBeacon = beacon;
       } else {
         if (Beacon.getBeaconId(beacon) == Beacon.getBeaconId(nearestBeacon) || Beacon.isNearerThan(beacon, nearestBeacon)) {

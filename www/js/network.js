@@ -13,7 +13,7 @@ var Network = {
   onUpdateAvailable: function(updateAvailable, noUpdate, noConnection) {
     var onOnline = function() {
       console.log('[NETWORK] getting api data');
-      Network.get(URL, function(newData) {
+      Network.get(API_HOST, function(newData) {
         console.log(newData.updated_at);
         if (newData.updated_at !== Cache.updatedAt()) {
           console.log('[NETWORK] update is available');
