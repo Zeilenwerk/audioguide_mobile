@@ -49,7 +49,6 @@ var Beacon = {
           return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
         })[0];
 
-
         App.trigger('beacon', { accuracy: nearestBeacon.accuracy,
                                 uuid: nearestBeacon.uuid.toLowerCase(), 
                                 identifier: stationData.url.split('/')[4].split('?')[0] });
@@ -129,3 +128,6 @@ var Beacon = {
     return (Math.sqrt((second * second) + (nearest * nearest)) / 2) > 0.5;
   }
 };
+
+App.registerService('beacon', Beacon.startRangingBeacons, function () {});
+

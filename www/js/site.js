@@ -45,8 +45,5 @@ var site = {
       guide.loadCachedFiles();
       site.getThumbnail();
 
-      if (guide.hasBeacons()) {
-        Beacon.startRangingBeacons();
-      }
     }
 };

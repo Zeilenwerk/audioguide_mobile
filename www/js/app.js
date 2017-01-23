@@ -1,6 +1,7 @@
 var App = {
 
   eventList: {},
+  serviceList: {},
 
   on: function(event, action) {
     if (!(event in App.eventList)) {
@@ -9,8 +10,20 @@ var App = {
     App.eventList[event].push(action);
   },
 
+  registerService: function(service, start, stop) {
+    App.serviceList[service] = {start: start, stop: stop};
+  },
+
   startService: function(service) {
-    // something happens here...
+    if (service in App.serviceList) {
+      App.serviceList[service].start();  
+    }
+  },
+
+  stopService: function(service) {
+    if (service in App.serviceList) {
+      App.serviceList[service].stop();
+    }
   },
 
   trigger: function(event, options) {

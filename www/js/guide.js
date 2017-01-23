@@ -53,10 +53,6 @@ var guide = {
 
       guide.hideScrollbar();
       guide.loadCachedFiles();
-      
-      if (guide.hasBeacons()) {
-        Beacon.startRangingBeacons();
-      }
     },
 
     loadCachedFiles: function() {
