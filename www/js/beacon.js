@@ -39,7 +39,6 @@ var Beacon = {
       }
 
       var nearestBeacon = Beacon.getNearestBeacon(beacons);
-      var secondBeacon = Beacon.getSecondBeacon(beacons);
 
       if (nearestBeacon) {
         console.log('didRangeBeaconsInRegion: ', {uuid: nearestBeacon.uuid, distance: nearestBeacon.accuracy});
@@ -50,24 +49,20 @@ var Beacon = {
           return stationData.uuid.toLowerCase() === nearestBeacon.uuid.toLowerCase();
         })[0];
 
-        if (!secondBeacon && nearestBeacon) {
-          if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-            console.log('[BEACON] display data from ' + stationData.url);
-            site.displayData(stationData.url.split('/')[4].split('?')[0] + '.html');
-            beaconNow = nearestBeacon.uuid.toLowerCase();
-          }
-        }
 
-        if ((!secondBeacon || !nearestBeacon) || Beacon.pitaDistance(secondBeacon.accuracy, nearestBeacon.accuracy)) {
-          if (nearestBeacon.uuid.toLowerCase() !== beaconNow) {
-            console.log('[BEACON] display data from ' + stationData.url);
-            site.displayData(stationData.url.split('/')[4].split('?')[0] + '.html');
-            beaconNow = nearestBeacon.uuid.toLowerCase();
-          }
-        }
+        App.trigger('beacon', { accuracy: nearestBeacon.accuracy,
+                                uuid: nearestBeacon.uuid.toLowerCase(), 
+                                identifier: stationData.url.split('/')[4].split('?')[0] });
       }
     };
   },
+
+  displayNotification: function(url) {
+    notify('Eine Location befindet sich in der Nähe', 'Anzeigen', function() {
+                                                                    site.displayData(url);
+                                                                  });
+  },
+
 
   startRangingRegion: function(region) {
     console.log('start ranging region' + region.uuid);
