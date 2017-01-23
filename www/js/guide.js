@@ -39,7 +39,7 @@ var guide = {
     displayData: function() {
       console.log('displayData');
       var data = Cache.getApiData();
-      Cache.readFile(data.landing_page.split('/')[4].split('?')[0] + ".html", data, guide.onFileLoaded);
+      Cache.readFile(guide.splitUrl(data.landing_page) + '.html', data, guide.onFileLoaded);
     },
 
     onFileLoaded: function(that, data) {
@@ -80,7 +80,7 @@ var guide = {
       var url = this.getAttribute('href');
       if(url !== null) {
         e.preventDefault();
-        site.displayData(url.split('/')[2].split('?')[0] + '.html');
+        site.displayData(guide.splitUrl(url) + 'html');
       }
     },
 
@@ -161,6 +161,10 @@ var guide = {
           document.querySelector(".wrapper").style.marginLeft = 0 + 'px';
         }
       }
+    },
+
+    splitUrl: function(url) {
+      return url.substring(url.lastIndexOf('/')+1, url.indexOf('?'));
     }
 };
 

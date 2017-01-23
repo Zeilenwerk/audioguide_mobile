@@ -27,7 +27,7 @@ var Beacon = {
     for (var i = 0; i < data.posts.length; i++) {
       if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
         Beacon.startRangingRegion({ uuid: data.posts[i].uuid,
-                                    identifier: data.posts[i].url.split('/')[4].split('?')[0] });
+                                    identifier: guide.splitUrl(data.posts[i].url) });
       }
     }
 
@@ -51,17 +51,10 @@ var Beacon = {
 
         App.trigger('beacon', { accuracy: nearestBeacon.accuracy,
                                 uuid: nearestBeacon.uuid.toLowerCase(), 
-                                identifier: stationData.url.split('/')[4].split('?')[0] });
+                                identifier: guide.splitUrl(stationData.url) });
       }
     };
   },
-
-  displayNotification: function(url) {
-    notify('Eine Location befindet sich in der Nähe', 'Anzeigen', function() {
-                                                                    site.displayData(url);
-                                                                  });
-  },
-
 
   startRangingRegion: function(region) {
     console.log('start ranging region' + region.uuid);

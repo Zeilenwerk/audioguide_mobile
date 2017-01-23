@@ -3,7 +3,7 @@ var site = {
     displayData: function(url)  {
       console.log('displayData function');
       var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile(url, data, site.onFileLoaded);
+      Cache.readFile(url + '.html', data, site.onFileLoaded);
     },
 
     setPoster: function() {
@@ -44,6 +44,5 @@ var site = {
       guide.hideScrollbar();
       guide.loadCachedFiles();
       site.getThumbnail();
-
     }
 };

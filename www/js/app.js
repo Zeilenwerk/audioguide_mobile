@@ -36,6 +36,6 @@ var App = {
   },
 
   navigate: function(slug) {
-    site.displayData(slug + '.html');
+    site.displayData(slug);
   }
 }

@@ -44,9 +44,9 @@ var Cache = {
     for (var i = 0; i < data.posts.length; i++) {
       var site = data.posts[i];
       var url = data.posts[i].url;
-      Cache.cacheList.push(url.split('/')[4].split('?')[0] + '.html');
-      console.log('[CACHE] Storing site ' + url.split('/')[4].split('?')[0] + '.html');
-      Network.getHTML(url, Cache.storeHtmlAndImages, url.split('/')[4].split('?')[0] + '.html');
+      Cache.cacheList.push(guide.splitUrl(url) + '.html');
+      console.log('[CACHE] Storing site ' + guide.splitUrl(url) + '.html');
+      Network.getHTML(url, Cache.storeHtmlAndImages, guide.splitUrl(url) + '.html');
     }
   },
 
