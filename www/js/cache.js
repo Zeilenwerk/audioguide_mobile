@@ -12,10 +12,10 @@ var Cache = {
   },
 
   updatedAt: function() {
-    var data = localStorage.getItem('data');
-    if(data) {
+    if(data = localStorage.getItem('data')) {
       return JSON.parse(data).updated_at;
     } else {
+      console.log('[CACHE]No cache data');
       return '1970-01-01T00:00:00.000Z';
     }
   },
@@ -44,9 +44,9 @@ var Cache = {
     for (var i = 0; i < data.posts.length; i++) {
       var site = data.posts[i];
       var url = data.posts[i].url;
-      Cache.cacheList.push(guide.splitUrl(url) + '.html');
-      console.log('[CACHE] Storing site ' + guide.splitUrl(url) + '.html');
-      Network.getHTML(url, Cache.storeHtmlAndImages, guide.splitUrl(url) + '.html');
+      Cache.cacheList.push(Network.splitUrl(url) + '.html');
+      console.log('[CACHE] Storing site ' + Network.splitUrl(url) + '.html');
+      Network.getHTML(url, Cache.storeHtmlAndImages, Network.splitUrl(url) + '.html');
     }
   },
 

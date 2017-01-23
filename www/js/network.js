@@ -13,7 +13,7 @@ var Network = {
   onUpdateAvailable: function(updateAvailable, noUpdate, noConnection) {
     var onOnline = function() {
       console.log('[NETWORK] getting api data');
-      Network.get(API_HOST, function(newData) {
+      Network.get(APIHOST, function(newData) {
         console.log(newData.updated_at);
         if (newData.updated_at !== Cache.updatedAt()) {
           console.log('[NETWORK] update is available');
@@ -68,5 +68,9 @@ var Network = {
     });
     req.open('GET', url);
     req.send();
-  }
+  },
+
+  splitUrl: function(url) {
+      return url.substring(url.lastIndexOf('/')+1, url.indexOf('?'));
+    }
 };

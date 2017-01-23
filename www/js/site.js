@@ -3,7 +3,7 @@ var site = {
     displayData: function(url)  {
       console.log('displayData function');
       var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile(url + '.html', data, site.onFileLoaded);
+      Cache.readFile(url, data, site.onFileLoaded);
     },
 
     setPoster: function() {

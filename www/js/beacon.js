@@ -27,7 +27,7 @@ var Beacon = {
     for (var i = 0; i < data.posts.length; i++) {
       if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
         Beacon.startRangingRegion({ uuid: data.posts[i].uuid,
-                                    identifier: guide.splitUrl(data.posts[i].url) });
+                                    identifier: Network.splitUrl(data.posts[i].url) });
       }
     }
 
@@ -51,7 +51,7 @@ var Beacon = {
 
         App.trigger('beacon', { accuracy: nearestBeacon.accuracy,
                                 uuid: nearestBeacon.uuid.toLowerCase(), 
-                                identifier: guide.splitUrl(stationData.url) });
+                                identifier: Network.splitUrl(stationData.url) });
       }
     };
   },
