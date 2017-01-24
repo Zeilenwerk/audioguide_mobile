@@ -1,5 +1,6 @@
 var beacons = {};
 var beaconNow = "00000000-0000-0000-0000-000000000000";
+var region;
 
 var Beacon = {
 
@@ -22,7 +23,6 @@ var Beacon = {
       var time = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
       console.log('didDetermineStateForRegion:', {type: eventType, time: time, regionId: regionId});
     };
-
 
     for (var i = 0; i < data.posts.length; i++) {
       if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
@@ -55,6 +55,7 @@ var Beacon = {
       }
     };
   },
+
 
   startRangingRegion: function(region) {
     console.log('start ranging region' + region.uuid);
@@ -91,23 +92,6 @@ var Beacon = {
   },
 
 
-  getSecondBeacon: function(beacons) {
-    var secondBeacon = null;
-    var sortable = [];
-
-    for (var i in beacons) {
-      sortable.push(beacons[i]);
-    }
-
-    sortable.sort(function(b1, b2) {
-        return b1.accuracy - b2.accuracy;
-    });
-
-    secondBeacon = sortable[1];
-    return secondBeacon;
-  },
-
-
   isNearerThan: function(beacon1, beacon2) {
     return beacon1.accuracy > 0  && beacon2.accuracy > 0  && beacon1.accuracy < beacon2.accuracy;
   },
@@ -117,10 +101,32 @@ var Beacon = {
     return beacon.uuid + ':' + beacon.major + ':' + beacon.minor;
   },
 
-  pitaDistance: function(second, nearest) {
-    return (Math.sqrt((second * second) + (nearest * nearest)) / 2) > 0.5;
+
+  stopRangingBeacons: function() {
+    console.log('[BEACON] stop ranging beacons');
+    var data = Cache.getApiData();
+
+    for (var i = 0; i < data.posts.length; i++) {
+      if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
+        Beacon.stopRangingRegion({ uuid: data.posts[i].uuid,
+                                   identifier: Network.splitUrl(data.posts[i].url) });
+      }
+    }
+  },
+
+  stopRangingRegion: function(region) {
+    console.log('[BEACON] stop ranging region' + region.uuid);
+    var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(
+      region.identifier,
+      region.uuid,
+      region.major,
+      region.minor);
+
+    cordova.plugins.locationManager.stopRangingBeaconsInRegion(beaconRegion)
+    .fail(function(e) { console.error(e); })
+    .done();
   }
 };
 
-App.registerService('beacon', Beacon.startRangingBeacons, function () {});
+App.registerService('beacon', Beacon.startRangingBeacons, Beacon.stopRangingBeacons);
 
