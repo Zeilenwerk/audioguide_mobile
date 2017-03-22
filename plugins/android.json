@@ -7,49 +7,49 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+        "cl.rmd.cordova.dialoggps": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         },
         "com.unarin.cordova.beacon": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         },
         "cordova-plugin-android-permissions": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cl.rmd.cordova.dialoggps": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         },
         "cordova-plugin-bluetooth-status": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
-        },
-        "cordova-plugin-settings-hook": {
-            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         },
         "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "ch.zeilenwerk.smartguide"
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
+        "cordova-plugin-settings-hook": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "ch.zeilenwerk.audioguide"
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         }
     }
 }
