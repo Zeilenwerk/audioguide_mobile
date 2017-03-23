@@ -11,6 +11,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <access origin="cdvfile://*" />
+    <access origin="content:///*" />
     <allow-intent href="cdvfile://*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -39,15 +40,19 @@
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
     </feature>
 
+    <!-- Show Loading Screen -->
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000"/>
     <preference name="ShowSplashScreenSpinner" value="false"/>
     
     <platform name="android">
+        <!-- ICONS -->
         <icon density="ldpi" src="res/icons/android/icon-36-ldpi.png" />
         <icon density="mdpi" src="res/icons/android/icon-48-mdpi.png" />
         <icon density="hdpi" src="res/icons/android/icon-72-hdpi.png" />
         <icon density="xhdpi" src="res/icons/android/icon-96-xhdpi.png" />
+        
+        <!-- Loading Screens -->
         <splash density="port-hdpi" src="res/screen/android/screen-hdpi-portrait.png" />
         <splash density="land-hdpi" src="res/screen/android/screen-hdpi-landscape.png" />
         <splash density="port-ldpi" src="res/screen/android/screen-ldpi-portrait.png" />
@@ -63,6 +68,7 @@
     </platform>
 
     <platform name="ios">
+        <!-- ICONS -->
         <icon height="180" src="res/icons/ios/icon-60-3x.png" width="180" />
         <icon height="60" src="res/icons/ios/icon-60.png" width="60" />
         <icon height="120" src="res/icons/ios/icon-60-2x.png" width="120" />
@@ -80,6 +86,8 @@
         <icon height="100" src="res/icons/ios/icon-50-2x.png" width="100" />
         <icon height="167" src="res/icons/ios/icon-60-3x.png" width="167" />
         <icon  height="87" src="res/icons/ios/icon-76.png" width="87" />
+
+        <!-- Loading Screens -->
         <splash height="480" src="res/screen/ios/screen-iphone-portrait.png" width="320" />
         <splash height="320" src="res/screen/ios/screen-iphone-landscape.png" width="480" />
         <splash height="960" src="res/screen/ios/screen-iphone-portrait-2x.png" width="640" />
@@ -96,11 +104,15 @@
         <splash height="1242" src="res/screen/ios/screen-iphone-landscape-736h.png" width="2208" />
     </platform>
 
+    <!-- Filesystem of the OS Systems -->
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidExtraFilesystems" value="files,files-external,root" />
     <preference name="iosPersistentFileLocation" value="Library" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,root" />
+
     <plugin name="cordova-plugin-settings-hook" spec="~0.2.3" />
+
+    <!-- Bluetooth Permission for Apple Devices -->
     <platform name="ios">
         <preference name="Orientation" value="all" />
         <config-file parent="NSBluetoothPeripheralUsageDescription" platform="ios" target="*-Info.plist">
