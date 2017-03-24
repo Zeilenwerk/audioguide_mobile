@@ -71,6 +71,10 @@ var Network = {
   },
 
   splitUrl: function(url) {
-      return url.substring(url.lastIndexOf('/')+1, url.indexOf('?'));
-    }
+    return url.substring(url.lastIndexOf('/')+1, url.indexOf('?'));
+  },
+
+  imageUrlSplit: function(url) {
+    return url.split('(')[1].split(')')[0];
+  }
 };

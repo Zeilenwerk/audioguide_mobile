@@ -102,7 +102,8 @@ var Cache = {
     var urls = HtmlParser.getImages(html);
 
     for(var i = 0; i < urls.length; i++) {
-      ImgCache.isCached(urls[i], Cache.cacheCheckComplete);
+      url = Network.imageUrlSplit(urls[i]);
+      ImgCache.isCached(url, Cache.cacheCheckComplete);
     }
   },
 
