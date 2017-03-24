@@ -29,7 +29,7 @@ var guide = {
     },
 
     displayUpdate: function() {
-      notify('Neue Inhalte sind verfügbar', 'Herunterladen', guide.goToUpdate);
+      notify('Neue Inhalte sind verfügbar', guide.goToUpdate);
     },
 
     goToUpdate: function() {
