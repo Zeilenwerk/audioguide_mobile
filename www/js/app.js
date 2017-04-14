@@ -37,5 +37,9 @@ var App = {
 
   navigate: function(slug) {
     site.displayData(slug + '.html');
+  },
+
+  getUUID: function() {
+    return device.uuid;
   }
 }
