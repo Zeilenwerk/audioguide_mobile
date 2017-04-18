@@ -46,8 +46,21 @@ var Cache = {
     debug('[CACHE] store html sites');
     var data = Cache.getApiData();
 
-    // store css
-    Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
+    // store assets
+    for (var i = 0; i < data.assets.length; i++) {
+      if(data.assets[i] != null){
+        debug('Added asset to cache: ' + data.assets[i]);
+        Cache.cache.add(URL + '/assets/' + data.assets[i]);
+      }
+    }
+
+    // download first (client) assets, for css to have asset urls
+    Cache.cache.download(function(){ /* progress */ }, false).then(function(cache){
+      debug('Asset cacheing successful!');
+      Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
+    },function() {
+      debug('Asset cacheing failed!');
+    });
 
     // store sites and media
     for (var i = 0; i < data.posts.length; i++) {
@@ -64,6 +77,9 @@ var Cache = {
   },
 
   storeCss: function(newContent, fileName) {
+    newContent = newContent.replace(/url\((.*?)\)/g, function(match){
+      return 'url(' + Cache.cache.get(URL + url) + ')';
+    });
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
         Cache.writeFile(fileEntry, newContent, fileName);

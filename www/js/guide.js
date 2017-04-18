@@ -64,7 +64,7 @@ var guide = {
 
     $(document).find('.sw--background_image, .has-background-image').each(function(i, e) {
       debug('loading cached file (bg-image)');
-      url = $(e).css('backgroundImage').replace(/url\("(.*)"\)/, '$1');
+      url = $(e).css('backgroundImage').replace(/url\("(.*?)"\)/g, '$1');
       $(e).css('backgroundImage', 'url("' + Cache.cache.get(url) + '")');
     });
   },
