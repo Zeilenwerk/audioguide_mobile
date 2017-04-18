@@ -1,3 +1,7 @@
+var debug = function(text){
+   console.log('[debug] ' + text);
+}
+
 var App = {
 
   eventList: {},

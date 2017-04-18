@@ -8,11 +8,7 @@ var update = {
   },
 
   onDeviceReady: function() {
-    ImgCache.init(function () {
-      Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
-    }, function () {
-      navigator.notification.alert('Bitte öffnen Sie die App mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'Mach ich');
-    });
+    Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
   },
 
   transferFailed: function() {
@@ -29,14 +25,14 @@ var update = {
   },
 
   onUpdateAvailable: function(newData) {
-    console.log('[UPDATE] api != localstorage');
+    console.log('[UPDATE] execute update process');
     Cache.init(update.onCachingComplete, update.onCachingProgress);
     Cache.storeApiData(newData);
     Cache.storeSites();
   },
 
   onNoUpdate: function() {
-    console.log('[UPDATE] no update need, redirect to start site');
+    console.log('[UPDATE] no update needed, redirect to start site');
     window.location.replace('index.html');
   },
 

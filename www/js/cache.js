@@ -1,6 +1,19 @@
 var Cache = {
-  cacheList: [],
-  totalImages: 0,
+  cache: null,
+
+  initializeCache: function(success, failure){
+    debug('Cache.initializeCache');
+    Cache.cache = new CordovaFileCache({
+      fs: new CordovaPromiseFS({
+          Promise: Promise
+      }),
+      mode: 'hash',
+      localRoot: 'data',
+      serverRoot: URL,
+      cacheBuster: false
+    });
+    Cache.cache.ready.then(success, failure);
+  },
 
   init: function(onCachingComplete, onCachingProgress) {
     this.onCachingComplete = onCachingComplete;
@@ -8,7 +21,7 @@ var Cache = {
   },
 
   empty: function() {
-    return ImgCache.getCurrentSize() === 0;
+    return Cache.cache.list().then(function(){ debug(list); }, function() { debug(list); });
   },
 
   updatedAt: function() {
@@ -29,12 +42,12 @@ var Cache = {
   },
 
   storeApiData: function(data) {
-    console.log('[CACHE] store api data');
+    debug('[CACHE] store api data');
     localStorage.setItem("data", JSON.stringify(data));
   },
 
   storeSites: function() {
-    console.log('[CACHE] store html sites');
+    debug('[CACHE] store html sites');
     var data = Cache.getApiData();
 
     // store css
@@ -44,8 +57,7 @@ var Cache = {
     for (var i = 0; i < data.posts.length; i++) {
       var site = data.posts[i];
       var url = data.posts[i].url;
-      Cache.cacheList.push(Network.splitUrl(url) + '.html');
-      console.log('[CACHE] Storing site ' + Network.splitUrl(url) + '.html');
+      debug('[CACHE] Storing site ' + Network.splitUrl(url) + '.html');
       Network.getHTML(url, Cache.storeHtmlAndImages, Network.splitUrl(url) + '.html');
     }
   },
@@ -64,7 +76,7 @@ var Cache = {
   },
 
   storeHtml: function(newContent, fileName) {
-    console.log('[CACHE] Storing HTML to ' + fileName);
+    console.log('[CACHE] Cache HTML to ' + fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
         Cache.writeFile(fileEntry, newContent, fileName);
@@ -103,24 +115,19 @@ var Cache = {
 
     for(var i = 0; i < urls.length; i++) {
       if(device.platform === "iOS") {
-        url = Network.imageUrlSplit(urls[i]);
-        ImgCache.isCached(url, Cache.cacheCheckComplete);
+        url = Network.imageUrlSplit(urls[i]);   // iOS quirck
+        Cache.cache.add(url);
       } else {
-        ImgCache.isCached(urls[i], Cache.cacheCheckComplete);
+        Cache.cache.add(url);                    // Android and other devices
       }
     }
-  },
 
-  cacheCheckComplete: function(url, success) {
-    if(!success) {
-      Cache.cacheList.push(url);
-      console.log('[CACHE] Storing image ' + url);
-      ImgCache.cacheFile(url, function() {
-        Cache.drop(Cache.cacheList, url);
-      });
-    } else {
-      Cache.drop(Cache.cacheList, url);
-    }
+    Cache.cache.download(function() { }, false).then(function(cache){
+      debug('Cacheing successful!');
+      Cache.onCachingComplete();
+    },function() {
+      debug('Cacheing failed!');
+    });
   },
 
   onErrorCreateFile: function() {
@@ -133,19 +140,5 @@ var Cache = {
 
   onErrorLoadFs: function() {
     console.log('Error beim laden des File System');
-  },
-
-  drop: function(array, element) {
-    if(array.length > Cache.totalImages) {
-      Cache.totalImages = array.length;
-    }
-    var index = array.indexOf(element);
-    if(index > -1) {
-      array.splice(index, 1);
-    }
-    Cache.onCachingProgress((1 - array.length / Cache.totalImages) * 100);
-    if(array.length === 0) {
-      Cache.onCachingComplete();
-    }
   }
 };
