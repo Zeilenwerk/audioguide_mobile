@@ -8,7 +8,11 @@ var update = {
   },
 
   onDeviceReady: function() {
-    Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
+    Cache.initializeCache(function(list) {
+      Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
+    }, function(){
+      navigator.notification.alert('Bitte öffnen Sie die App mit einer funktionierender Internetverbindung', function() {}, 'Hinweis',  'OK');
+    });
   },
 
   transferFailed: function() {

@@ -20,10 +20,6 @@ var Cache = {
     this.onCachingProgress = onCachingProgress;
   },
 
-  empty: function() {
-    return Cache.cache.list().then(function(){ debug(list); }, function() { debug(list); });
-  },
-
   updatedAt: function() {
     if(data = localStorage.getItem('data')) {
       return JSON.parse(data).updated_at;
@@ -103,7 +99,7 @@ var Cache = {
   writeFile: function(fileEntry, text, fileName) {
     fileEntry.createWriter(function (fileWriter) {
       fileWriter.onwriteend = function() {
-        Cache.drop(Cache.cacheList, fileName);
+        //Cache.drop(Cache.cacheList, fileName);
       };
       fileWriter.onerror = function(e) {};
       fileWriter.write(text);
@@ -118,11 +114,11 @@ var Cache = {
         url = Network.imageUrlSplit(urls[i]);   // iOS quirck
         Cache.cache.add(url);
       } else {
-        Cache.cache.add(url);                    // Android and other devices
+        Cache.cache.add(urls[i]);                    // Android and other devices
       }
     }
 
-    Cache.cache.download(function() { }, false).then(function(cache){
+    Cache.cache.download(function(){ /* progress */ }, false).then(function(cache){
       debug('Cacheing successful!');
       Cache.onCachingComplete();
     },function() {

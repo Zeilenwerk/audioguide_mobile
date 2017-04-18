@@ -55,23 +55,17 @@ var guide = {
   },
 
   loadCachedFiles: function() {
-    console.log('load cached files');
+    debug('loading cached files');
 
-    $('img, audio, video').each(function() {
-      console.log('load cached files');
-      var element = $(this);
-      ImgCache.getCachedFileURL(element.attr('src'), function(source, cdvUrl){
-        resolveLocalFileSystemURL(cdvUrl, function(entry) {
-          var nativePath = entry.toURL();
-          element.attr('src', nativePath);
-        });
-      }, function(){
-        console.log('cache fail');
-      });
+    $('img, audio, video').each(function(i, e) {
+      debug('loading cached file (img, audio, video)');
+      $(e).attr('src', Cache.cache.get($(e).attr('src')));
     });
 
-    $(document).find('.sw--background_image, .has-background-image').each(function() {
-      ImgCache.useCachedBackground($(this));
+    $(document).find('.sw--background_image, .has-background-image').each(function(i, e) {
+      debug('loading cached file (bg-image)');
+      url = $(e).css('backgroundImage').replace(/url\("(.*)"\)/, '$1');
+      $(e).css('backgroundImage', 'url("' + Cache.cache.get(url) + '")');
     });
   },
 

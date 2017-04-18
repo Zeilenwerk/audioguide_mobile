@@ -15,7 +15,7 @@ var Network = {
       console.log('[NETWORK] getting api data');
       Network.get(APIHOST, function(newData) {
         console.log(newData.updated_at);
-        if (newData.updated_at !== Cache.updatedAt()) {
+        if (true /* FIXME TODO set to this --> newData.updated_at !== Cache.updatedAt()*/) {
           console.log('[NETWORK] update is available');
           updateAvailable(newData);
         } else {
