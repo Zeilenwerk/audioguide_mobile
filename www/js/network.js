@@ -80,7 +80,8 @@ var Network = {
   },
 
   imageUrlSplit: function(url) {
-    debug('-- Network.imageUrlSplit');
-    return url.split('(')[1].split(')')[0];
+    debug('-- Network.imageUrlSplit for iOS');
+    debug(url);
+    return url.split('(')[1].split(')')[0].replace('file://', '');
   }
 };

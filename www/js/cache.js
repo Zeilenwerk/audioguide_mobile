@@ -153,7 +153,7 @@ var Cache = {
   storeImages: function(html) {
     debug('-- Cache.storeImages');
     var urls = HtmlParser.getImages(html);
-
+    console.log(urls);
     for(var i = 0; i < urls.length; i++) {
       if(device.platform === "iOS") {
         url = Network.imageUrlSplit(urls[i]);   // iOS quirck

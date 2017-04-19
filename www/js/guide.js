@@ -17,7 +17,7 @@ var guide = {
       debug('Cache.initializeCache callback');
       console.log(list);
       var data = Cache.getApiData();
-      
+
       if (list.length <= 0 || data == null || localStorage.getItem("updated_at") != data.updated_at) {
         debug('Cache is empty');
         guide.goToUpdate();
