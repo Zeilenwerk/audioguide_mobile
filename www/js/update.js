@@ -19,15 +19,8 @@ var update = {
   transferFailed: function() {
     debug('-- update.transferFailed');
     console.log('[UPDATE] file transfer failed');
-    var bar = document.querySelector('.progress-bar');
-    bar.style.display = 'none';
-    var p = document.querySelector('p');
-    p.innerHTML = 'Aktualisierung fehlgeschlagen.<br>Bitte Internetverbindung überprüfen.';
-    var button = document.querySelector('.reverse');
-    button.style.display = 'block';
-    button.addEventListener('click', function() {
-      window.location.reload();
-    });
+
+    update.addWarningText('Aktualisierung fehlgeschlagen, bitte die Internetverbindung überprüfen [#ERR-TRANSFER]');
   },
 
   onUpdateAvailable: function(newData) {
@@ -67,6 +60,9 @@ var update = {
   addWarningText: function(text){
     $('.logo-wrapper').removeClass('loading');
     $('.status-text').text(text);
+    $('.reverse').show().click(function() {
+      window.location.reload();
+    });
   }
 };
 

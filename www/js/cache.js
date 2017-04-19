@@ -48,6 +48,7 @@ var Cache = {
   storeSites: function() {
     debug('-- Cache.storeSites');
     var data = Cache.getApiData();
+    update.addLoadingText('Erfolgreich alle Konfigurationsdaten geladen…');
 
     // store assets
     for (var i = 0; i < data.assets.length; i++) {
@@ -56,15 +57,18 @@ var Cache = {
         Cache.cache.add(URL + '/assets/' + data.assets[i]);
       }
     }
+    update.addLoadingText('Erfolgreich alle statischen Medien angefordert…');
 
     // download first (client) assets, for css to have asset urls
     Cache.cache.download(function(){Cache.onCachingProgress}, false).then(function(cache){
       debug('Asset cacheing successful!');
+      update.addLoadingText('Erfolgreich alle statische Medien geladen…');
       Cache.siteList.push('index.css');
       Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
       Cache.checkCacheingComplete();
     },function() {
       debug('Asset cacheing failed!');
+      update.addWarningText('Einige Daten konnten nicht geladen werden, bitte versuche es erneut [#ERR-ASSET]');
     });
 
     // store sites and media
@@ -76,6 +80,7 @@ var Cache = {
       debug('[CACHE] Storing site ' + filename);
       Network.getHTML(url, Cache.storeHtmlAndImages, filename);
     }
+    update.addLoadingText('Erfolgreich alle Seiten und dynamischen Medien angefordert…');
   },
 
   storeHtmlAndImages: function(html, filename) {
@@ -98,6 +103,7 @@ var Cache = {
         console.log(res);
       }, Cache.onErrorCreateFile);
     }, Cache.onErrorLoadFs);
+    update.addLoadingText('Erfolgreich die Gestaltung angepasst…');
   },
 
   storeHtml: function(newContent, fileName) {
@@ -157,9 +163,11 @@ var Cache = {
 
     Cache.cache.download(function() {Cache.onCachingProgress}, false).then(function(cache){
       debug('Cacheing successful!');
+      update.addLoadingText('Erfolgreich alle dynamischen Medien geladen…');
       Cache.checkCacheingComplete();
     },function() {
       debug('Cacheing failed!');
+      update.addWarningText('Einige Daten konnten nicht geladen werden, bitte versuche es erneut [#ERR-MEDIA]');
     });
   },
 
