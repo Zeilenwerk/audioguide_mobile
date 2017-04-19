@@ -16,7 +16,15 @@ var guide = {
     Cache.initializeCache(function(list) {
       debug('Cache.initializeCache callback');
       console.log(list);
-      if (list.length <= 0) {
+      var data = Cache.getApiData();
+      
+      if (localStorage.getItem("updated_at") != null) {
+        var last_update = JSON.parse(localStorage.getItem("updated_at")).updated_at;
+      } else {
+        var last_update = "1970-01-01T00:00:00.000Z"
+      }
+      
+      if (list.length <= 0 || data == null || last_update != data.updated_at) {
         debug('Cache is empty');
         guide.goToUpdate();
       }

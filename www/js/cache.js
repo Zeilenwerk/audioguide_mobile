@@ -37,6 +37,8 @@ var Cache = {
     var data = localStorage.getItem('data');
     if (data) {
      return JSON.parse(data);
+    } else {
+      return null;
     }
   },
 
@@ -58,7 +60,7 @@ var Cache = {
     }
 
     // download first (client) assets, for css to have asset urls
-    Cache.cache.download(function(){}, false).then(function(cache){
+    Cache.cache.download(false, false).then(function(cache){
       debug('Asset cacheing successful!');
       Cache.siteList.push('index.css');
       Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
@@ -177,6 +179,8 @@ var Cache = {
 
   checkCacheingComplete: function() {
     if(Cache.siteList.length <= 0 && Cache.cache.isDirty()) {
+      var data = Cache.getApiData();
+      localStorage.setItem("updated_at", data.updated_at);
       Cache.onCachingComplete();
     }
   }
