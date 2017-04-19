@@ -55,7 +55,7 @@ var Cache = {
     }
 
     // download first (client) assets, for css to have asset urls
-    Cache.cache.download(function(){ /* progress */ }, false).then(function(cache){
+    Cache.cache.download(function(){update.onCachingProgress}, false).then(function(cache){
       debug('Asset cacheing successful!');
       Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
     },function() {

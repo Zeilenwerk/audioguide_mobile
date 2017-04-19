@@ -14,6 +14,7 @@ var guide = {
 
     Cache.initializeCache(function(list) {
       debug('Cache.initializeCache callback');
+      console.log(list);
       if (list.length <= 0) {
         debug('Cache is empty');
         guide.goToUpdate();

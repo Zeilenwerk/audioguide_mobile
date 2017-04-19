@@ -47,12 +47,12 @@ var update = {
     }, 2000);
   },
 
-  onCachingProgress: function(percent) {
-    console.log("Progress: " + percent);
+  onCachingProgress: function(e) {
+    console.log("Progress: " + (100/e.queueIndex*e.queueSize));
     var bar = document.querySelector('.progress-bar');
     bar.style.display = 'block';
     var span = document.querySelector('span');
-    span.style.width = percent + '%';
+    span.style.width = (100/e.queueIndex*e.queueSize) + '%';
   }
 };
 
