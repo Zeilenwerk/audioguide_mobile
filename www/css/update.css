@@ -54,17 +54,27 @@ span {
   color: #FFF;
 }
 
+/*
+ * Fancy shit */
+
+/* Wrapper, layout */
+
 .wrapper-update {
+  position: absolute;
+  top: 50%;
+  margin-top: -110px;
   width: 100%;
 }
 
-/* Fancy shit */
+/* Text */
 
 .status-text {
   padding: 24px 0 18px 0;
 
   color: #AAA;
 }
+
+/* SVG, logo */
 
 svg {
   display: block;
