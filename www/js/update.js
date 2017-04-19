@@ -8,6 +8,7 @@ var update = {
   },
 
   onDeviceReady: function() {
+    debug('-- update.onDeviceReady');
     Cache.initializeCache(function(list) {
       Network.onUpdateAvailable(update.onUpdateAvailable, update.onNoUpdate, update.transferFailed);
     }, function(){
@@ -16,6 +17,7 @@ var update = {
   },
 
   transferFailed: function() {
+    debug('-- update.transferFailed');
     console.log('[UPDATE] file transfer failed');
     var bar = document.querySelector('.progress-bar');
     bar.style.display = 'none';
@@ -29,25 +31,26 @@ var update = {
   },
 
   onUpdateAvailable: function(newData) {
-    console.log('[UPDATE] execute update process');
+    debug('-- update.onUpdateAvailable -- execute update process');
     Cache.init(update.onCachingComplete, update.onCachingProgress);
     Cache.storeApiData(newData);
     Cache.storeSites();
   },
 
   onNoUpdate: function() {
-    console.log('[UPDATE] no update needed, redirect to start site');
+    debug('-- update.onNoUpdate -- no update needed, redirect to start site');
     window.location.replace('index.html');
   },
 
   onCachingComplete: function() {
-    console.log('[UPDATE] update complete, redirect to start site');
+    debug('-- update.onCachingComplete -- update complete, redirect to start site');
     setTimeout(function() {
       window.location.replace('index.html');
-    }, 2000);
+    }, 2 * 1000);
   },
 
   onCachingProgress: function(e) {
+    debug('-- update.onCachingProgress');
     console.log("Progress: " + (100/e.queueIndex*e.queueSize));
     var bar = document.querySelector('.progress-bar');
     bar.style.display = 'block';

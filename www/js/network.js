@@ -1,7 +1,7 @@
 var Network = {
 
   checkNetwork: function(online, offline) {
-    console.log('checkNetwork function');
+    debug('-- Network.checkNetwork');
     var networkState = navigator.connection.type;
     if (networkState === Connection.NONE) {
       offline();
@@ -11,6 +11,7 @@ var Network = {
   },
 
   onUpdateAvailable: function(updateAvailable, noUpdate, noConnection) {
+    debug('-- Network.onUpdateAvailable');
     var onOnline = function() {
       console.log('[NETWORK] getting api data');
       Network.get(APIHOST, function(newData) {
@@ -32,6 +33,7 @@ var Network = {
   },
 
   get: function(url, callbackSuccess, callbackError) {
+    debug('-- Network.get');
     var req = new XMLHttpRequest();
     req.open('GET', url, true);
     req.onload = function(e) {
@@ -50,6 +52,7 @@ var Network = {
   },
 
   getHTML: function(url, callback, filename) {
+    debug('-- Network.getHTML');
     var req = new XMLHttpRequest();
     req.addEventListener('load', function() {
       var el = document.createElement('html');
@@ -62,6 +65,7 @@ var Network = {
   },
 
   getCss: function(url, callback, filename) {
+    debug('-- Network.getCss');
     var req = new XMLHttpRequest();
     req.addEventListener('load', function() {
       callback(this.responseText, filename);
@@ -71,10 +75,12 @@ var Network = {
   },
 
   splitUrl: function(url) {
+    debug('-- Network.splitUrl');
     return url.substring(url.lastIndexOf('/')+1, url.indexOf('?'));
   },
 
   imageUrlSplit: function(url) {
+    debug('-- Network.imageUrlSplit');
     return url.split('(')[1].split(')')[0];
   }
 };
