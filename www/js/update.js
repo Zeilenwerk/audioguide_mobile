@@ -32,7 +32,7 @@ var update = {
 
   onUpdateAvailable: function(newData) {
     debug('-- update.onUpdateAvailable -- execute update process');
-    Cache.init(update.onCachingComplete, update.onCachingProgress);
+    Cache.init(update.onCachingComplete);
     Cache.storeApiData(newData);
     Cache.storeSites();
   },

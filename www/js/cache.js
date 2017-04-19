@@ -16,10 +16,10 @@ var Cache = {
     Cache.cache.ready.then(success, failure);
   },
 
-  init: function(onCachingComplete, onCachingProgress) {
+  init: function(onCachingComplete) {
     debug('-- Cache.init');
     this.onCachingComplete = onCachingComplete;
-    this.onCachingProgress = onCachingProgress;
+    //this.onCachingProgress = onCachingProgress;
   },
 
   updatedAt: function() {
@@ -58,7 +58,7 @@ var Cache = {
     }
 
     // download first (client) assets, for css to have asset urls
-    Cache.cache.download(function(){Cache.onCachingProgress}, false).then(function(cache){
+    Cache.cache.download(function(){}, false).then(function(cache){
       debug('Asset cacheing successful!');
       Cache.siteList.push('index.css');
       Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
@@ -155,7 +155,7 @@ var Cache = {
       }
     }
 
-    Cache.cache.download(function() {Cache.onCachingProgress}, false).then(function(cache){
+    Cache.cache.download(function() {}, false).then(function(cache){
       debug('Cacheing successful!');
       Cache.checkCacheingComplete();
     },function() {
