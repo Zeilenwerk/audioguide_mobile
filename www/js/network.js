@@ -16,7 +16,7 @@ var Network = {
       console.log('[NETWORK] getting api data');
       Network.get(APIHOST, function(newData) {
         console.log(newData.updated_at);
-        if (newData.updated_at !== Cache.updatedAt()) {
+        if (newData.updated_at != localStorage.getItem("updated_at")) {
           console.log('[NETWORK] update is available');
           updateAvailable(newData);
         } else {

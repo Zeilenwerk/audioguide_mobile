@@ -1,4 +1,6 @@
 var update = {
+  networkTimeout: null,
+  
   initialize: function() {
     this.bindEvents();
   },
@@ -18,13 +20,17 @@ var update = {
 
   transferFailed: function() {
     debug('-- update.transferFailed');
-    console.log('[UPDATE] file transfer failed');
-
     update.addWarningText('Aktualisierung fehlgeschlagen, bitte die Internetverbindung überprüfen [#ERR-TRANSFER]');
+  },
+
+  transferTimeout: function(){
+    debug('-- update.transferTimeout');
+    update.addWarningText('Zeitüberschreitung beim Aktualisieren der Inhalte, bitte die Internetverbindung überprüfen [#ERR-TIMEOUT]');
   },
 
   onUpdateAvailable: function(newData) {
     debug('-- update.onUpdateAvailable -- execute update process');
+    networkTimeout = setTimeout(transferTimeout, 90 * 1000);
     Cache.init(update.onCachingComplete);
     Cache.storeApiData(newData);
     Cache.storeSites();
@@ -37,9 +43,8 @@ var update = {
 
   onCachingComplete: function() {
     debug('-- update.onCachingComplete -- update complete, redirect to start site');
-    setTimeout(function() {
-      window.location.replace('index.html');
-    }, 2 * 1000);
+    clearTimeout(networkTimeout);
+    window.location.replace('index.html');
   },
 
   onCachingProgress: function(e) {

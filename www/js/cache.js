@@ -62,7 +62,7 @@ var Cache = {
     update.addLoadingText('Erfolgreich alle statischen Medien angefordert…');
 
     // download first (client) assets, for css to have asset urls
-    Cache.cache.download(false, false).then(function(cache){
+    Cache.cache.download().then(function(cache){
       debug('Asset cacheing successful!');
       update.addLoadingText('Erfolgreich alle statische Medien geladen…');
       Cache.siteList.push('index.css');
@@ -163,7 +163,7 @@ var Cache = {
       }
     }
 
-    Cache.cache.download(function() {}, false).then(function(cache){
+    Cache.cache.download().then(function(cache){
       debug('Cacheing successful!');
       update.addLoadingText('Erfolgreich alle dynamischen Medien geladen…');
       Cache.checkCacheingComplete();
