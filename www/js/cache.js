@@ -135,7 +135,7 @@ var Cache = {
       }
     }
 
-    Cache.cache.download(function(){ /* progress */ }, false).then(function(cache){
+    Cache.cache.download(function(){update.onCachingProgress}, false).then(function(cache){
       debug('Cacheing successful!');
       Cache.onCachingComplete();
     },function() {
