@@ -186,7 +186,7 @@ var Cache = {
   },
 
   checkCacheingComplete: function() {
-    if(Cache.siteList.length <= 0 && Cache.cache.isDirty()) {
+    if(Cache.siteList.length <= 0 && !Cache.cache.isDirty()) {
       var data = Cache.getApiData();
       localStorage.setItem("updated_at", data.updated_at);
       Cache.onCachingComplete();
