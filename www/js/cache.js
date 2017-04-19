@@ -58,7 +58,7 @@ var Cache = {
     }
 
     // download first (client) assets, for css to have asset urls
-    Cache.cache.download(function(){update.onCachingProgress}, false).then(function(cache){
+    Cache.cache.download(function(){Cache.onCachingProgress}, false).then(function(cache){
       debug('Asset cacheing successful!');
       Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
     },function() {
@@ -84,6 +84,7 @@ var Cache = {
 
   storeCss: function(newContent, fileName) {
     debug('-- Cache.storeCss');
+    Cache.siteList.push('index.css');
     newContent = newContent.replace(/url\((.*?)\)/g, function(match){
       url = match.replace(/url\((.*?)\)/g, '$1');
       return 'url(' + Cache.cache.get(URL + url) + ')';
@@ -152,7 +153,7 @@ var Cache = {
       }
     }
 
-    Cache.cache.download(function(){update.onCachingProgress}, false).then(function(cache){
+    Cache.cache.download(function() {Cache.onCachingProgress}, false).then(function(cache){
       if (Cache.siteList.length <= 0) {
         debug('Cacheing successful!');
         Cache.onCachingComplete();
