@@ -81,9 +81,12 @@ var Cache = {
       url = match.replace(/url\((.*?)\)/g, '$1');
       return 'url(' + Cache.cache.get(URL + url) + ')';
     });
+    debug(newContent);
+    debug(fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
-        Cache.writeFile(fileEntry, newContent, fileName);
+        res = Cache.writeFile(fileEntry, newContent, fileName);
+        console.log(res);
       }, Cache.onErrorCreateFile);
     }, Cache.onErrorLoadFs);
   },

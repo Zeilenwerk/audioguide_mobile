@@ -29,7 +29,11 @@ var guide = {
   },
 
   displayUpdate: function() {
-    notify('Neue Inhalte sind verfügbar', guide.goToUpdate);
+    if(typeof notify == "undefined"){
+      guide.goToUpdate();
+    }else{
+      notify('Neue Inhalte sind verfügbar', guide.goToUpdate);
+    }
   },
 
   goToUpdate: function() {
