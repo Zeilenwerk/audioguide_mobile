@@ -46,7 +46,7 @@ var update = {
     debug('-- update.onCachingComplete -- update complete, redirect to start site');
     setTimeout(function() {
       window.location.replace('index.html');
-    }, 2000);
+    }, 2 * 1000);
   },
 
   onCachingProgress: function(e) {

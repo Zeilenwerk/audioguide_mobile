@@ -97,7 +97,7 @@ var Cache = {
 
   storeHtml: function(newContent, fileName) {
     debug('-- Cache.storeHtml');
-    debug('[CACHE] Cache HTML to ' + fileName);
+    debug('-- Cache.storeHtml fileName:' + fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
         Cache.writeFile(fileEntry, newContent, fileName);
