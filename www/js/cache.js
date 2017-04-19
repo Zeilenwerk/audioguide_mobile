@@ -1,5 +1,6 @@
 var Cache = {
   cache: null,
+  siteList: [],
 
   initializeCache: function(success, failure){
     debug('-- Cache.initializeCache');
@@ -68,8 +69,10 @@ var Cache = {
     for (var i = 0; i < data.posts.length; i++) {
       var site = data.posts[i];
       var url = data.posts[i].url;
-      debug('[CACHE] Storing site ' + Network.splitUrl(url) + '.html');
-      Network.getHTML(url, Cache.storeHtmlAndImages, Network.splitUrl(url) + '.html');
+      var filename = Network.splitUrl(url) + '.html';
+      Cache.siteList.push(filename);
+      debug('[CACHE] Storing site ' + filename);
+      Network.getHTML(url, Cache.storeHtmlAndImages, filename);
     }
   },
 
@@ -126,7 +129,10 @@ var Cache = {
     debug('-- Cache.writeFile');
     fileEntry.createWriter(function (fileWriter) {
       fileWriter.onwriteend = function() {
-        //Cache.drop(Cache.cacheList, fileName);
+        var i = Cache.siteList.indexOf(fileName);
+        if(i != -1) {
+          Cache.siteList.splice(i, 1);
+        }
       };
       fileWriter.onerror = function(e) {};
       fileWriter.write(text);
@@ -142,13 +148,15 @@ var Cache = {
         url = Network.imageUrlSplit(urls[i]);   // iOS quirck
         Cache.cache.add(url);
       } else {
-        Cache.cache.add(urls[i]);                    // Android and other devices
+        Cache.cache.add(urls[i]);               // Android and other devices
       }
     }
 
     Cache.cache.download(function(){update.onCachingProgress}, false).then(function(cache){
-      debug('Cacheing successful!');
-      Cache.onCachingComplete();
+      if (Cache.siteList.length <= 0) {
+        debug('Cacheing successful!');
+        Cache.onCachingComplete();
+      }
     },function() {
       debug('Cacheing failed!');
     });
