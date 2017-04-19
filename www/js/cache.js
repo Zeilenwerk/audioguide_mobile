@@ -78,6 +78,7 @@ var Cache = {
 
   storeCss: function(newContent, fileName) {
     newContent = newContent.replace(/url\((.*?)\)/g, function(match){
+      url = match.replace(/url\((.*?)\)/g, '$1');
       return 'url(' + Cache.cache.get(URL + url) + ')';
     });
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
