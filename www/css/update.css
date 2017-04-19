@@ -36,20 +36,58 @@ span {
   display: none;
   cursor: pointer;
   width: 220px;
-  border: 2px solid rgb(145, 207, 218);
+  border: 2px solid #888;
   text-align: center;
-  background-color: rgba(67, 150, 224, 0.06);
-  padding: 12px 0px 12px 0px;
+  background-color: #FFF;
+  padding: 9px 0px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 20px;
+  margin-bottom: 9px;
   color: #666;
 }
-
 .reverse {
   margin-top: 20px;
+}
+.button:hover {
+  border-color: #555;
+  background-color: #555;
+  color: #FFF;
 }
 
 .wrapper-update {
   width: 100%;
+}
+
+/* Fancy shit */
+
+.status-text {
+  padding: 24px 0 18px 0;
+
+  color: #AAA;
+}
+
+svg {
+  display: block;
+  width: 75px;
+  height: 75px;
+  margin: 0 auto;
+}
+svg path {
+  stroke-linecap: round;
+  stroke-width: 100px;
+}
+
+svg.loading .logo path {
+  stroke-dasharray: 456;
+  stroke-dashoffset: -912;
+  animation: dash 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+}
+svg.loading .warning {
+  display: none;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

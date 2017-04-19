@@ -56,6 +56,16 @@ var update = {
     bar.style.display = 'block';
     var span = document.querySelector('span');
     span.style.width = (100/e.queueIndex*e.queueSize) + '%';
+  },
+
+  addLoadingText: function(text){
+    $('.logo-wrapper').addClass('loading');
+    $('.status-text').text(text);
+  },
+
+  addWarningText: function(text){
+    $('.logo-wrapper').removeClass('loading');
+    $('.status-text').text(text);
   }
 };
 
