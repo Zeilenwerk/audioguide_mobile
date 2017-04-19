@@ -1,13 +1,14 @@
 var guide = {
   initialize: function() {
-      this.bindEvents();
+    this.bindEvents();
   },
 
   bindEvents: function() {
-      document.addEventListener('deviceready', this.onDeviceReady, false);
+    document.addEventListener('deviceready', this.onDeviceReady, false);
   },
 
   onDeviceReady: function() {
+    debug('-- guide.onDeviceReady');
     window.addEventListener("resize", guide.hideScrollbar, true);
 
     StatusBar.hide();
@@ -29,6 +30,7 @@ var guide = {
   },
 
   displayUpdate: function() {
+    debug('-- guide.displayUpdate');
     if(typeof notify == "undefined"){
       guide.goToUpdate();
     }else{
@@ -37,16 +39,18 @@ var guide = {
   },
 
   goToUpdate: function() {
+    debug('-- guide.goToUpdate');
     window.location.replace('update.html');
   },
 
   displayData: function() {
-    console.log('displayData');
+    debug('-- guide.displayData');
     var data = Cache.getApiData();
     Cache.readFile(Network.splitUrl(data.landing_page) + '.html', data, guide.onFileLoaded);
   },
 
   onFileLoaded: function(that, data) {
+    debug('-- guide.onFileLoaded');
     $('.main').html(that.result);
 
     var links = document.querySelectorAll('a');
@@ -60,7 +64,7 @@ var guide = {
   },
 
   loadCachedFiles: function() {
-    debug('loading cached files');
+    debug('-- guide.loadCachedFiles');
 
     $('img, audio, video').each(function(i, e) {
       debug('loading cached file (img, audio, video)');
@@ -75,6 +79,7 @@ var guide = {
   },
 
   onStationClick: function(e) {
+    debug('-- guide.onStationClick');
     var url = this.getAttribute('href');
     if(url !== null) {
       e.preventDefault();
@@ -83,6 +88,7 @@ var guide = {
   },
 
   askLocationPermission: function() {
+    debug('-- guide.askLocationPermission');
     cordova.dialogGPS("Das GPS auf deinem Smartphone ist ausgeschaltet. Damit die App richtig funktionieren kann braucht es deine Position um Beacons um dich herum zu finden.",//message
         "Dies geht mit Wifi, Mobilen Daten oder Offline",
         function(buttonIndex){
@@ -96,6 +102,7 @@ var guide = {
   },
 
   hasBeacons: function() {
+    debug('-- guide.hasBeacons');
     var beacons = false;
     var data = Cache.getApiData();
 
@@ -120,14 +127,17 @@ var guide = {
   },
 
   softwareVersion: function() {
+    debug('-- guide.softwareVersion');
     return device.version;
   },
 
   devicePlatform: function() {
+    debug('-- guide.devicePlatform');
     return device.platform;
   },
 
   checkBluetooth: function() {
+    debug('-- guide.checkBluetooth');
     cordova.plugins.BluetoothStatus.initPlugin();
     if (!cordova.plugins.BluetoothStatus.BTenabled) {
       if(new Date() - guide.getLastAlert() > 1000 * 60 * 10) {
@@ -138,10 +148,12 @@ var guide = {
   },
 
   setLastAlert: function() {
+    debug('-- guide.setLastAlert');
     localStorage.setItem('bluetoothLastAlert', new Date().toISOString());
   },
 
   getLastAlert: function() {
+    debug('-- guide.getLastAlert');
     var last = localStorage.getItem('bluetoothLastAlert');
     if(last) {
       return Date.parse(last);
@@ -151,6 +163,7 @@ var guide = {
   },
 
   hideScrollbar: function() {
+    debug('-- guide.hideScrollbar');
     if (document.querySelector('.menu-left')) {
       var width = document.querySelector('.menu-left').clientWidth;
       if(width > 0) {

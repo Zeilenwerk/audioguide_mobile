@@ -2,7 +2,7 @@ var Cache = {
   cache: null,
 
   initializeCache: function(success, failure){
-    debug('Cache.initializeCache');
+    debug('-- Cache.initializeCache');
     Cache.cache = new CordovaFileCache({
       fs: new CordovaPromiseFS({
           Promise: Promise
@@ -16,11 +16,13 @@ var Cache = {
   },
 
   init: function(onCachingComplete, onCachingProgress) {
+    debug('-- Cache.init');
     this.onCachingComplete = onCachingComplete;
     this.onCachingProgress = onCachingProgress;
   },
 
   updatedAt: function() {
+    debug('-- Cache.updatedAt');
     if(data = localStorage.getItem('data')) {
       return JSON.parse(data).updated_at;
     } else {
@@ -30,7 +32,7 @@ var Cache = {
   },
 
   getApiData: function() {
-    console.log('[CACHE] get cache data');
+    debug('-- Cache.getApiData');
     var data = localStorage.getItem('data');
     if (data) {
      return JSON.parse(data);
@@ -38,12 +40,12 @@ var Cache = {
   },
 
   storeApiData: function(data) {
-    debug('[CACHE] store api data');
+    debug('-- Cache.storeApiData');
     localStorage.setItem("data", JSON.stringify(data));
   },
 
   storeSites: function() {
-    debug('[CACHE] store html sites');
+    debug('-- Cache.storeSites');
     var data = Cache.getApiData();
 
     // store assets
@@ -72,11 +74,13 @@ var Cache = {
   },
 
   storeHtmlAndImages: function(html, filename) {
+    debug('-- Cache.storeHtmlAndImages');
     Cache.storeHtml(html.innerHTML, filename);
     Cache.storeImages(html.innerHTML);
   },
 
   storeCss: function(newContent, fileName) {
+    debug('-- Cache.storeCss');
     newContent = newContent.replace(/url\((.*?)\)/g, function(match){
       url = match.replace(/url\((.*?)\)/g, '$1');
       return 'url(' + Cache.cache.get(URL + url) + ')';
@@ -92,7 +96,8 @@ var Cache = {
   },
 
   storeHtml: function(newContent, fileName) {
-    console.log('[CACHE] Cache HTML to ' + fileName);
+    debug('-- Cache.storeHtml');
+    debug('[CACHE] Cache HTML to ' + fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
       fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
         Cache.writeFile(fileEntry, newContent, fileName);
@@ -101,6 +106,7 @@ var Cache = {
   },
 
   readFile: function(fileName, data, onFileLoaded) {
+    debug('-- Cache.readFile');
     console.log('[CACHE] Reading html from ' + fileName);
     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
         fs.root.getFile(fileName, { create: true, exclusive: false }, function (fileEntry) {
@@ -117,6 +123,7 @@ var Cache = {
   },
 
   writeFile: function(fileEntry, text, fileName) {
+    debug('-- Cache.writeFile');
     fileEntry.createWriter(function (fileWriter) {
       fileWriter.onwriteend = function() {
         //Cache.drop(Cache.cacheList, fileName);
@@ -127,6 +134,7 @@ var Cache = {
   },
 
   storeImages: function(html) {
+    debug('-- Cache.storeImages');
     var urls = HtmlParser.getImages(html);
 
     for(var i = 0; i < urls.length; i++) {
@@ -147,14 +155,14 @@ var Cache = {
   },
 
   onErrorCreateFile: function() {
-    console.log('Error beim erstellen des Files');
+    debug('-- Cache.onErrorCreateFile');
   },
 
   onErrorReadFile: function() {
-    console.log('Error beim laden des File');
+    debug('-- Cache.onErrorReadFile');
   },
 
   onErrorLoadFs: function() {
-    console.log('Error beim laden des File System');
+    debug('-- Cache.onErrorLoadFs');
   }
 };
