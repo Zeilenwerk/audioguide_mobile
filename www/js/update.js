@@ -51,11 +51,12 @@ var update = {
 
   onCachingProgress: function(e) {
     debug('-- update.onCachingProgress');
-    console.log("Progress: " + (100/e.queueIndex*e.queueSize));
+    var percent = 100/e.queueIndex*e.queueSize;
+    console.log("Progress: " + percent);
     var bar = document.querySelector('.progress-bar');
     bar.style.display = 'block';
     var span = document.querySelector('span');
-    span.style.width = (100/e.queueIndex*e.queueSize) + '%';
+    span.style.width = percent + '%';
   },
 
   addLoadingText: function(text){
