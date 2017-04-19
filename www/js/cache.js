@@ -67,22 +67,21 @@ var Cache = {
       update.addLoadingText('Erfolgreich alle statische Medien geladen…');
       Cache.siteList.push('index.css');
       Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
-      Cache.checkCacheingComplete();
+
+      // store sites and media
+      for (var i = 0; i < data.posts.length; i++) {
+        var site = data.posts[i];
+        var url = data.posts[i].url;
+        var filename = Network.splitUrl(url) + '.html';
+        Cache.siteList.push(filename);
+        debug('[CACHE] Storing site ' + filename);
+        Network.getHTML(url, Cache.storeHtmlAndImages, filename);
+      }
+      update.addLoadingText('Erfolgreich alle Seiten und dynamischen Medien angefordert…');
     },function() {
       debug('Asset cacheing failed!');
       update.addWarningText('Einige Daten konnten nicht geladen werden, bitte versuche es erneut [#ERR-ASSET]');
     });
-
-    // store sites and media
-    for (var i = 0; i < data.posts.length; i++) {
-      var site = data.posts[i];
-      var url = data.posts[i].url;
-      var filename = Network.splitUrl(url) + '.html';
-      Cache.siteList.push(filename);
-      debug('[CACHE] Storing site ' + filename);
-      Network.getHTML(url, Cache.storeHtmlAndImages, filename);
-    }
-    update.addLoadingText('Erfolgreich alle Seiten und dynamischen Medien angefordert…');
   },
 
   storeHtmlAndImages: function(html, filename) {
