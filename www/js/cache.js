@@ -60,7 +60,9 @@ var Cache = {
     // download first (client) assets, for css to have asset urls
     Cache.cache.download(function(){Cache.onCachingProgress}, false).then(function(cache){
       debug('Asset cacheing successful!');
+      Cache.siteList.push('index.css');
       Network.getCss(data.stylesheet, Cache.storeCss, 'index.css');
+      Cache.checkCacheingComplete();
     },function() {
       debug('Asset cacheing failed!');
     });
@@ -84,7 +86,6 @@ var Cache = {
 
   storeCss: function(newContent, fileName) {
     debug('-- Cache.storeCss');
-    Cache.siteList.push('index.css');
     newContent = newContent.replace(/url\((.*?)\)/g, function(match){
       url = match.replace(/url\((.*?)\)/g, '$1');
       return 'url(' + Cache.cache.get(URL + url) + ')';
@@ -134,6 +135,7 @@ var Cache = {
         if(i != -1) {
           Cache.siteList.splice(i, 1);
         }
+        Cache.checkCacheingComplete();
       };
       fileWriter.onerror = function(e) {};
       fileWriter.write(text);
@@ -154,10 +156,8 @@ var Cache = {
     }
 
     Cache.cache.download(function() {Cache.onCachingProgress}, false).then(function(cache){
-      if (Cache.siteList.length <= 0) {
-        debug('Cacheing successful!');
-        Cache.onCachingComplete();
-      }
+      debug('Cacheing successful!');
+      Cache.checkCacheingComplete();
     },function() {
       debug('Cacheing failed!');
     });
@@ -173,5 +173,11 @@ var Cache = {
 
   onErrorLoadFs: function() {
     debug('-- Cache.onErrorLoadFs');
+  },
+
+  checkCacheingComplete: function() {
+    if(Cache.siteList.length <= 0 && Cache.cache.isDirty()) {
+      Cache.onCachingComplete();
+    }
   }
 };
