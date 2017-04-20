@@ -110,6 +110,9 @@
     <preference name="iosExtraFilesystems" value="library,library-nosync,root" />
     <plugin name="cordova-plugin-settings-hook" spec="~0.2.3" />
 
+    <!-- iOS scrolling fix  -->
+    <preference name="DisallowOverscroll" value="true" />
+
     <!-- Bluetooth Permission for Apple Devices -->
     <platform name="ios">
         <preference name="Orientation" value="all" />

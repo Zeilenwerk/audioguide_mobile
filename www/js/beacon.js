@@ -129,4 +129,3 @@ var Beacon = {
 };
 
 App.registerService('beacon', Beacon.startRangingBeacons, Beacon.stopRangingBeacons);
-
