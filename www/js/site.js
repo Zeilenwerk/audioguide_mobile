@@ -1,9 +1,12 @@
 var site = {
 
     displayData: function(url)  {
-      console.log('displayData function');
-      var data = JSON.parse(localStorage.getItem('data'));
-      Cache.readFile(url, data, site.onFileLoaded);
+      if(url != localStorage.getItem("currentSite")) {
+        console.log('displayData function');
+        var data = JSON.parse(localStorage.getItem('data'));
+        localStorage.setItem("currentSite", url);
+        Cache.readFile(url, data, site.onFileLoaded);
+      }
     },
 
     setPoster: function() {
