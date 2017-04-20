@@ -89,7 +89,7 @@ svg path {
 
 svg.loading .logo path {
   stroke-dasharray: 456;
-  stroke-dashoffset: -912;
+  stroke-dashoffset: 912;
   animation: dash 0.75s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
 }
 svg.loading .warning {
