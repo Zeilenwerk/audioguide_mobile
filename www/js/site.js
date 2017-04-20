@@ -5,7 +5,7 @@ var site = {
         console.log('displayData function');
         var data = JSON.parse(localStorage.getItem('data'));
         localStorage.setItem("currentSite", url);
-        Cache.readFile(url, data, site.onFileLoaded);
+        Cache.readFile(url + ".html", data, site.onFileLoaded);
       }
     },
 

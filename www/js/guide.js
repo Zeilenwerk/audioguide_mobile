@@ -87,7 +87,7 @@ var guide = {
     var url = this.getAttribute('href');
     if(url !== null) {
       e.preventDefault();
-      site.displayData(Network.splitUrl(url) + '.html');
+      site.displayData(Network.splitUrl(url));
     }
   },
 
