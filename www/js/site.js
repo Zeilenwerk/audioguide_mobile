@@ -47,5 +47,6 @@ var site = {
       guide.hideScrollbar();
       guide.loadCachedFiles();
       site.getThumbnail();
+      App.trigger('pagechange');
     }
 };

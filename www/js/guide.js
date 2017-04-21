@@ -65,6 +65,7 @@ var guide = {
 
     guide.hideScrollbar();
     guide.loadCachedFiles();
+    App.trigger('pagechange');
   },
 
   loadCachedFiles: function() {
