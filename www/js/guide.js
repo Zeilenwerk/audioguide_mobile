@@ -86,9 +86,13 @@ var guide = {
   onStationClick: function(e) {
     debug('-- guide.onStationClick');
     var url = this.getAttribute('href');
-    if(url !== null) {
-      e.preventDefault();
-      site.displayData(Network.splitUrl(url));
+    if(url[0] == '/'){ // is an internal link
+      if(url !== null) {
+        e.preventDefault();
+        site.displayData(Network.splitUrl(url));
+      }
+    }else{
+      window.open(url, '_system');
     }
   },
 
