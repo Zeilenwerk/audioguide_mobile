@@ -31,6 +31,9 @@
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "ch.zeilenwerk.dfb"
+        },
         "cordova-plugin-network-information": {
             "PACKAGE_NAME": "ch.zeilenwerk.dfb"
         },

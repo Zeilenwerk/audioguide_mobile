@@ -86,12 +86,14 @@ var guide = {
   onStationClick: function(e) {
     debug('-- guide.onStationClick');
     var url = this.getAttribute('href');
+    console.log(url);
     if(url[0] == '/'){ // is an internal link
       if(url !== null) {
         e.preventDefault();
         site.displayData(Network.splitUrl(url));
       }
     }else{
+      e.preventDefault();
       window.open(url, '_system');
     }
   },
