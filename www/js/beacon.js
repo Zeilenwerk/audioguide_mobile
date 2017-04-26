@@ -26,8 +26,12 @@ var Beacon = {
 
     for (var i = 0; i < data.posts.length; i++) {
       if (data.posts[i].uuid !== "" && data.posts[i].uuid !== null) {
-        Beacon.startRangingRegion({ uuid: data.posts[i].uuid,
+        try {
+          Beacon.startRangingRegion({ uuid: data.posts[i].uuid,
                                     identifier: Network.splitUrl(data.posts[i].url) });
+        } catch(e) {
+          console.log("Beacon ranging error: " + e.message );
+        }
       }
     }
 
